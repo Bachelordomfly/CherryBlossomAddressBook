@@ -25,16 +25,15 @@
 {
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBarHidden = YES;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = kColorAppMain;
+    self.title = @"拨号";
     
     //添加头部隐藏视图（特殊）
-    [self.view addSubview:self.headerTF];
+//    [self.view addSubview:self.headerTF];
     
     //添加数字按钮
     [self addDigitalButtons];

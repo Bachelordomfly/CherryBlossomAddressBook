@@ -26,6 +26,7 @@
 #import "HTPressableButton.h"
 #import "SVProgressHUD.h"
 #import "FMDB.h"
+#import "MJExtension.h"
 
 /* HttpRequest */
 
@@ -57,11 +58,16 @@
 #import "UIView+Util.h"
 #import "UIView+Additions.h"
 #import "UIImage+Tint.h"
+#import "UITextField+Category.h"
+#import "NSString+Utilities.h"
+
 
 /* View */
 #import "Views.h"
 #import "SPTextFieldView.h"
 #import "JJButton.h"
+#import "BaseTableViewCell.h"
+#import "BaseSimpleCell.h"
 
 #pragma mark - 快捷方法
 
@@ -123,6 +129,8 @@ alpha:((float)(rgbValue & 0xFF))/255.0]
 #define NAV_BAR_HEIGHT 64 //默认NavigationBar高度
 #define TAB_BAR_HEIGHT 49 //默认TabBar高度
 
+#define NAVIBAR_AND_STATUSBAR_HEIGHT 64
+
 #define SCREEN_BOUNDS       [UIScreen mainScreen].bounds
 #define SCREEN_WIDTH        [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT       [UIScreen mainScreen].bounds.size.height
@@ -170,10 +178,17 @@ alpha:((float)(rgbValue & 0xFF))/255.0]
 #pragma mark - UIColor
 
 //#define kColorAppMain       UIColorFromRGB_D(237, 168, 225)  //APP主色调(樱花色)
-#define kColorAppMain       UIColorFromRGB_0x(0xf7e4ed)  //APP主色调(樱花色)
-#define kColorBgMain        UIColorFromRGB_0x(0xFFFFFF)      //一级框架背景色(纯白色)
-#define kColorBgSub         UIColorFromRGB_0x(0xeFeFF4)      //二级框架背景色
-#define kColorBgLine        UIColorFromRGB_0x(0xfa8ec2)
+#define kColorAppMain       UIColorFromRGB_0x(0xf7e4ed)       //APP主色调(樱花色)
+#define kColorBgMain        UIColorFromRGB_0x(0xFFFFFF)       //一级框架背景色(纯白色)
+#define kColorBgSub         UIColorFromRGB_0x(0xeFeFF4)       //二级框架背景色
+#define kColorBgLine        UIColorFromRGB_0x(0xfa8ec2)       //普通分割线颜色
+#define kColorHairline     UIColorFromRGB_0x(0xe5e5e5)        //cell分割线颜色
+//定义Cell高度
+#define kSimpleCellHeight 55.f
+#define kColorTextMain     UIColorFromRGB_0x(0x333333)
+#define kColorTextSub      UIColorFromRGB_0x(0x666666)
+
+#define kColorCellBgSel    [UIColor colorWithHue:0.0f saturation:0.0f brightness:0.95f alpha:1.0f] //cell背景色
 #define kNaviBarBgImg [UIImage imageWithColor:kColorAppMain cornerRadius:0]
 
 #pragma mark - 预编译函数及命令

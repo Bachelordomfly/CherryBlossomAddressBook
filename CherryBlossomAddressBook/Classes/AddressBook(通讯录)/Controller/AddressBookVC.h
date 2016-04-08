@@ -12,7 +12,8 @@
 @end
 
 
-@interface AddressBookCell : UITableViewCell
+@interface AddressBookCell : BaseTableViewCell
 
-
++ (CGFloat)cellHeight;
+- (void)configureCellWithContacterModel:(ContacterModel *)model;
 @end

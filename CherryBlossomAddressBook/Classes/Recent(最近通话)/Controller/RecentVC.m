@@ -16,23 +16,24 @@
 
 @implementation RecentVC
 
-#pragma mark - 生命周期
+#pragma mark - life cycle
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.navigationItem.titleView = self.titleView;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
     
     
 }
-- (void)viewWillAppear:(BOOL)animated
+
+
+#pragma mark - private method
+
+- (void)setupNaviBarItems
 {
-    [super viewWillAppear:animated];
+    [super setupNaviBarItems];
     
-    //
-    
+    self.navigationItem.titleView = self.titleView;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 #pragma mark - 自定义
 /**
