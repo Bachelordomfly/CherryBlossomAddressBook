@@ -45,7 +45,7 @@
     [self.layer setMasksToBounds:YES];
     //设置边框
     [self.layer setBorderWidth:1.f];
-    [self.layer setBorderColor:CGColorFromRGB_0x(0xbfbfbf)];
+    [self.layer setBorderColor:[UIColorFromRGB_0x(0xbfbfbf) CGColor]];
 }
 
 #pragma mark - 子控件

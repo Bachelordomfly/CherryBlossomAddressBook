@@ -42,9 +42,20 @@ UITableViewDataSource
 {
     [super viewDidLoad];
     
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.edgesForExtendedLayout =  UIRectEdgeNone;
+    }
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    //修正view的正确高度
+    CGRect frame = self.view.frame;
+    frame.size.height -= self.navigationController.navigationBar ? NAV_BAR_HEIGHT : 0;
+    self.view.frame = frame;
+    
+    self.tableView.backgroundColor = kColorBgMain;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+
 
 }
 
@@ -54,6 +65,8 @@ UITableViewDataSource
     if (!_tableView)
     {
         CGRect frame = self.view.frame;
+        frame.origin.x = 0;
+        frame.origin.y = 0;
         _tableView = [[UITableView alloc] initWithFrame:frame style:_style];
         _tableView.dataSource = self;
         _tableView.delegate = self;

@@ -19,13 +19,13 @@
     [super viewDidLoad];
     
     //设置NavigationBar的背景图片
-    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"login_bg"] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationBar setBackgroundImage:kNaviBarBgImg forBarMetrics:UIBarMetricsDefault];
     
     if ([self.navigationBar respondsToSelector:@selector(setShadowImage:)]) {
         [self.navigationBar setShadowImage:[[UIImage alloc] init]];
     }
 
-    [self.navigationBar setTintColor:[UIColor purpleColor]];
+    [self.navigationBar setBarTintColor:kColorBgMain];
 }
 
 - (void)didReceiveMemoryWarning {

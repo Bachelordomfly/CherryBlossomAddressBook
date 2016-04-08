@@ -14,6 +14,13 @@ typedef NS_ENUM(NSUInteger, SPTextFieldImageType){
     SPTextFieldImageNone
 };
 
+typedef NS_OPTIONS(NSUInteger, Type){
+    Account = 1,
+    Password,
+    RepeatPassword
+};
+
+
 
 @interface SPTextFieldView : UIView
 

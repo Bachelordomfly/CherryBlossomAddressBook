@@ -24,6 +24,8 @@
 #import "MBProgressHUD.h"
 #import "AMSmoothAlertView.h"
 #import "HTPressableButton.h"
+#import "SVProgressHUD.h"
+#import "FMDB.h"
 
 /* HttpRequest */
 
@@ -31,6 +33,8 @@
 
 /* Controler */
 #import "JJNavigationController.h"
+#import "GestureNavigationController.h"
+#import "MLNavigationController.h"
 #import "ABTabBarController.h"
 #import "BaseVC.h"
 #import "BaseTableVC.h"
@@ -38,15 +42,21 @@
 
 /* Model */
 #import "ABModel.h"
+#import "UserModel.h"
 #import "ContacterModel.h"
 
 /* Managers */
 #import "AppManager.h"
 #import "UserManager.h"
+#import "DataBaseManager.h"
 
 /* Category */
 #import "UIView+Util.h"
-
+#import "UIImage+COlor.h"
+#import "UIView+Frame.h"
+#import "UIView+Util.h"
+#import "UIView+Additions.h"
+#import "UIImage+Tint.h"
 
 /* View */
 #import "Views.h"
@@ -159,11 +169,12 @@ alpha:((float)(rgbValue & 0xFF))/255.0]
 
 #pragma mark - UIColor
 
-#define kColorAppMain       UIColorFromRGB_0x(0xFF8200)      //APP主色调(橘色)
+//#define kColorAppMain       UIColorFromRGB_D(237, 168, 225)  //APP主色调(樱花色)
+#define kColorAppMain       UIColorFromRGB_0x(0xf7e4ed)  //APP主色调(樱花色)
 #define kColorBgMain        UIColorFromRGB_0x(0xFFFFFF)      //一级框架背景色(纯白色)
 #define kColorBgSub         UIColorFromRGB_0x(0xeFeFF4)      //二级框架背景色
-
-
+#define kColorBgLine        UIColorFromRGB_0x(0xfa8ec2)
+#define kNaviBarBgImg [UIImage imageWithColor:kColorAppMain cornerRadius:0]
 
 #pragma mark - 预编译函数及命令
 

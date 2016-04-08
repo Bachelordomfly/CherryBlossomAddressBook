@@ -6,7 +6,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @class ABTabBarController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

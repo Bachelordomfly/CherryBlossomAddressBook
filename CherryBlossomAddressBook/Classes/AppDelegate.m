@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginVC.h"
 
 @interface AppDelegate ()
 
@@ -23,18 +24,24 @@
      */
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
+    
+//    LoginVC *loginVC = [[LoginVC alloc]init];
     self.tabBarController = [[ABTabBarController alloc] init];
     self.window.rootViewController = self.tabBarController;
-    
+//    self.window.rootViewController = loginVC;
+   
     /**
      *  设置NavigationBar背景色
      */
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"navigationbar_bg"]]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"navigationBar_bg"]]];
+    
+
     
     /**
-     *  设置MBProgressHUD
+     *  设置SVProgressHUD
      */
-    
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleLight];
     
     
     /**

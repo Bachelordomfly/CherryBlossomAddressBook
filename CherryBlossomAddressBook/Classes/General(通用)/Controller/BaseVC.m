@@ -7,9 +7,11 @@
 //
 
 #import "BaseVC.h"
+#import "NaviTitleLable.h"
 
 @interface BaseVC ()
 
+@property(nonatomic,strong) NaviTitleLable *titleLb;
 @end
 
 @implementation BaseVC
@@ -22,6 +24,7 @@
     
     //设置背景色
     //...
+    self.view.backgroundColor = kColorAppMain;
     
     //设置导航栏
     [self setupNaviBarItems];
@@ -42,12 +45,22 @@
     if ([self.navigationController.viewControllers count] > 1)
     {
         //如果有素材 此处可设置返回按钮的图片
-//        UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"header_back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(didClickBack:)];
-        
-        UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(didClickBack:)];
+        UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"header_back_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(didClickBack:)];
         
         self.navigationItem.leftBarButtonItem = leftItem;
     }
+}
+
+#pragma mark - setter / getter
+
+-(void)setTitle:(NSString *)title
+{
+    if (!_titleLb)
+    {
+        _titleLb = [[NaviTitleLable alloc] initWithTitle:title];
+        self.navigationItem.titleView = self.titleLb;
+    }
+    [_titleLb setText:title];
 }
 
 #pragma mark - 通知

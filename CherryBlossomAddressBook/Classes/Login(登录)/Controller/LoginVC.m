@@ -7,28 +7,29 @@
 //
 
 #import "LoginVC.h"
-#import "LoginPersonCollect.h"
+#import "RegisteVC.h"
+#import "PersonalCollectVC.h"
 
 @interface LoginVC ()
 
 /**
- *  背景
+ *  背景视图
  */
 @property (nonatomic, strong) UIImageView *backGroundImageView;
 /**
- *  账号
+ *  账号框
  */
 @property (nonatomic, strong) SPTextFieldView *userName;
 /**
- *  密码
+ *  密码框
  */
 @property (nonatomic, strong) SPTextFieldView *passWd;
 /**
- *  登录
+ *  登录按钮
  */
 @property (nonatomic, strong) JJButton *loginButton;
 /**
- *  注册
+ *  注册按钮
  */
 @property (nonatomic, strong) JJButton *registerButton;
 
@@ -41,15 +42,20 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     [self addAllSubViews];
-    
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.view endEditing:YES];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 #pragma mark - private method
@@ -64,69 +70,7 @@
     [self.backGroundImageView addSubview:self.passWd];
     [self.backGroundImageView addSubview:self.loginButton];
     [self.backGroundImageView addSubview:self.registerButton];
-    
-    
-    
-//    
-//    
-//    
-//    UIView *contentView = self.view;
-//    contentView.backgroundColor = [UIColor whiteColor];
-//    UIImageView *baseImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_bg"]];
-//    baseImageView.userInteractionEnabled = YES;
-//    [contentView addSubview:baseImageView];
-//    [baseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(contentView);
-//    }];
-//    contentView = baseImageView;
-//    
-//    UIView *view;
-//    UIView *preView;
-//    
-//    view = self.userName;
-//    [contentView addSubview:view];
-//    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(contentView).offset(3*IMAGE_WIDTH);
-//        make.left.equalTo(contentView).offset(IMAGE_WIDTH);
-//        make.right.equalTo(contentView).offset(-IMAGE_WIDTH);
-//        make.height.mas_equalTo(45);
-//        
-//    }];
-//    preView = view;
-//    
-//    view = self.passWd;
-//    [contentView addSubview:_passWd];
-//    [_passWd mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.right.equalTo(preView);
-//        make.top.equalTo(preView.mas_bottom).offset(0.5*IMAGE_WIDTH);
-//    }];
-//    preView = view;
-//    
-//    JJButton *newBtn = [[JJButton alloc]initWithFrame:CGRectMake(30, 230, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
-//    [newBtn setTitle:@"注册" forState:UIControlStateNormal];
-//    [newBtn addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
-//    view = newBtn;
-//    [contentView addSubview:newBtn];
-//    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.left.equalTo(preView);
-//        make.bottom.equalTo(contentView).offset(-2*IMAGE_WIDTH);
-//    }];
-//    preView = view;
-//    
-//    JJButton *loginBtn = [[JJButton alloc]initWithFrame:CGRectMake(30, 230, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
-//    [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-//    [loginBtn addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
-//    view = loginBtn;
-//    [contentView addSubview:loginBtn];
-//    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.left.equalTo(preView);
-//        make.bottom.equalTo(preView.mas_top).offset(-0.5*IMAGE_WIDTH);
-//    }];
-//    preView = view;
-    
-    
 }
-
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -138,7 +82,7 @@
     
     //账号
     [self.userName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.backGroundImageView).offset(3*IMAGE_WIDTH);
+        make.top.equalTo(self.backGroundImageView).offset(5*IMAGE_WIDTH);
         make.left.equalTo(self.backGroundImageView).offset(IMAGE_WIDTH);
         make.right.equalTo(self.backGroundImageView).offset(-IMAGE_WIDTH);
         make.height.mas_equalTo(45);
@@ -153,7 +97,7 @@
     //登录
     [self.loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.left.mas_equalTo(self.passWd);
-        make.top.mas_equalTo(self.passWd.mas_bottom).offset(3*IMAGE_WIDTH);
+        make.top.mas_equalTo(self.passWd.mas_bottom).offset(2*IMAGE_WIDTH);
     }];
     
     //注册
@@ -173,17 +117,18 @@
         _backGroundImageView.backgroundColor = [UIColor whiteColor];
         _backGroundImageView.contentMode = UIViewContentModeScaleAspectFit;
         _backGroundImageView.layer.masksToBounds = YES;
+        _backGroundImageView.userInteractionEnabled = YES;
     }
     return _backGroundImageView;
 }
 -(SPTextFieldView *)userName{
     
     if (!_userName) {
-        _userName = [[SPTextFieldView alloc]initWithSPTextFieldImageType:SPTextFieldImageLeft];
+        _userName = [[SPTextFieldView alloc] initWithSPTextFieldImageType:SPTextFieldImageLeft];
         _userName.textField.placeholder = @"请输入用户名";
         _userName.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         [_userName.imageBtn setImage:[UIImage imageNamed:@"login_id_icon"] forState:UIControlStateNormal];
-        _userName.textField.tag = 1;
+        _userName.textField.tag = Account;
     }
     return _userName;
 }
@@ -191,12 +136,12 @@
 -(SPTextFieldView *)passWd{
     
     if (!_passWd) {
-        _passWd = [[SPTextFieldView alloc]initWithSPTextFieldImageType:SPTextFieldImageLeft];
+        _passWd = [[SPTextFieldView alloc] initWithSPTextFieldImageType:SPTextFieldImageLeft];
         _passWd.textField.placeholder = @"请输入密码";
         _passWd.textField.secureTextEntry = YES;
         _passWd.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         [_passWd.imageBtn setImage:[UIImage imageNamed:@"login_password_icon"] forState:UIControlStateNormal];
-        _passWd.textField.tag = 1;
+        _passWd.textField.tag = Password;
         
     }
     return _passWd;
@@ -206,7 +151,7 @@
     if (!_loginButton)
     {
         _loginButton = [[JJButton alloc]initWithFrame:CGRectMake(30, 230, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
-        [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
+        [_loginButton setTitle:@"登 录" forState:UIControlStateNormal];
         [_loginButton addTarget:self action:@selector(didClickLogin:) forControlEvents:UIControlEventTouchUpInside];
 
     }
@@ -217,46 +162,29 @@
     if (!_registerButton)
     {
         _registerButton = [[JJButton alloc]initWithFrame:CGRectMake(30, 230, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
-        [_registerButton setTitle:@"注册" forState:UIControlStateNormal];
-        [_registerButton addTarget:self action:@selector(addAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_registerButton setTitle:@"注 册" forState:UIControlStateNormal];
+        [_registerButton addTarget:self action:@selector(didClickRegister:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     return _registerButton;
 }
 
+#pragma mark - 通知相关
 
-#pragma mark - addBtAction
-
--(void)addAction:(UIButton *)addBt
+- (void)addNotificationObservers
 {
-//    FMDatabase *db = [LoginPersonCollect sharedDatabaseUser];
-//    NSString *sql_1 = [NSString stringWithFormat:@"SELECT COUNT(*) as count FROM t_adressBook where name=:name"];
-//    NSDictionary *dic_1 = @{@"name": self.userName.textField.text};
-//    FMResultSet *set = [db executeQuery:sql_1 withParameterDictionary:dic_1];
-//    NSInteger count = 0;
-//    
-//    if (set.next) {
-//        count = [set intForColumn:@"count"];
-//    }
-//    
-//    if (count > 0) {
-//        AMSmoothAlertView *alert = [[AMSmoothAlertView alloc]initDropAlertWithTitle:@"注册失败" andText:@"用户名已存在" andCancelButton:YES forAlertType:AlertFailure];
-//        [alert show];
-//    } else{
-//        BOOL result = [db executeUpdate:@"insert into t_adressBook(name,passwd) values(?,?);", self.userName.textField.text,self.passWd.textField.text];
-//        if(result)
-//        {
-//            //            NSLog(@"插入数据成功");
-//            AMSmoothAlertView *alert = [[AMSmoothAlertView alloc]initDropAlertWithTitle:@"注册成功" andText:nil andCancelButton:YES forAlertType:AlertSuccess];
-//            [alert show];
-//        }
-//        else {
-//            //            NSLog(@"插入数据失败");
-//        }
-//    }
-//    
-//    [set close];
+    [super addNotificationObservers];
     
+    //键盘事件
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppear:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDisappear:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)removeNotificationObservers
+{
+    [super removeNotificationObservers];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 监听点击事件
@@ -267,56 +195,71 @@
  */
 - (void)didClickLogin:(JJButton *)sender
 {
+//    if (self.userName.textField.text.length == 0)
+//    {
+//        [SVProgressHUD showErrorWithStatus:@"请输入账号"];
+//        return ;
+//    }
+//    if (self.passWd.textField.text.length == 0)
+//    {
+//        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+//        return ;
+//    }
     
+    //查询数据库
+
 }
 /**
  *  点击注册
  */
 - (void)didClickRegister:(JJButton *)sender
 {
-    
+    RegisteVC *registeVC = [[RegisteVC alloc] init];
+    [self.navigationController pushViewController:registeVC animated:YES];
 }
 
-
--(void)loginAction:(UIButton *)loginBt
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-//    FMDatabase *db = [LoginPersonCollect sharedDatabaseUser];
-//    NSString *sql = @"select * from t_adressBook;";
-//    FMResultSet *set = [db executeQuery:sql];
-//    
-//    while ([set next]) {
-//        NSString *name = [set stringForColumn:@"name"];
-//        NSString *passwd = [set stringForColumn:@"passwd"];
-//        
-//        if ([self.userName.textField.text isEqualToString:name]) {
-//            if (![self.passWd.textField.text isEqualToString:passwd]) {
-//                AMSmoothAlertView *alert = [[AMSmoothAlertView alloc]initDropAlertWithTitle:@"登录失败" andText:@"密码错误" andCancelButton:YES forAlertType:AlertFailure];
-//                [alert show];
-//                return;
-//            }
-//            else
-//            {
-//                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//                hud.mode = MBProgressHUDModeAnnularDeterminate;
-//                hud.labelText = @"Loading";
-//                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
-//                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//                    [self presentViewController:self.abTabBarController animated:YES completion:^{
-//                    }];
-//                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-//                });
-//                return;
-//            }
-//        }
-//        else {
-//            continue;
-//        }
-//        
-//    }
-//    AMSmoothAlertView *alert = [[AMSmoothAlertView alloc]initDropAlertWithTitle:@"登录失败" andText:@"用户名错误" andCancelButton:YES forAlertType:AlertFailure];
-//    [alert show];
-//    return;
+    [self.view endEditing:YES];
 }
+
+#pragma mark - 键盘事件处理
+//键盘出现
+- (void)keyboardAppear:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    
+    CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    if(keyboardFrame.origin.y > CGRectGetMaxY(self.loginButton.frame)+8)
+    {
+        return ;
+    }
+    
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    UIView *firstResponder = [keyWindow performSelector:@selector(firstResponder)];
+    
+    
+    if (firstResponder.tag == Account)
+    {
+        CGFloat offset = keyboardFrame.origin.y - CGRectGetMaxY(self.loginButton.frame);
+        self.view.frame = CGRectMake(0, self.view.origin.y + offset - 8, self.view.width, self.view.height);
+    }
+    else if (firstResponder.tag == Password)
+    {
+        CGFloat offset = keyboardFrame.origin.y - CGRectGetMaxY(self.registerButton.frame);
+        self.view.frame = CGRectMake(0, self.view.origin.y + offset - 8, self.view.width, self.view.height);
+    }
+}
+- (void)keyboardChange:(NSNotification *)notification
+{
+    self.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+- (void)keyboardDisappear:(NSNotification *)notification
+{
+    self.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
 
 
 

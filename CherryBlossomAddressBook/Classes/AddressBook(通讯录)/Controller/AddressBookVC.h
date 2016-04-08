@@ -7,6 +7,12 @@
 
 #import "BaseVC.h"
 
-@interface AddressBookVC : BaseVC
+@interface AddressBookVC : BaseTableVC
+
+@end
+
+
+@interface AddressBookCell : UITableViewCell
+
 
 @end

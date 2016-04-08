@@ -8,11 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+#define kUserModelFromLogin     @"kUserModelFromLogin_"
 #define kUserSecurityAccount    @"kUserSecurityAccount_"
 #define kUserSecurityPassword   @"kUserSecurityPassword_"
 
+@class UserSecurity;
+
 @interface UserManager : NSObject
 
+/**
+ *  用户模型
+ */
+@property (nonatomic, strong) UserModel *userModel;
+/**
+ *  用户登录信息
+ */
+@property (nonatomic, strong) UserSecurity *userSecurity;
 /**
  *  是否自动登录
  */
@@ -23,4 +34,17 @@
  *
  */
 + (instancetype)shareInstance;
+@end
+
+
+#pragma mark - UserSecurity
+
+/**
+ *  保存登录信息
+ */
+@interface UserSecurity : ABModel
+
+@property (nonatomic, copy) NSString *account;
+@property (nonatomic, copy) NSString *password;
+
 @end

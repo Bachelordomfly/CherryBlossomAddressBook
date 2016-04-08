@@ -10,7 +10,7 @@
 #import "LoginVC.h"
 #import "AddPersonVC.h"
 
-@interface PersonalCollectVC () 
+@interface PersonalCollectVC ()
 
 @property (nonatomic, strong) NSMutableArray *data;
 @property (nonatomic, strong) LoginVC *loginViewController;
@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];
     
-   
+    
     self.navigationItem.title = @"个人收藏";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightBarButtonItemAction:)];
@@ -40,14 +40,20 @@
 /**
  加载数据源
  */
-//- (NSMutableArray *)data
-//{
-//    if(!_data)
-//    {
-//        _data = [PersonCollectInfo dataFromPlist];
-//    }
-//    return _data;
-//}
+- (NSMutableArray *)data
+{
+    if(!_data)
+    {
+        _data = [NSMutableArray array];
+        [_data addObject:@"jiajia"];
+        [_data addObject:@"jiajia"];
+        [_data addObject:@"jiajia"];
+        [_data addObject:@"jiajia"];
+        [_data addObject:@"jiajia"];
+        
+    }
+    return _data;
+}
 
 
 #pragma mark-leftBarButtomItem
@@ -56,21 +62,21 @@
     UIAlertController *alterView = [UIAlertController alertControllerWithTitle:@"是否注销" message:@"确定注销吗？" preferredStyle:UIAlertControllerStyleActionSheet];
     
     [alterView addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-
-        [self presentViewController:self.loginViewController animated:NO completion:nil]; 
+        
+        [self presentViewController:self.loginViewController animated:NO completion:nil];
     }]];
     
     [alterView addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         
     }]];
     [self presentViewController:alterView animated:YES completion:nil];
-
+    
     
 }
 
 -(void)rightBarButtonItemAction:(UIBarButtonItem *)rightBarButtonItem
 {
-
+    
     AddPersonVC *addPersonVC = [[AddPersonVC alloc]init];
     [self.navigationController pushViewController:addPersonVC animated:YES];
 }
@@ -79,7 +85,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.data.count;
+    //    return self.data.count;
+    return 80;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,7 +102,7 @@
     cell.avatorImageView.image = [UIImage imageNamed:@"branddefulthead"];
     cell.nameLable.text = @"deavin";
     cell.areaLable.text = @"住宅";
-//    cell.accessoryType = UITableViewCellAccessoryDetailButton;
+    //    cell.accessoryType = UITableViewCellAccessoryDetailButton;
     return cell;
 }
 
@@ -131,60 +138,81 @@
 @end
 
 @implementation PersonalCollectCell
-//
-//-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-//
-//    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-//        
-//        self.backgroundColor = UIColorFromRGB(0xececec);
-//        
-//        UIView *fixView =[self.contentView addShadowTanView];
-//        
-//        UIView *view;
-//        UIView *preView;
-//        
-//        _avatorImageView = [[UIImageView alloc]init];
-//        [fixView addSubview:_avatorImageView];
-//        view = _avatorImageView;
-//        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.equalTo(self.imageView);
-//            make.left.equalTo(self).offset(20);
-//            make.centerY.equalTo(self);
-//        }];
-//        preView = view;
-//        
-//        _nameLable = [[UILabel alloc]init];
-//        _nameLable.font = [UIFont systemFontOfSize:24];
-//        [fixView addSubview:_nameLable];
-//        view = _nameLable;
-//        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.equalTo(self.textLabel);
-//            make.left.equalTo(preView.mas_right).offset(10);
-//            make.top.centerY.equalTo(preView);
-//        }];
-//        
-//        _checkButton = [[UIButton alloc]init];
-//        [_checkButton setBackgroundImage:[UIImage imageNamed:@"login_show_icon"] forState:UIControlStateNormal];
-//        [fixView addSubview:_checkButton];
-//        view = _checkButton;
-//        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.right.equalTo(fixView.mas_right).offset(-20);
-//            make.size.mas_equalTo(25);
-//            make.centerY.equalTo(fixView);
-//        }];
-//        preView = view;
-//        
-//        _areaLable = [[UILabel alloc]init];
-//        _areaLable.font = [UIFont systemFontOfSize:15];
-//        [fixView addSubview:_areaLable];
-//        view = _areaLable;
-//        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.right.equalTo(preView.mas_left).offset(-10);
-//            make.centerY.equalTo(preView);
-//        }];
-//
-//    }
-//    return self;
-//}
+-(UIImageView *)avatorImageView{
+    
+    if (!_avatorImageView) {
+        _avatorImageView = [[UIImageView alloc]init];
+    }
+    return _avatorImageView;
+}
+
+-(UILabel *)nameLable{
+    
+    if (!_nameLable) {
+        _nameLable = [[UILabel alloc]init];
+        _nameLable.font = [UIFont systemFontOfSize:24];
+    }
+    return _nameLable;
+}
+
+-(UIButton *)checkButton{
+    
+    if (!_checkButton) {
+        _checkButton = [[UIButton alloc]init];
+        [_checkButton setBackgroundImage:[UIImage imageNamed:@"login_show_icon"] forState:UIControlStateNormal];
+    }
+    return _checkButton;
+}
+
+-(UILabel *)areaLable{
+    
+    if (!_areaLable) {
+        _areaLable = [[UILabel alloc]init];
+        _areaLable.font = [UIFont systemFontOfSize:15];
+    }
+    return _areaLable;
+}
+
+
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        self.backgroundColor = kColorAppMain;
+        UIView *fixView =[self.contentView addShadowTanView];
+        
+        
+        [fixView addSubview:self.avatorImageView];
+        [self.avatorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.equalTo(self.imageView);
+            make.left.equalTo(self).offset(20);
+            make.centerY.equalTo(self);
+        }];
+        
+        [fixView addSubview:self.nameLable];
+        [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.equalTo(self.textLabel);
+            make.left.equalTo(self.avatorImageView.mas_right).offset(10);
+            make.top.centerY.equalTo(self.avatorImageView);
+        }];
+        
+        
+        [fixView addSubview:self.checkButton];
+        [self.checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(fixView.mas_right).offset(-20);
+            make.size.mas_equalTo(25);
+            make.centerY.equalTo(fixView);
+        }];
+        
+        [fixView addSubview:self.areaLable];
+        [self.areaLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.checkButton.mas_left).offset(-10);
+            make.centerY.equalTo(self.checkButton);
+        }];
+        
+    }
+    return self;
+}
 
 @end
+

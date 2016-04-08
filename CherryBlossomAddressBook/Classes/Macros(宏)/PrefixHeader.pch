@@ -14,7 +14,6 @@
  *  引入APP宏文件
  */
 #import "AppMacros.h"
-#import "ConfigMacro.h"
-#import "NotificationMacro.h"
+
 
 #endif /* PrefixHeader_pch */

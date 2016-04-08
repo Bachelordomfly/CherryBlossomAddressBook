@@ -28,7 +28,7 @@
 {
     if (self = [super init])
     {
-        [self initChildViewControllers];
+        
     }
     return self;
 }
@@ -98,14 +98,16 @@
  */
 - (void)enterApp
 {
-    if ([UserManager shareInstance].isAutoLogin)
-    {
-        return ;
-    }
-    else
-    {
-        [self initLoginVC];
-    }
+//    if ([UserManager shareInstance].isAutoLogin)
+//    {
+//        [self initChildViewControllers];
+//        return ;
+//    }
+//    else
+//    {
+//        [self initLoginVC];
+//    }
+    [self initChildViewControllers];
 }
 /**
  *  弹出登录界面
@@ -128,36 +130,36 @@
     //1、个人收藏
     PersonalCollectVC *pcVC = [[PersonalCollectVC alloc] init];
     pcVC.tabBarItem.title = @"个人收藏";
-    pcVC.tabBarItem.image = [UIImage imageNamed:@"tabbar_me"];
-    pcVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabbar_meHL"];
-    JJNavigationController *pcNC = [[JJNavigationController alloc] initWithRootViewController:pcVC];
+    pcVC.tabBarItem.image = [UIImage imageNamed:@"tabBar_me_n"];
+    pcVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabBar_me_s"];
+    GestureNavigationController *pcNC = [[GestureNavigationController alloc] initWithRootViewController:pcVC];
     
     [self addChildViewController:pcNC];
     
     //2、最近通话
     RecentVC *recentVC = [[RecentVC alloc] init];
     recentVC.tabBarItem.title = @"最近通话";
-    recentVC.tabBarItem.image = [UIImage imageNamed:@"tabbar_mainframe"];
-    recentVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabbar_mainframeHL"];
-    JJNavigationController *recentNC = [[JJNavigationController alloc] initWithRootViewController:recentVC];
+    recentVC.tabBarItem.image = [UIImage imageNamed:@"tabBar_recommend_n"];
+    recentVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabBar_recommend_s"];
+    GestureNavigationController *recentNC = [[GestureNavigationController alloc] initWithRootViewController:recentVC];
     
     [self addChildViewController:recentNC];
     
     //3、通讯录
     AddressBookVC *abVC = [[AddressBookVC alloc] init];
     abVC.tabBarItem.title = @"通讯录";
-    abVC.tabBarItem.image = [UIImage imageNamed:@"tabbar_contacts"];
-    abVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabbar_contactsHL"];
-    JJNavigationController *abNC = [[JJNavigationController alloc] initWithRootViewController:abVC];
+    abVC.tabBarItem.image = [UIImage imageNamed:@"tabBar_home_n"];
+    abVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabBar_home_s"];
+    GestureNavigationController *abNC = [[GestureNavigationController alloc] initWithRootViewController:abVC];
     
     [self addChildViewController:abNC];
     
     //4、拨号键盘
     DialVC *dialVC = [[DialVC alloc] init];
     dialVC.tabBarItem.title = @"拨号键盘";
-    dialVC.tabBarItem.image = [UIImage imageNamed:@"tabbar_discover"];
-    dialVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabbar_discoverHL"];
-    JJNavigationController *dialNC = [[JJNavigationController alloc] initWithRootViewController:dialVC];
+    dialVC.tabBarItem.image = [UIImage imageNamed:@"tabBar_shopCart_n"];
+    dialVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabBar_shopCart_s"];
+    GestureNavigationController *dialNC = [[GestureNavigationController alloc] initWithRootViewController:dialVC];
     
     [self addChildViewController:dialNC];
     
