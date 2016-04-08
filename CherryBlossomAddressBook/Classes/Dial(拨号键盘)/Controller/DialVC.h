@@ -7,6 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DialVC : UIViewController
+@interface DialVC : BaseVC
 
 @end

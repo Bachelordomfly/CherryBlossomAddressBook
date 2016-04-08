@@ -55,8 +55,6 @@ UITableViewDataSource
     self.tableView.backgroundColor = kColorBgMain;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
-
-
 }
 
 #pragma mark - getter/setter

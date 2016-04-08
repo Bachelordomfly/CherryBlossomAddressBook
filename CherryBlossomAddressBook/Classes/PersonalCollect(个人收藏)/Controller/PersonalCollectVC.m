@@ -18,23 +18,33 @@
 
 @implementation PersonalCollectVC
 
-#pragma mark - 生命周期
+#pragma mark - life cycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.title = @"个人收藏";
     
-    self.navigationItem.title = @"个人收藏";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightBarButtonItemAction:)];
     self.loginViewController = [[LoginVC alloc]init];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //
-    //self.tableView.tableHeaderView.hidden = YES;
+    
 }
+
+#pragma mark - private method
+
+- (void)setupNaviBarItems
+{
+    [super setupNaviBarItems];
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightBarButtonItemAction:)];
+}
+
+
+
 
 #pragma mark - 自定义方法
 /**
@@ -56,7 +66,7 @@
 }
 
 
-#pragma mark-leftBarButtomItem
+#pragma mark - leftBarButtomItem
 -(void)leftBarButtonItemAction:(UIBarButtonItem *)leftBarButtonItem
 {
     UIAlertController *alterView = [UIAlertController alertControllerWithTitle:@"是否注销" message:@"确定注销吗？" preferredStyle:UIAlertControllerStyleActionSheet];

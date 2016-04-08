@@ -29,12 +29,6 @@
     self.tabBarController = [[ABTabBarController alloc] init];
     self.window.rootViewController = self.tabBarController;
 //    self.window.rootViewController = loginVC;
-   
-    /**
-     *  设置NavigationBar背景色
-     */
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"navigationBar_bg"]]];
-    
 
     
     /**

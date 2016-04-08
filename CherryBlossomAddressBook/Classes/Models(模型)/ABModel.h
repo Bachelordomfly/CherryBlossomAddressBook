@@ -15,15 +15,15 @@ typedef NS_ENUM(NSInteger, ABSex) {
     /**
      *  性别未知
      */
-    ABUnknow = 0,
+    ABSexUnknow = 0,
     /**
      *  男性
      */
-    ABMan = 1,
+    ABSexMan = 1,
     /**
      *  女性
      */
-    ABWomen = 2
+    ABSexWomen = 2
 };
 
 /**
