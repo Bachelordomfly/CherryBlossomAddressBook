@@ -209,7 +209,6 @@
                 [[view.subviews objectAtIndex:0] removeFromSuperview];
             }
         }
-
     }
     return _searchBar;
 }

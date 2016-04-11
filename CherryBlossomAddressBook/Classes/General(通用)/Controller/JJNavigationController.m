@@ -19,14 +19,14 @@
     [super viewDidLoad];
     
     //设置NavigationBar的背景图片
-    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationBar_bg"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationBar setBackgroundImage:[UIImage imageWithColor:kColorBlue cornerRadius:0] forBarMetrics:UIBarMetricsDefault];
     
     if ([self.navigationBar respondsToSelector:@selector(setShadowImage:)])
     {
         [self.navigationBar setShadowImage:[[UIImage alloc] init]];
     }
 
-    [self.navigationBar setBarTintColor:kColorBgMain];
+    [self.navigationBar setTintColor:kColorBgMain];
 }
 
 - (void)didReceiveMemoryWarning {

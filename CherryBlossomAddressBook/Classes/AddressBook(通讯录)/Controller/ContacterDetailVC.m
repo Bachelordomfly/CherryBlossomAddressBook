@@ -169,12 +169,14 @@ UINavigationControllerDelegate
         else if (indexPath.row == 1)
         {
             static NSString *reuseID = @"AddressCell";
-            ContacterAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID];
+            BaseSimpleCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID];
             if (!cell)
             {
-                cell = [[ContacterAddressCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseID];
+                cell = [[BaseSimpleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseID];
             }
-            [cell updateWithContact:self.contacterModel];
+            cell.position = BaseSimpleCellBGPositionBottom;
+            cell.textLabel.text = self.titleArray[indexPath.section][indexPath.row];
+            cell.detailTextLabel.text = _contacterModel.address.length > 0 ? _contacterModel.address : @"暂无信息";
             return cell;
         }
     }
@@ -185,7 +187,7 @@ UINavigationControllerDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == ContacterSectionTypeTop)
+    if(indexPath.section == ContacterSectionTypeTop && indexPath.row == 0)
     {
         return [ContacterAvatarCell cellHeight];
     }
@@ -380,7 +382,11 @@ UINavigationControllerDelegate
 @end
 
 
+@interface ContacterAddressCell ()
 
+@property (nonatomic, strong) ContacterModel *contacterModel;
+@property (nonatomic, strong) UIView *line;
+@end
 
 /**
  *  详细备注cell
@@ -396,13 +402,15 @@ UINavigationControllerDelegate
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
         [self.contentView addSubview:self.remarkTV];
+        [self.contentView addSubview:self.line];
     }
     return self;
 }
 
 - (void)updateWithContact:(ContacterModel *)contact
 {
-    [self.remarkTV setText:[NSString stringWithFormat:@"   地址信息：%@", contact.address]];
+    _contacterModel = contact;
+    [self.remarkTV setText:_contacterModel.address.length > 0 ? _contacterModel.address : @"暂无信息"];
 }
 
 - (void)layoutSubviews
@@ -410,6 +418,10 @@ UINavigationControllerDelegate
     [super layoutSubviews];
     [self.remarkTV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.width.height.mas_equalTo(self.contentView);
+    }];
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(self.contentView);
+        make.height.mas_equalTo(0.5);
     }];
 }
 
@@ -423,6 +435,16 @@ UINavigationControllerDelegate
         [_remarkTV setTextColor:kColorTextMain];
     }
     return _remarkTV;
+}
+- (UIView *)line
+{
+    if (!_line)
+    {
+        _line = [UIView new];
+        _line.backgroundColor = [UIColor grayColor];
+        _line.alpha = 0.3;
+    }
+    return _line;
 }
 
 @end

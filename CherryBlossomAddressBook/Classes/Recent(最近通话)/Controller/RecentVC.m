@@ -7,6 +7,7 @@
 //
 
 #import "RecentVC.h"
+#import "RecentCell.h"
 
 @interface RecentVC ()
 
@@ -107,15 +108,3 @@
 
 @end
 
-@implementation RecentCell
-
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
-        
-    }
-    return self;
-}
-
-@end

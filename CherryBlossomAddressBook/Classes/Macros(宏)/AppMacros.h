@@ -169,24 +169,23 @@ alpha:((float)(rgbValue & 0xFF))/255.0]
 #pragma mark - Font
 
 #define SHFontNavBarTitle [UIFont systemWithFont:34]
-#define SHFontTabBarItem [UIFont systemWithFont:20]
+#define SHFontTabBarItem  [UIFont systemWithFont:20]
 
 #define kDefaultRegularFontFamilyName @"HelveticaNeue"
-#define kDefaultBoldFontFamilyName @"HelveticaNeue-Bold"
+#define kDefaultBoldFontFamilyName    @"HelveticaNeue-Bold"
 #define kDefaultFontFamilyNameForRead @"XinGothic-Mzread W4"
 
 #pragma mark - UIColor
 
-//#define kColorAppMain       UIColorFromRGB_D(237, 168, 225)  //APP主色调(樱花色)
+#define kColorBlue          UIColorFromRGBA_D(36, 175, 224, 1)
 #define kColorAppMain       UIColorFromRGB_0x(0xf7e4ed)       //APP主色调(樱花色)
 #define kColorBgMain        UIColorFromRGB_0x(0xFFFFFF)       //一级框架背景色(纯白色)
 #define kColorBgSub         UIColorFromRGB_0x(0xeFeFF4)       //二级框架背景色
 #define kColorBgLine        UIColorFromRGB_0x(0xfa8ec2)       //普通分割线颜色
-#define kColorHairline     UIColorFromRGB_0x(0xe5e5e5)        //cell分割线颜色
-//定义Cell高度
-#define kSimpleCellHeight 55.f
-#define kColorTextMain     UIColorFromRGB_0x(0x333333)
-#define kColorTextSub      UIColorFromRGB_0x(0x666666)
+#define kColorHairline      UIColorFromRGB_0x(0xe5e5e5)        //cell分割线颜色
+#define kSimpleCellHeight   55.f
+#define kColorTextMain      UIColorFromRGB_0x(0x333333)
+#define kColorTextSub       UIColorFromRGB_0x(0x666666)
 
 #define kColorCellBgSel    [UIColor colorWithHue:0.0f saturation:0.0f brightness:0.95f alpha:1.0f] //cell背景色
 #define kNaviBarBgImg [UIImage imageWithColor:kColorAppMain cornerRadius:0]

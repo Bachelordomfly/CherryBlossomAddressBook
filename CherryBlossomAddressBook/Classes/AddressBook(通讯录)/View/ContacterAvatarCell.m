@@ -89,7 +89,7 @@
     [self addSubview:self.subTitleLab];
     [self addSubview:self.detailIV];
     [self addSubview:self.detailBtn];
-//    [self addSubview:self.line];
+    [self addSubview:self.line];
 }
 /**
  *  子控件布局
@@ -126,13 +126,13 @@
         make.centerY.mas_equalTo(self.mas_centerY);
     }];
     
-//    //分割线
-//    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self.mas_left).offset(16);
-//        make.right.mas_equalTo(self.mas_right).offset(-16);
-//        make.bottom.mas_equalTo(self.mas_bottom).offset(-1);
-//        make.height.mas_equalTo(0.5);
-//    }];
+    //分割线
+    [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.mas_left).offset(16);
+        make.right.mas_equalTo(self.mas_right).offset(-16);
+        make.bottom.mas_equalTo(self.mas_bottom).offset(-1);
+        make.height.mas_equalTo(0.5);
+    }];
 }
 
 #pragma mark - lazyload
