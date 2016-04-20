@@ -19,7 +19,11 @@
     [super viewDidLoad];
     
     //设置NavigationBar的背景图片
+<<<<<<< HEAD
     [self.navigationBar setBackgroundImage:[UIImage imageWithColor:kColorBlue cornerRadius:0] forBarMetrics:UIBarMetricsDefault];
+=======
+    [self.navigationBar setBackgroundImage:[UIImage imageWithColor:kColorMain cornerRadius:0] forBarMetrics:UIBarMetricsDefault];
+>>>>>>> Bachelordomfly/master
     
     if ([self.navigationBar respondsToSelector:@selector(setShadowImage:)])
     {

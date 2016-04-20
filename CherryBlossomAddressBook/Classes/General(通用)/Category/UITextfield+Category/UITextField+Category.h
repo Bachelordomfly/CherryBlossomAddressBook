@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SKTag.h"
 
 @interface UITextField (Category)
 
 @property (nonatomic, strong) UIColor *placeholderColor;
+@end
+
+@interface SKTag (Util)
+
+- (void)setSelected:(BOOL)selected;
+
 @end

@@ -10,4 +10,13 @@
 
 @implementation ContacterModel
 
+- (instancetype)initWithDictionary:(NSDictionary *)dict
+{
+    if (self = [super initWithDictionary:dict])
+    {
+        _name = [dict objectForKey:@"name"];
+    }
+    return self;
+}
+
 @end

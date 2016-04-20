@@ -9,7 +9,7 @@
 #import "ABModel.h"
 
 
-@interface ContacterModel : NSObject
+@interface ContacterModel : ABModel
 
 @property (nonatomic, copy)   NSString *name;         //姓名
 @property (nonatomic, copy)   NSString *nickName;     //备注名

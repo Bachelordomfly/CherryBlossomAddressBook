@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) NSMutableArray *data;
 @property (nonatomic, strong) LoginVC *loginViewController;
+@property (nonatomic, assign) BOOL isEditable;
+
 @end
 
 @implementation PersonalCollectVC
@@ -26,12 +28,18 @@
     self.title = @"个人收藏";
     
     self.loginViewController = [[LoginVC alloc]init];
+    
+   
+    
+    
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
 }
+
+
 
 #pragma mark - private method
 
@@ -112,7 +120,6 @@
     cell.avatorImageView.image = [UIImage imageNamed:@"branddefulthead"];
     cell.nameLable.text = @"deavin";
     cell.areaLable.text = @"住宅";
-    //    cell.accessoryType = UITableViewCellAccessoryDetailButton;
     return cell;
 }
 
@@ -123,15 +130,12 @@
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 80;
-}
 
 - (NSString *) tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return @"删除";
 }
+
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)

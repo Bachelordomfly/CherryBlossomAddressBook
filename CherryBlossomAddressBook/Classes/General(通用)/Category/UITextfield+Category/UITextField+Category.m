@@ -35,3 +35,16 @@ static NSString * const kPlaceholderColorKey = @"placeholderLabel.textColor";
 
 @end
 
+@implementation SKTag (Util)
+
+- (void)setSelected:(BOOL)selected{
+    if (selected) {
+        self.textColor = [UIColor whiteColor];
+        self.bgColor = kColorMain;
+    } else{
+        self.textColor = kColorMain;
+        self.bgColor = [UIColor clearColor];
+    }
+}
+
+@end

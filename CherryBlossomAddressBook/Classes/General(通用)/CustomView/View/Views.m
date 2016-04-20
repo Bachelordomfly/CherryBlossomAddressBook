@@ -41,6 +41,20 @@
 
 @end
 
+@implementation JJTag
+
++ (instancetype)tagWithText:(NSString *)text{
+    JJTag *tag = [super tagWithText:text];
+    tag.borderColor = kColorMain;
+    tag.borderWidth = 2;
+    tag.cornerRadius = 14;
+    tag.fontSize = 14;
+    tag.padding = UIEdgeInsetsMake(5, 13, 5, 13);
+    
+    return tag;
+}
+
+@end
 
 
 

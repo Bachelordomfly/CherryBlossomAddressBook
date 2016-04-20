@@ -68,6 +68,8 @@
 #import "JJButton.h"
 #import "BaseTableViewCell.h"
 #import "BaseSimpleCell.h"
+#import "SKTagView.h"
+#import "SKTag.h"
 
 #pragma mark - 快捷方法
 
@@ -177,7 +179,13 @@ alpha:((float)(rgbValue & 0xFF))/255.0]
 
 #pragma mark - UIColor
 
+<<<<<<< HEAD
 #define kColorBlue          UIColorFromRGBA_D(36, 175, 224, 1)
+=======
+#define kColorMain          UIColorFromRGBA_D(253, 165, 198, 1)
+#define kColorTabBarItem    UIColorFromRGBA_D(252, 99, 97, 1)
+
+>>>>>>> Bachelordomfly/master
 #define kColorAppMain       UIColorFromRGB_0x(0xf7e4ed)       //APP主色调(樱花色)
 #define kColorBgMain        UIColorFromRGB_0x(0xFFFFFF)       //一级框架背景色(纯白色)
 #define kColorBgSub         UIColorFromRGB_0x(0xeFeFF4)       //二级框架背景色

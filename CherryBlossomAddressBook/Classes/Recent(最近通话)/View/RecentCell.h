@@ -11,5 +11,9 @@
 
 @interface RecentCell : BaseSimpleCell
 
+<<<<<<< HEAD
 - (void)configureCellWithContacterModel:(ContacterModel *)contacterModel;
+=======
+//- (void)configureCellWithContacterModel:(ContacterModel *)contacterModel;
+>>>>>>> Bachelordomfly/master
 @end
