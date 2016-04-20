@@ -12,7 +12,7 @@
 @interface RecentVC ()
 
 @property (nonatomic, strong) RecentTitleView *titleView;
-
+@property (nonatomic, strong) NSArray *dataArray;
 @end
 
 @implementation RecentVC
@@ -35,6 +35,10 @@
     
     self.navigationItem.titleView = self.titleView;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    self.titleView.midSC.selectedSegmentIndex = 0;
+    [self.titleView.midSC addTarget:self action:@selector(segumentAction:) forControlEvents:UIControlEventValueChanged];
+    
 }
 
 #pragma mark - lazyload
@@ -47,12 +51,41 @@
     return _titleView;
 }
 
+-(NSArray *)dataArray{
 
+    if (!_dataArray) {
+        _dataArray = [[NSArray alloc]init];
+        _dataArray = @[@"1",@"2",@"3",@"4",@"1",@"2",@"3",@"4",@"1",@"2",@"3",@"4",@"1",@"2",@"3",@"4"];
+    }
+    return _dataArray;
+}
+
+
+#pragma mark- segument点击事件
+-(void)segumentAction:(UISegmentedControl *)seg
+{
+    NSInteger index = seg.selectedSegmentIndex;
+    
+    switch (index) {
+        case 0:
+            self.dataArray = @[@"1",@"2",@"3",@"4",@"1",@"2",@"3",@"4",@"1",@"2",@"3",@"4",@"1",@"2",@"3",@"4"];
+            [self.tableView reloadData];
+            break;
+        case 1:
+            self.dataArray = @[@"1",@"2",@"3",@"4"];
+            [self.tableView reloadData];
+            break;
+            
+        default:
+            break;
+    }
+    
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 80;
+    return self.dataArray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

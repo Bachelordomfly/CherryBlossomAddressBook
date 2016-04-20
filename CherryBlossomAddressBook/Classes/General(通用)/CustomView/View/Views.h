@@ -11,6 +11,8 @@
 
 @interface RecentTitleView : UIView
 
+@property (nonatomic, strong) UISegmentedControl *midSC;
+
 @end
 
 @interface JJTag : SKTag

@@ -63,4 +63,14 @@ static CGFloat selfAvatorOffset = 1.5f;
     return shadowView;
 }
 
+- (void)coloredSubviews{
+    for (UIView *view in self.subviews) {
+        view.backgroundColor = [UIColor randomColor];
+        
+        for (UIView *subView in view.subviews) {
+            subView.backgroundColor = [UIColor randomColor];
+        }
+    }
+}
+
 @end
