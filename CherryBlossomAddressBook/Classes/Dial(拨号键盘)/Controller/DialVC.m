@@ -87,14 +87,11 @@
         
         //创建uiview控件
         UIButton *numberBtn=[[UIButton alloc]initWithFrame:CGRectMake(appviewx, appviewy, appvieww, appviewh)];
-<<<<<<< HEAD
         //[appview setBackgroundColor:[UIColor purpleColor]];
         [bkview addSubview:numberBtn];
         [numberBtn setTitle:@"3" forState:UIControlStateNormal];
-=======
         [bkview addSubview:numberBtn];
         [numberBtn setTitle:[NSString stringWithFormat:@"%d", i+1] forState:UIControlStateNormal];
->>>>>>> pr/2
         [numberBtn setBackgroundColor: [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]];
         
     }
