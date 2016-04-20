@@ -55,6 +55,8 @@ UITableViewDataSource
     self.tableView.backgroundColor = kColorBgMain;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+    
+    
 }
 
 #pragma mark - getter/setter
@@ -92,6 +94,12 @@ UITableViewDataSource
     }
     
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    return 80;
 }
 
 @end

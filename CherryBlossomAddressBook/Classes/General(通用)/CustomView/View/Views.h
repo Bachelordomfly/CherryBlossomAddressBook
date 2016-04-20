@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SKTag.h"
 
 @interface RecentTitleView : UIView
+
+@end
+
+@interface JJTag : SKTag
+
 
 @end

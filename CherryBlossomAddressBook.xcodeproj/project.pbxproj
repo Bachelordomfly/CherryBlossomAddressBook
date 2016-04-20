@@ -57,6 +57,10 @@
 		52011C511CB7C0B900E365F8 /* ContacterSexPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52011C501CB7C0B900E365F8 /* ContacterSexPopView.m */; };
 		52011C541CB7C24E00E365F8 /* ContacterDetailChangeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52011C531CB7C24E00E365F8 /* ContacterDetailChangeVC.m */; };
 		52011C571CB7C73700E365F8 /* ImageScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52011C561CB7C73700E365F8 /* ImageScaleViewController.m */; };
+		52A1A2341CB7F4D8009BC5A0 /* RecentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A1A2331CB7F4D8009BC5A0 /* RecentCell.m */; };
+		A5A054041CC0CC7F001C9A88 /* SKTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A054031CC0CC7F001C9A88 /* SKTagView.m */; };
+		A5A054071CC0CCD2001C9A88 /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A054061CC0CCD2001C9A88 /* SKTag.m */; };
+		A5A0540A1CC0CD30001C9A88 /* SKTagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A054091CC0CD30001C9A88 /* SKTagButton.m */; };
 		A5E1D45E1CAB8F79001DCBB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E1D45D1CAB8F79001DCBB5 /* main.m */; };
 		A5E1D46A1CAB8F79001DCBB5 /* CherryBlossomAddressBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5E1D4681CAB8F79001DCBB5 /* CherryBlossomAddressBook.xcdatamodeld */; };
 		A5E1D46C1CAB8F79001DCBB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E1D46B1CAB8F79001DCBB5 /* Assets.xcassets */; };
@@ -434,6 +438,14 @@
 		52011C531CB7C24E00E365F8 /* ContacterDetailChangeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContacterDetailChangeVC.m; sourceTree = "<group>"; };
 		52011C551CB7C73700E365F8 /* ImageScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScaleViewController.h; sourceTree = "<group>"; };
 		52011C561CB7C73700E365F8 /* ImageScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageScaleViewController.m; sourceTree = "<group>"; };
+		52A1A2321CB7F4D8009BC5A0 /* RecentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCell.h; sourceTree = "<group>"; };
+		52A1A2331CB7F4D8009BC5A0 /* RecentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCell.m; sourceTree = "<group>"; };
+		A5A054021CC0CC7F001C9A88 /* SKTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagView.h; sourceTree = "<group>"; };
+		A5A054031CC0CC7F001C9A88 /* SKTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagView.m; sourceTree = "<group>"; };
+		A5A054051CC0CCD2001C9A88 /* SKTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTag.h; sourceTree = "<group>"; };
+		A5A054061CC0CCD2001C9A88 /* SKTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTag.m; sourceTree = "<group>"; };
+		A5A054081CC0CD30001C9A88 /* SKTagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagButton.h; sourceTree = "<group>"; };
+		A5A054091CC0CD30001C9A88 /* SKTagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagButton.m; sourceTree = "<group>"; };
 		A5E1D4591CAB8F79001DCBB5 /* CherryBlossomAddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CherryBlossomAddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E1D45D1CAB8F79001DCBB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E1D4691CAB8F79001DCBB5 /* CherryBlossomAddressBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CherryBlossomAddressBook.xcdatamodel; sourceTree = "<group>"; };
@@ -1097,6 +1109,12 @@
 		52011C371CB7B9CD00E365F8 /* UITextField */ = {
 			isa = PBXGroup;
 			children = (
+				A5A054081CC0CD30001C9A88 /* SKTagButton.h */,
+				A5A054091CC0CD30001C9A88 /* SKTagButton.m */,
+				A5A054051CC0CCD2001C9A88 /* SKTag.h */,
+				A5A054061CC0CCD2001C9A88 /* SKTag.m */,
+				A5A054021CC0CC7F001C9A88 /* SKTagView.h */,
+				A5A054031CC0CC7F001C9A88 /* SKTagView.m */,
 				52011C381CB7B9CD00E365F8 /* SPTextFieldView.h */,
 				52011C391CB7B9CD00E365F8 /* SPTextFieldView.m */,
 			);
@@ -1119,6 +1137,15 @@
 				52011C4D1CB7BC1000E365F8 /* NSString+Utilities.m */,
 			);
 			path = "NSString+Categories";
+			sourceTree = "<group>";
+		};
+		52A1A2311CB7F46D009BC5A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52A1A2321CB7F4D8009BC5A0 /* RecentCell.h */,
+				52A1A2331CB7F4D8009BC5A0 /* RecentCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A5E1D4501CAB8F79001DCBB5 = {
@@ -1523,6 +1550,7 @@
 			isa = PBXGroup;
 			children = (
 				A5EA6D751CB7757600D2E299 /* Controller */,
+				52A1A2311CB7F46D009BC5A0 /* View */,
 			);
 			path = "Recent(最近通话)";
 			sourceTree = "<group>";
@@ -2212,6 +2240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5A054071CC0CCD2001C9A88 /* SKTag.m in Sources */,
 				A5EA6FB11CB7757700D2E299 /* GPUImageLineGenerator.m in Sources */,
 				A5EA6F681CB7757700D2E299 /* GPUImage3x3TextureSamplingFilter.m in Sources */,
 				A5EA700B1CB7757700D2E299 /* HTPressableButtonPrefs.m in Sources */,
@@ -2324,6 +2353,7 @@
 				A5EA6FDB1CB7757700D2E299 /* GPUImageSaturationBlendFilter.m in Sources */,
 				A5EA6FC61CB7757700D2E299 /* GPUImageOpacityFilter.m in Sources */,
 				A5EA6F271CB7757700D2E299 /* UITableView+FDKeyedHeightCache.m in Sources */,
+				52A1A2341CB7F4D8009BC5A0 /* RecentCell.m in Sources */,
 				A5EA6FF81CB7757700D2E299 /* GPUImageTwoInputCrossTextureSamplingFilter.m in Sources */,
 				A5EA6F8D1CB7757700D2E299 /* GPUImageExposureFilter.m in Sources */,
 				A5EA6FB01CB7757700D2E299 /* GPUImageLinearBurnBlendFilter.m in Sources */,
@@ -2381,6 +2411,7 @@
 				A5EA6FD41CB7757700D2E299 /* GPUImageRawDataInput.m in Sources */,
 				A5EA6F671CB7757700D2E299 /* GPUImage3x3ConvolutionFilter.m in Sources */,
 				A5EA6FA31CB7757700D2E299 /* GPUImageHistogramGenerator.m in Sources */,
+				A5A0540A1CC0CD30001C9A88 /* SKTagButton.m in Sources */,
 				A5EA6FBB1CB7757700D2E299 /* GPUImageMissEtikateFilter.m in Sources */,
 				A5EA6F401CB7757700D2E299 /* UserManager.m in Sources */,
 				A5EA6F6C1CB7757700D2E299 /* GPUImageAmatorkaFilter.m in Sources */,
@@ -2434,6 +2465,7 @@
 				A5EA6FE91CB7757700D2E299 /* GPUImageSphereRefractionFilter.m in Sources */,
 				A5EA700D1CB7757700D2E299 /* UIImage+HTButton.m in Sources */,
 				A5EA6FFB1CB7757700D2E299 /* GPUImageTwoPassTextureSamplingFilter.m in Sources */,
+				A5A054041CC0CC7F001C9A88 /* SKTagView.m in Sources */,
 				A5EA6F261CB7757700D2E299 /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				52011BE11CB7946300E365F8 /* ContacterDetailVC.m in Sources */,
 				A5EA6F8C1CB7757700D2E299 /* GPUImageExclusionBlendFilter.m in Sources */,
@@ -2618,7 +2650,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = CherryBlossomAddressBook/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/xujiajia/Desktop/CherryBlossomAddressBook/CherryBlossomAddressBook/PrefixHeader.pch;
 				INFOPLIST_FILE = CherryBlossomAddressBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2632,7 +2664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = CherryBlossomAddressBook/PrefixHeader.pch;
+				GCC_PREFIX_HEADER = /Users/xujiajia/Desktop/CherryBlossomAddressBook/CherryBlossomAddressBook/PrefixHeader.pch;
 				INFOPLIST_FILE = CherryBlossomAddressBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

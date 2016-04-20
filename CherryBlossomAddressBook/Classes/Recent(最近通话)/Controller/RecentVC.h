@@ -11,6 +11,3 @@
 @end
 
 
-@interface RecentCell : UITableViewCell
-
-@end

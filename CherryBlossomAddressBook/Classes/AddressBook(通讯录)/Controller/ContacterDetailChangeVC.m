@@ -74,13 +74,19 @@
 
 #pragma mark - Block
 
-//姓名
+/**
+ *  修改用户姓名
+ *
+ *  @param title
+ *  @param oldInfo
+ *  @param ContacterDetailChangeNameBlock
+ */
 - (void)prepareCellTitle:(NSString *)title
          CellContentInfo:(NSString *)oldInfo
-contacterDetailChangeNameBlock:(ContacterDetailChangeNameBlock)ContacterDetailChangeNameBlock
+ContacterDetailChangeNameBlock:(ContacterDetailChangeNameBlock)contacterDetailChangeNameBlock
 {
     _changeType = ContacterDetailChangeName;
-    _nameBlock = ContacterDetailChangeNameBlock;
+    _nameBlock = contacterDetailChangeNameBlock;
     _originalInfo = oldInfo;
     self.title = [NSString stringWithFormat:@"%@编辑", title];
     self.editView.text = oldInfo;

@@ -127,11 +127,12 @@
  */
 - (void)initChildViewControllers
 {
+    [self.tabBar setBackgroundImage:[UIImage imageWithColor:kColorMain cornerRadius:1]];
     //1、个人收藏
     PersonalCollectVC *pcVC = [[PersonalCollectVC alloc] init];
     pcVC.tabBarItem.title = @"个人收藏";
-    pcVC.tabBarItem.image = [UIImage imageNamed:@"tabBar_me_n"];
-    pcVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabBar_me_s"];
+    pcVC.tabBarItem.image = [[UIImage imageNamed:@"collection_h"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    pcVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"collection_s"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     GestureNavigationController *pcNC = [[GestureNavigationController alloc] initWithRootViewController:pcVC];
     
     [self addChildViewController:pcNC];
@@ -139,8 +140,8 @@
     //2、最近通话
     RecentVC *recentVC = [[RecentVC alloc] init];
     recentVC.tabBarItem.title = @"最近通话";
-    recentVC.tabBarItem.image = [UIImage imageNamed:@"tabBar_recommend_n"];
-    recentVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabBar_recommend_s"];
+    recentVC.tabBarItem.image = [[UIImage imageNamed:@"recent_h"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    recentVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"recent_s"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     GestureNavigationController *recentNC = [[GestureNavigationController alloc] initWithRootViewController:recentVC];
     
     [self addChildViewController:recentNC];
@@ -148,8 +149,8 @@
     //3、通讯录
     AddressBookVC *abVC = [[AddressBookVC alloc] init];
     abVC.tabBarItem.title = @"通讯录";
-    abVC.tabBarItem.image = [UIImage imageNamed:@"tabBar_home_n"];
-    abVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabBar_home_s"];
+    abVC.tabBarItem.image = [[UIImage imageNamed:@"tabBar_home_n"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    abVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabBar_home_s"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     GestureNavigationController *abNC = [[GestureNavigationController alloc] initWithRootViewController:abVC];
     
     [self addChildViewController:abNC];
@@ -157,8 +158,8 @@
     //4、拨号键盘
     DialVC *dialVC = [[DialVC alloc] init];
     dialVC.tabBarItem.title = @"拨号键盘";
-    dialVC.tabBarItem.image = [UIImage imageNamed:@"tabBar_shopCart_n"];
-    dialVC.tabBarItem.selectedImage = [UIImage imageNamed:@"tabBar_shopCart_s"];
+    dialVC.tabBarItem.image = [[UIImage imageNamed:@"dail_h"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    dialVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"dail_s"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     GestureNavigationController *dialNC = [[GestureNavigationController alloc] initWithRootViewController:dialVC];
     
     [self addChildViewController:dialNC];

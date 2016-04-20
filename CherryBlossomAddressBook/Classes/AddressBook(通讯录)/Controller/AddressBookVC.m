@@ -209,7 +209,6 @@
                 [[view.subviews objectAtIndex:0] removeFromSuperview];
             }
         }
-
     }
     return _searchBar;
 }
@@ -261,9 +260,9 @@
     {
         cell = [[AddressBookCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseID];
     }
-    NSArray *sectionArr=[self.listContent objectAtIndex:indexPath.section];
-    ContacterModel *contacter = (ContacterModel *)[sectionArr objectAtIndex:indexPath.row];
-    [cell configureCellWithContacterModel:contacter];
+//    NSArray *sectionArr=[self.listContent objectAtIndex:indexPath.section];
+//    ContacterModel *contacter = (ContacterModel *)[sectionArr objectAtIndex:indexPath.row];
+//    [cell configureCellWithContacterModel:contacter];
     cell.drawHeadLine = (indexPath.row == 0);
     return cell;
 }
@@ -295,10 +294,10 @@
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [AddressBookCell cellHeight];
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return [AddressBookCell cellHeight];
+//}
 
 - (NSString *) tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -351,7 +350,7 @@
 @property (nonatomic, strong) UIImageView *imgUser;
 @property (nonatomic, strong) UIImageView *imgState;
 @property (nonatomic, strong) UILabel *lbTitle;
-
+@property (nonatomic, strong) UILabel *tagLable;
 @property (nonatomic, strong) ContacterModel *model;
 @end
 
@@ -362,61 +361,51 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
         
-//        self.backgroundColor = kColorAppMain;
-//        UIView *fixView =[self.contentView addShadowTanView];
-//        
-//        UIImageView *avatorImageView = [[UIImageView alloc]init];
-//        avatorImageView.image = [UIImage imageNamed:@"login_id_icon"];
-//        [fixView addSubview:avatorImageView];
-//        [avatorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.equalTo(self.imageView);
-//            make.left.equalTo(self).offset(20);
-//            make.centerY.equalTo(self);
-//        }];
-//        
-//        UILabel *nameLable = [[UILabel alloc]init];
-//        nameLable.text = @"jiajia";
-//        nameLable.font = [UIFont systemFontOfSize:25];
-//        [fixView addSubview:nameLable];
-//        [nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.equalTo(self.textLabel);
-//            make.left.equalTo(avatorImageView.mas_right).offset(10);
-//            make.centerY.equalTo(avatorImageView);
-//        }];
-//
-        
-        self.backgroundColor = kColorBgMain;
+        self.backgroundColor = kColorAppMain;
+        UIView *fixView =[self.contentView addShadowTanView];
         
         //头像
         _imgUser=[[UIImageView alloc]init];
         _imgUser.contentMode = UIViewContentModeScaleAspectFill;
+        _imgUser.image = [UIImage imageNamed:@"default_head_woman"];
         [_imgUser setBackgroundColor:kColorBgSub];
         _imgUser.layer.cornerRadius = 4.f;
         _imgUser.layer.masksToBounds = YES;
-        [self.contentView addSubview:_imgUser];
+        [fixView addSubview:_imgUser];
         
         //
         _imgState=[[UIImageView alloc]init];
         _imgState.image = [UIImage imageNamed:@"contact_icon_active"];
-        [self.contentView addSubview:_imgState];
+        [fixView addSubview:_imgState];
         
         //名字
         _lbTitle=[[UILabel alloc]initWithFrame:CGRectMake(81, 18, 160, 25)];
         _lbTitle.font=[UIFont fontWithName:@"STHeitiTC-Light" size:16];
-        [self.contentView addSubview:_lbTitle];
+        _lbTitle.text = @"jiajia";
+        [fixView addSubview:_lbTitle];
+        
+        //标签
+        _tagLable = [[UILabel alloc]init];
+        _tagLable.text = @"大笨蛋,🐷";
+        _tagLable.font = [UIFont systemFontOfSize:14];
+        [fixView addSubview:_tagLable];
+        [_tagLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.lbTitle.mas_right);
+            make.bottom.equalTo(self.lbTitle);
+        }];
         
         self.separatorLineInset = 10.f;
         
     }
     return self;
 }
-- (void)configureCellWithContacterModel:(ContacterModel *)model
-{
-    _model = model;
-    _imgUser.image = [UIImage imageNamed:_model.avatarPath];
-    _imgState.image = [UIImage imageNamed:_model.sex == ABSexMan ? @"man_manager_icon":@"woman_manager_icon"];
-    _lbTitle.text = _model.name;
-}
+//- (void)configureCellWithContacterModel:(ContacterModel *)model
+//{
+//    _model = model;
+//    _imgUser.image = [UIImage imageNamed:_model.avatarPath];
+//    _imgState.image = [UIImage imageNamed:_model.sex == ABSexMan ? @"man_manager_icon":@"woman_manager_icon"];
+//    _lbTitle.text = _model.name;
+//}
 +(CGFloat)cellHeight
 {
     return 65.f;

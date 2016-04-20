@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddPersonVC : UIViewController
+@interface AddPersonVC : BaseVC
 
 @end
