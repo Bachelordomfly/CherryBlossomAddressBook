@@ -48,6 +48,11 @@
      */
     [UserManager shareInstance];
     
+    /**
+     *  设置tabBar item颜色
+     */
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateSelected];
+    
     return YES;
 }
 

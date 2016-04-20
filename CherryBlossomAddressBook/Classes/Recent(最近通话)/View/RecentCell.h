@@ -11,5 +11,5 @@
 
 @interface RecentCell : BaseSimpleCell
 
-- (void)configureCellWithContacterModel:(ContacterModel *)contacterModel;
+//- (void)configureCellWithContacterModel:(ContacterModel *)contacterModel;
 @end

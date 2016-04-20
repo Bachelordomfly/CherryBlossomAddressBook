@@ -12,7 +12,7 @@
 @interface RecentVC ()
 
 @property (nonatomic, strong) RecentTitleView *titleView;
-@property (nonatomic, strong) NSMutableArray *recentData;
+
 @end
 
 @implementation RecentVC
@@ -36,18 +36,6 @@
     self.navigationItem.titleView = self.titleView;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
-#pragma mark - 自定义
-/**
- 加载数据源
- */
-- (NSMutableArray *)recentData
-{
-    if(!_recentData)
-    {
-//        _recentData = [RecentCellInfo dataFromPlist ];
-    }
-    return _recentData;
-}
 
 #pragma mark - lazyload
 - (RecentTitleView *)titleView
@@ -64,8 +52,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"%ld", self.recentData.count);
-    return self.recentData.count;
+    return 80;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -73,35 +60,10 @@
     RecentCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID];
     if(!cell)
     {
-        cell = [[RecentCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseID];
+        cell = [[RecentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseID];
     }
-    
-//    cell.info = self.recentData[indexPath.row];
     
     return cell;
-}
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 60;
-}
-- (NSString *) tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return @"删除";
-}
-- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        [_recentData removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
 }
 
 

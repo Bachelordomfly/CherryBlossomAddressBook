@@ -19,7 +19,7 @@
 /**
  *  性别
  */
-@property (nonatomic, strong) UIImageView *sexImageView;
+//@property (nonatomic, strong) UIImageView *sexImageView;
 
 /**
  *  备注
@@ -39,7 +39,7 @@
 /**
  *  联系人模型
  */
-@property (nonatomic, strong) ContacterModel *contacterModel;
+//@property (nonatomic, strong) ContacterModel *contacterModel;
 
 @end
 
@@ -51,80 +51,44 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
-        [self.contentView addSubview:self.avatarImageView];
-        [self.contentView addSubview:self.sexImageView];
-        [self.contentView addSubview:self.nameLab];
-        [self.contentView addSubview:self.phoneLab];
-        [self.contentView addSubview:self.timeLab];
+        self.backgroundColor = kColorAppMain;
+        UIView *fixView =[self.contentView addShadowTanView];
+        
+        [fixView addSubview:self.avatarImageView];
+        [fixView addSubview:self.nameLab];
+        [fixView addSubview:self.phoneLab];
+        [fixView addSubview:self.timeLab];
     }
     return self;
 }
 
-#pragma mark - 
-
-- (void)configureCellWithContacterModel:(ContacterModel *)contacterModel
-{
-    _contacterModel = contacterModel;
-    
-    //头像
-    if (_contacterModel.avatarPath.length > 0)
-    {
-        self.avatarImageView.image = [UIImage imageNamed:_contacterModel.avatarPath];
-    }
-    else
-    {
-        
-    }
-    
-    //性别
-    if (_contacterModel.sex == ABSexMan)
-    {
-        self.sexImageView.image = [UIImage imageNamed:@"man_manager_icon"];
-    }
-    else if ((_contacterModel.sex == ABSexWomen))
-    {
-        self.sexImageView.image = [UIImage imageNamed:@"woman_manager_icon"];
-    }
-    else
-    {
-        
-    }
-    
-    
-    
-    
-}
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    CGFloat margin = 5.f;
-    
     //头像
     [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(self.contentView).offset(margin);
-        make.width.mas_equalTo(kSimpleCellHeight - 2*margin);
-    }];
-    
-    //性别
-    [self.sexImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+        make.height.width.mas_equalTo(50);
+        make.left.equalTo(self.contentView).offset(20);
+        make.centerY.equalTo(self.contentView);
     }];
     
     //姓名
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+        make.left.equalTo(self.avatarImageView.mas_right).offset(10);
+        make.bottom.equalTo(self.avatarImageView);
     }];
     
     //电话
     [self.phoneLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+        make.left.equalTo(self.nameLab.mas_right).offset(5);
+        make.bottom.mas_equalTo(self.nameLab);
     }];
     
     //时间
     [self.timeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        
+        make.bottom.equalTo(self.nameLab);
+        make.right.equalTo(self.contentView).offset(-20);
     }];
 }
 
@@ -134,23 +98,19 @@
 {
     if (!_avatarImageView)
     {
-        
+        _avatarImageView = [[UIImageView alloc]init];
+        _avatarImageView.image = [UIImage imageNamed:@"overlookCall"];
     }
     return _avatarImageView;
 }
-- (UIImageView *)sexImageView
-{
-    if (!_sexImageView)
-    {
-        
-    }
-    return _sexImageView;
-}
+
 - (UILabel *)nameLab
 {
     if (!_nameLab)
     {
-        
+        _nameLab = [[UILabel alloc]init];
+        _nameLab.font = [UIFont systemFontOfSize:24];
+        _nameLab.text = @"jiajia";
     }
     return _nameLab;
 }
@@ -158,7 +118,10 @@
 {
     if (!_phoneLab)
     {
-        
+        _phoneLab = [[UILabel alloc]init];
+        _phoneLab.font = [UIFont systemFontOfSize:14];
+        [_phoneLab setTextColor:[UIColor grayColor]];
+        _phoneLab.text = @"13162558525";
     }
     return _phoneLab;
 }
@@ -166,7 +129,10 @@
 {
     if (!_timeLab)
     {
-        
+        _timeLab = [[UILabel alloc]init];
+        _timeLab.font = [UIFont systemFontOfSize:14];
+        [_timeLab setTextColor:[UIColor grayColor]];
+        _timeLab.text = @"2016-4-19";
     }
     return _timeLab;
 }
