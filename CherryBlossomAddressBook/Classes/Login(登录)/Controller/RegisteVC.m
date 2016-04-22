@@ -286,7 +286,7 @@
     }
     
     //打开数据库
-    if ([[DataBaseManager shareInstanceDataBase] openUserDataBase])
+    if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
     {
         //查询数据库
         if ([[DataBaseManager shareInstanceDataBase] isExistOfAccount:self.account])
