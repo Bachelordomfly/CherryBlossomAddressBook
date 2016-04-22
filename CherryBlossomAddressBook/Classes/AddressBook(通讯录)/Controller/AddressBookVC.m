@@ -348,7 +348,7 @@
 @interface AddressBookCell ()
 
 @property (nonatomic, strong) UIImageView *imgUser;
-@property (nonatomic, strong) UIImageView *imgState;
+//@property (nonatomic, strong) UIImageView *imgState;
 @property (nonatomic, strong) UILabel *lbTitle;
 @property (nonatomic, strong) UILabel *tagLable;
 @property (nonatomic, strong) ContacterModel *model;
@@ -374,28 +374,36 @@
         [fixView addSubview:_imgUser];
         
         //
-        _imgState=[[UIImageView alloc]init];
-        _imgState.image = [UIImage imageNamed:@"contact_icon_active"];
-        [fixView addSubview:_imgState];
+//        _imgState=[[UIImageView alloc]init];
+//        _imgState.image = [UIImage imageNamed:@"contact_icon_active"];
+//        [fixView addSubview:_imgState];
+        
         
         //名字
-        _lbTitle=[[UILabel alloc]initWithFrame:CGRectMake(81, 18, 160, 25)];
-        _lbTitle.font=[UIFont fontWithName:@"STHeitiTC-Light" size:16];
+        _lbTitle=[[UILabel alloc]init];
+//        _lbTitle.font=[UIFont fontWithName:@"STHeitiTC-Light" size:16];
+        _lbTitle.font = [UIFont systemFontOfSize:24];
         _lbTitle.text = @"jiajia";
         [fixView addSubview:_lbTitle];
+        [_lbTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_imgUser.mas_right).offset(10);
+            make.centerY.equalTo(fixView);
+        }];
         
         //标签
         _tagLable = [[UILabel alloc]init];
         _tagLable.text = @"大笨蛋,🐷";
+        [_tagLable setTextColor:kColorMain];
         _tagLable.font = [UIFont systemFontOfSize:14];
         [fixView addSubview:_tagLable];
         [_tagLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.lbTitle.mas_right);
+            make.left.equalTo(self.lbTitle.mas_right).offset(10);
             make.bottom.equalTo(self.lbTitle);
         }];
         
         self.separatorLineInset = 10.f;
         
+//        [fixView coloredSubviews];
     }
     return self;
 }
@@ -415,10 +423,10 @@
     [super layoutSubviews];
     
     _imgUser.frame = CGRectMake(10,([AddressBookCell cellHeight]-userImgWidht)/2.f, userImgWidht,userImgWidht);
-    _imgState.frame = CGRectMake(CGRectGetMaxX(_imgUser.frame)+9.f, ([AddressBookCell cellHeight]-stateImgWidth)/2.f-2, stateImgWidth,stateImgWidth);
+//    _imgState.frame = CGRectMake(CGRectGetMaxX(_imgUser.frame)+9.f, ([AddressBookCell cellHeight]-stateImgWidth)/2.f-2, stateImgWidth,stateImgWidth);
     
-    CGFloat titleWidth = self.width - CGRectGetMaxX(_imgState.frame) - 9.f - 26.f;
-    _lbTitle.frame = CGRectMake(CGRectGetMaxX(_imgState.frame)+2.f, ([AddressBookCell cellHeight]-stateImgWidth-4)/2.f,titleWidth ,stateImgWidth+4);
+//    CGFloat titleWidth = self.width - CGRectGetMaxX(_imgState.frame) - 9.f - 26.f;
+//    _lbTitle.frame = CGRectMake(CGRectGetMaxX(_imgState.frame)+2.f, ([AddressBookCell cellHeight]-stateImgWidth-4)/2.f,titleWidth ,stateImgWidth+4);
 }
 
 

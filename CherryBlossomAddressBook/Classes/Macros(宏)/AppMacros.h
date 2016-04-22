@@ -63,6 +63,7 @@
 #import "UIImage+Tint.h"
 #import "UITextField+Category.h"
 #import "NSString+Utilities.h"
+#import "UIColor+Util.h"
 
 
 /* View */
@@ -73,7 +74,12 @@
 #import "BaseSimpleCell.h"
 #import "SKTagView.h"
 #import "SKTag.h"
+<<<<<<< HEAD
 #import "SKTagButton.h"
+=======
+#import "FlipTableView.h"
+#import "SegmentTapView.h"
+>>>>>>> Bachelordomfly/master
 
 #pragma mark - 快捷方法
 

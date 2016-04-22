@@ -115,9 +115,6 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
     }
-    cell.avatorImageView.image = [UIImage imageNamed:@"branddefulthead"];
-    cell.nameLable.text = @"deavin";
-    cell.areaLable.text = @"住宅";
     return cell;
 }
 
@@ -146,14 +143,19 @@
 @end
 
 @interface PersonalCollectCell()
-
+@property (nonatomic, strong) UIImageView   *avatorImageView;
+@property (nonatomic, strong) UILabel       *nameLable;
+@property (nonatomic, strong) UILabel       *areaLable;
+@property (nonatomic, strong) UIButton      *checkButton;
 @end
 
 @implementation PersonalCollectCell
+
 -(UIImageView *)avatorImageView{
     
     if (!_avatorImageView) {
         _avatorImageView = [[UIImageView alloc]init];
+        _avatorImageView.image = [UIImage imageNamed:@"overlookCall"];
     }
     return _avatorImageView;
 }
@@ -163,6 +165,7 @@
     if (!_nameLable) {
         _nameLable = [[UILabel alloc]init];
         _nameLable.font = [UIFont systemFontOfSize:24];
+        _nameLable.text = @"jiajia";
     }
     return _nameLable;
 }
@@ -181,6 +184,8 @@
     if (!_areaLable) {
         _areaLable = [[UILabel alloc]init];
         _areaLable.font = [UIFont systemFontOfSize:15];
+        [_areaLable setTextColor:[UIColor grayColor]];
+        _areaLable.text = @"住宅";
     }
     return _areaLable;
 }
@@ -193,22 +198,24 @@
         self.backgroundColor = kColorAppMain;
         UIView *fixView =[self.contentView addShadowTanView];
         
+        //头像
         
         [fixView addSubview:self.avatorImageView];
         [self.avatorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.equalTo(self.imageView);
-            make.left.equalTo(self).offset(20);
-            make.centerY.equalTo(self);
+            make.height.width.mas_equalTo(50);
+            make.left.equalTo(self.contentView).offset(20);
+            make.centerY.equalTo(self.contentView);
         }];
+        
+        //姓名
         
         [fixView addSubview:self.nameLable];
         [self.nameLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.equalTo(self.textLabel);
             make.left.equalTo(self.avatorImageView.mas_right).offset(10);
-            make.top.centerY.equalTo(self.avatorImageView);
+            make.bottom.equalTo(self.avatorImageView);
         }];
         
-        
+        //
         [fixView addSubview:self.checkButton];
         [self.checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(fixView.mas_right).offset(-20);
@@ -222,6 +229,7 @@
             make.centerY.equalTo(self.checkButton);
         }];
         
+//        [fixView coloredSubviews];
     }
     return self;
 }

@@ -10,7 +10,6 @@
 
 @interface RecentTitleView ()
 
-@property (nonatomic, strong) UISegmentedControl *midSC;
 @end
 
 @implementation RecentTitleView

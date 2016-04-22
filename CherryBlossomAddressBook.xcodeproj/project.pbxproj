@@ -318,6 +318,9 @@
 		A5EA701A1CB7757700D2E299 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A5EA6F121CB7757700D2E299 /* SVProgressHUD.bundle */; };
 		A5EA701B1CB7757700D2E299 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6F141CB7757700D2E299 /* SVProgressHUD.m */; };
 		A5EA701C1CB7757700D2E299 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6F161CB7757700D2E299 /* SVRadialGradientLayer.m */; };
+		A5F751AE1CC72D8500AE478C /* FlipTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F751AB1CC72D8500AE478C /* FlipTableView.m */; };
+		A5F751AF1CC72D8500AE478C /* SegmentTapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F751AD1CC72D8500AE478C /* SegmentTapView.m */; };
+		A5F751B31CC74B0C00AE478C /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F751B21CC74B0C00AE478C /* UIColor+Util.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -949,6 +952,12 @@
 		A5EA6F141CB7757700D2E299 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		A5EA6F151CB7757700D2E299 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		A5EA6F161CB7757700D2E299 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		A5F751AA1CC72D8500AE478C /* FlipTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlipTableView.h; sourceTree = "<group>"; };
+		A5F751AB1CC72D8500AE478C /* FlipTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlipTableView.m; sourceTree = "<group>"; };
+		A5F751AC1CC72D8500AE478C /* SegmentTapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentTapView.h; sourceTree = "<group>"; };
+		A5F751AD1CC72D8500AE478C /* SegmentTapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentTapView.m; sourceTree = "<group>"; };
+		A5F751B11CC74B0C00AE478C /* UIColor+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Util.h"; sourceTree = "<group>"; };
+		A5F751B21CC74B0C00AE478C /* UIColor+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Util.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1300,6 +1309,7 @@
 		A5EA6CF91CB7757600D2E299 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				A5F751B01CC74AB000AE478C /* UIColor+Categories */,
 				52011C4B1CB7BC1000E365F8 /* NSString+Categories */,
 				52011C1A1CB7A21400E365F8 /* UITextfield+Category */,
 				A5EA6CFA1CB7757600D2E299 /* NSDictionary+Categories */,
@@ -1572,6 +1582,7 @@
 		A5EA6D781CB7757600D2E299 /* Vendors(第三方) */ = {
 			isa = PBXGroup;
 			children = (
+				A5F751A91CC72D8500AE478C /* 滑动分页控制器 */,
 				52011BE51CB7973B00E365F8 /* SDWebImage */,
 				52011BBF1CB7900F00E365F8 /* MJExtension */,
 				A5EA6D791CB7757600D2E299 /* AMSmoothAlert */,
@@ -2090,6 +2101,26 @@
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
+		A5F751A91CC72D8500AE478C /* 滑动分页控制器 */ = {
+			isa = PBXGroup;
+			children = (
+				A5F751AA1CC72D8500AE478C /* FlipTableView.h */,
+				A5F751AB1CC72D8500AE478C /* FlipTableView.m */,
+				A5F751AC1CC72D8500AE478C /* SegmentTapView.h */,
+				A5F751AD1CC72D8500AE478C /* SegmentTapView.m */,
+			);
+			path = "滑动分页控制器";
+			sourceTree = "<group>";
+		};
+		A5F751B01CC74AB000AE478C /* UIColor+Categories */ = {
+			isa = PBXGroup;
+			children = (
+				A5F751B11CC74B0C00AE478C /* UIColor+Util.h */,
+				A5F751B21CC74B0C00AE478C /* UIColor+Util.m */,
+			);
+			name = "UIColor+Categories";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2305,6 +2336,7 @@
 				A5EA6FDF1CB7757700D2E299 /* GPUImageSharpenFilter.m in Sources */,
 				A5EA6F901CB7757700D2E299 /* GPUImageFilter.m in Sources */,
 				A5EA70051CB7757700D2E299 /* GPUImageContext.m in Sources */,
+				A5F751AF1CC72D8500AE478C /* SegmentTapView.m in Sources */,
 				A5EA6F831CB7757700D2E299 /* GPUImageDarkenBlendFilter.m in Sources */,
 				A5EA70071CB7757700D2E299 /* GPUImagePicture+TextureSubimage.m in Sources */,
 				A5EA6F9A1CB7757700D2E299 /* GPUImageGrayscaleFilter.m in Sources */,
@@ -2330,6 +2362,7 @@
 				A5EA6F411CB7757700D2E299 /* ABModel.m in Sources */,
 				A5EA6F1A1CB7757700D2E299 /* AppDelegate.m in Sources */,
 				52011BD51CB7900F00E365F8 /* MJExtensionConst.m in Sources */,
+				A5F751B31CC74B0C00AE478C /* UIColor+Util.m in Sources */,
 				A5EA6F791CB7757700D2E299 /* GPUImageColorBlendFilter.m in Sources */,
 				A5EA6F991CB7757700D2E299 /* GPUImageGlassSphereFilter.m in Sources */,
 				A5EA6FD71CB7757700D2E299 /* GPUImageRGBDilationFilter.m in Sources */,
@@ -2350,6 +2383,7 @@
 				A5EA6F9E1CB7757700D2E299 /* GPUImageHazeFilter.m in Sources */,
 				A5EA6F2D1CB7757700D2E299 /* BaseTableVC.m in Sources */,
 				A5EA6F921CB7757700D2E299 /* GPUImageFilterPipeline.m in Sources */,
+				A5F751AE1CC72D8500AE478C /* FlipTableView.m in Sources */,
 				A5EA6F941CB7757700D2E299 /* GPUImageFramebufferCache.m in Sources */,
 				52011BD91CB7900F00E365F8 /* MJPropertyType.m in Sources */,
 				A5EA6FAE1CB7757700D2E299 /* GPUImageLevelsFilter.m in Sources */,

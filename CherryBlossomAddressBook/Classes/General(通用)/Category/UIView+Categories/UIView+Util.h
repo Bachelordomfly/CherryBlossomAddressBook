@@ -44,6 +44,10 @@
  */
 - (UIView*)addShadowvWithOffset:(CGFloat)offset;
 
+/**
+ *  显示该页面的所有子控件
+ */
+- (void)coloredSubviews;
 
 
 @end

@@ -11,11 +11,6 @@
 
 @end
 
-@interface PersonalCollectCell : UITableViewCell
-@property (nonatomic, strong) UIImageView   *avatorImageView;
-@property (nonatomic, strong) UILabel       *nameLable;
-@property (nonatomic, strong) UILabel       *areaLable;
-@property (nonatomic, strong) UIButton      *checkButton;
-
+@interface PersonalCollectCell : BaseSimpleCell
 
 @end
