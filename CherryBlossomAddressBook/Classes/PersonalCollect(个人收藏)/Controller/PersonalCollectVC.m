@@ -29,8 +29,6 @@
     
     self.loginViewController = [[LoginVC alloc]init];
     
-   
-    
     
 }
 - (void)viewWillAppear:(BOOL)animated

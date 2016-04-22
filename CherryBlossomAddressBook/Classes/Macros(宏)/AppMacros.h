@@ -14,6 +14,9 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+/* Const */
+#import "DataBasePath.h"
+
 /* 宏文件 */
 #import "ConfigMacro.h"
 #import "NotificationMacro.h"
@@ -71,8 +74,12 @@
 #import "BaseSimpleCell.h"
 #import "SKTagView.h"
 #import "SKTag.h"
+<<<<<<< HEAD
+#import "SKTagButton.h"
+=======
 #import "FlipTableView.h"
 #import "SegmentTapView.h"
+>>>>>>> Bachelordomfly/master
 
 #pragma mark - 快捷方法
 
@@ -182,6 +189,8 @@ alpha:((float)(rgbValue & 0xFF))/255.0]
 
 #pragma mark - UIColor
 
+
+#define kColorBlue          UIColorFromRGBA_D(36, 175, 224, 1)
 #define kColorMain          UIColorFromRGBA_D(253, 165, 198, 1)
 #define kColorTabBarItem    UIColorFromRGBA_D(252, 99, 97, 1)
 

@@ -56,22 +56,26 @@ static NSInteger const lineSpace = 11;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.title = @"新建联系人";
     [self addAllSubViews];
     
-    __weak typeof(self) weakSelf = self;
-    [weakSelf.selectedTagArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    weakSelf(self);
+    [self.selectedTagArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         JJTag *tag = [JJTag tagWithText:obj];
         [tag setSelected:[weakSelf.allTagArr containsObject:obj]];
-        
-        [self.allTagsView addTag:tag];
+        [weakSelf.allTagsView addTag:tag];
     }];
-
+}
+- (void)setupNaviBarItems
+{
+    [super setupNaviBarItems];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(didClickSave)];
 }
 
--(void)addAllSubViews{
-
+-(void)addAllSubViews
+{
     [self.view addSubview:self.avatorImageV];
     [self.view addSubview:self.nameTextV];
     [self.view addSubview:self.numbleTextV];
@@ -198,14 +202,13 @@ static NSInteger const lineSpace = 11;
     if (!_tagTextFiled) {
         _tagTextFiled = [[SKTagView alloc]init];
         _tagTextFiled.backgroundColor = [UIColor clearColor];
-        _tagTextFiled.padding    = UIEdgeInsetsMake(5, 10, -5, -5);
+        _tagTextFiled.padding   = UIEdgeInsetsMake(5, 10, -5, -5);
         _tagTextFiled.insets    = 6;
         _tagTextFiled.lineSpace = lineSpace;
         [_tagTextFiled setEditable:@"手动输入标签"];
         _tagTextFiled.delegate = self;
         
         weakSelf(self);
-//        Handle tag's click event
         _tagTextFiled.didClickTagAtIndex = ^(NSUInteger index){
             NSString *tag = [weakSelf.selectedTagArr objectAtIndex:index];
             [weakSelf didToggleTag:tag scroll:NO];
@@ -426,6 +429,29 @@ static NSInteger const lineSpace = 11;
     }
     
     [self layoutSelectedScrollView:NO];
+}
+
+#pragma mark - 保存
+
+- (void)didClickSave
+{
+    if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
+    {
+        ContacterModel *contacter = [[ContacterModel alloc] init];
+        contacter.name = self.nameTextV.textField.text;
+        contacter.phone = self.numbleTextV.textField.text;
+        contacter.address = self.addressTextV.textField.text;
+        
+        if ([[DataBaseManager shareInstanceDataBase] isExistsOfContacterModel:contacter])
+        {
+            return ;
+        }
+        else
+        {
+            [[DataBaseManager shareInstanceDataBase] successInsertContacterModel:contacter];
+        }
+        
+    }
 }
 
 

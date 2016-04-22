@@ -11,6 +11,7 @@
 
 @interface ContacterModel : ABModel
 
+@property (nonatomic, copy)   NSString *contacterID;
 @property (nonatomic, copy)   NSString *name;         //姓名
 @property (nonatomic, copy)   NSString *nickName;     //备注名
 @property (nonatomic, copy)   NSString *phone;        //电话

@@ -21,7 +21,7 @@
 @property (nonatomic) CGFloat insets;
 @property (nonatomic) CGFloat preferredMaxLayoutWidth;
 @property (nonatomic) BOOL singleLine;
-@property (nonatomic,assign) id<SKTagViewDelegate> delegate;             // default is nil. weak reference
+@property (nonatomic, weak) id<SKTagViewDelegate> delegate;             // default is nil. weak reference
 @property (nonatomic, strong) NSMutableArray *btns;
 
 - (void)setEditable:(NSString *)placeholder;
@@ -32,6 +32,5 @@
 - (void)removeAllTags;
 
 @property (nonatomic, copy) void (^didClickTagAtIndex)(NSUInteger index);
-
 @end
 
