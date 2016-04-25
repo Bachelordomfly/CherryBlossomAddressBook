@@ -193,7 +193,7 @@
  */
 - (void)didReceiveNotifacationDidLogin:(NSNotification *)notification
 {
-    
+    [self initChildViewControllers];
 }
 /**
  *  需要登录

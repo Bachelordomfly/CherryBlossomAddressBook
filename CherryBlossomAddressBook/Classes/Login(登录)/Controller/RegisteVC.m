@@ -37,7 +37,7 @@
 /**
  *  确认按钮
  */
-@property (nonatomic, strong) UIButton *confirmBtn;
+@property (nonatomic, strong) JJButton *confirmBtn;
 /**
  *  账户名字符串
  */
@@ -219,18 +219,14 @@
     }
     return _repeatPasswordTF;
 }
-- (UIButton *)confirmBtn
+- (JJButton *)confirmBtn
 {
     if(!_confirmBtn)
     {
-        _confirmBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _confirmBtn.backgroundColor = kColorAppMain;
+        _confirmBtn = [[JJButton alloc]initWithFrame:CGRectMake(30, 230, 260, 50) buttonStyle:HTPressableButtonStyleRounded];
+        _confirmBtn.shadowColor = kColorBgLine;
+        _confirmBtn.buttonColor = kColorMain;
         [_confirmBtn setTitle:@"确  认" forState:UIControlStateNormal];
-        [_confirmBtn setTitleColor:kColorBgMain forState:UIControlStateNormal];
-        [_confirmBtn.titleLabel setFont:[UIFont systemFontOfSize:17.f]];
-        [_confirmBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
-        [_confirmBtn.layer setCornerRadius:2.f];
-        [_confirmBtn.layer setMasksToBounds:YES];
         [_confirmBtn addTarget:self action:@selector(confirmBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _confirmBtn;

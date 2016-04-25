@@ -67,6 +67,7 @@
  */
 -(void)addAllSubViews
 {
+    
     [self.view addSubview:self.backGroundImageView];
     [self.backGroundImageView addSubview:self.userName];
     [self.backGroundImageView addSubview:self.passWd];
@@ -79,7 +80,7 @@
     
     //背景图片
     [self.backGroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.view);
+        make.edges.equalTo(self.view);
     }];
     
     //账号
@@ -115,7 +116,7 @@
 {
     if (!_backGroundImageView)
     {
-        _backGroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_bg"]];
+        _backGroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
         _backGroundImageView.backgroundColor = [UIColor whiteColor];
         _backGroundImageView.contentMode = UIViewContentModeScaleAspectFit;
         _backGroundImageView.layer.masksToBounds = YES;
