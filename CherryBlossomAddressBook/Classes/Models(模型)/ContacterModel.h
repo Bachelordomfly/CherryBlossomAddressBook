@@ -6,12 +6,11 @@
 //  Copyright © 2016年 mac-025. All rights reserved.
 //
 
-#import "ABModel.h"
+#import "Model.h"
 
+@interface ContacterModel : Model
 
-@interface ContacterModel : ABModel
-
-@property (nonatomic, copy)   NSString *contacterID;
+@property (nonatomic, assign) NSInteger contacterID;  //数据库唯一标识
 @property (nonatomic, copy)   NSString *name;         //姓名
 @property (nonatomic, copy)   NSString *nickName;     //备注名
 @property (nonatomic, copy)   NSString *phone;        //电话

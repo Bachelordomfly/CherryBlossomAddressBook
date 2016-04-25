@@ -79,7 +79,12 @@
     
     [alterView addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        [self presentViewController:self.loginViewController animated:NO completion:nil];
+        //清空本地登录信息
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kUserSecurityAccount];
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kUserSecurityPassword];
+        
+        //退出登录 - 发布通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidLogout object:nil];
     }]];
     
     [alterView addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {

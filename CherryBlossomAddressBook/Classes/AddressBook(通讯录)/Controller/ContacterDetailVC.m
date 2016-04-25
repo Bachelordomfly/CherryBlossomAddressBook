@@ -118,7 +118,7 @@ UINavigationControllerDelegate
     /*************** 中间 第1组 ******************/
     else if(indexPath.section == ContacterSectionTypeMid)
     {
-        //姓名
+        //备注名
         if(indexPath.row == 0)
         {
             static NSString *reuseID = @"NickNameCell";
@@ -129,7 +129,8 @@ UINavigationControllerDelegate
             }
             cell.position = BaseSimpleCellBGPositionTop;
             cell.textLabel.text = self.titleArray[indexPath.section][indexPath.row];
-            cell.detailTextLabel.text = _contacterModel.name;
+            NSLog(@"%@", _contacterModel.nickName);
+            cell.detailTextLabel.text = [_contacterModel.nickName isEqualToString:@"(null)"] ? @"暂无" : _contacterModel.nickName;
             return cell;
         }
         //性别
@@ -144,7 +145,21 @@ UINavigationControllerDelegate
             cell.position = BaseSimpleCellBGPositionBottom;
             cell.textLabel.text = self.titleArray[indexPath.section][indexPath.row];
             //非男即女
-            cell.detailTextLabel.text = _contacterModel.sex != ABSexMan ? @"女" : @"男";
+            NSString *sex = @"";
+            switch (_contacterModel.sex) {
+                case ABSexMan:
+                    sex = @"男";
+                    break;
+                case ABSexWomen:
+                    sex = @"女";
+                    break;
+                case ABSexUnknow:
+                    sex = @"未知";
+                    break;
+                default:
+                    break;
+            }
+            cell.detailTextLabel.text = sex;
             return cell;
         }
     }
@@ -345,13 +360,14 @@ UINavigationControllerDelegate
  */
 - (void)cellIndexPath:(NSIndexPath *)indexPath ContacterDetailChangeType:(ContacterDetailChangeType)changeType
 {
-    ContacterDetailChangeVC *contacterChangeVC = [[ContacterDetailChangeVC alloc] init];
+    ContacterDetailChangeVC *contacterChangeVC = [[ContacterDetailChangeVC alloc] initWithContacterModel:_contacterModel];
     
     //使用block给 ContacterDetailChangeVC 传值
     switch (changeType) {
         case ContacterDetailChangeName:
         {
-            [contacterChangeVC prepareCellTitle:self.titleArray[indexPath.section][indexPath.row] CellContentInfo:_contacterModel.nickName ContacterDetailChangeNameBlock:^(NSString *newNickName) {
+            NSLog(@"%@", _contacterModel.name);
+            [contacterChangeVC prepareCellTitle:self.titleArray[indexPath.section][indexPath.row] CellContentInfo:_contacterModel.name ContacterDetailChangeNameBlock:^(NSString *newNickName) {
             }];
         }
             break;
@@ -378,6 +394,17 @@ UINavigationControllerDelegate
     
     [self.navigationController pushViewController:contacterChangeVC animated:YES];
 }
+
+#pragma mark - 保存修改
+
+- (void)didClickSaveChange
+{
+    if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
+    {
+        
+    }
+}
+
 
 @end
 

@@ -6,14 +6,14 @@
 //  Copyright © 2016年 RenSihao. All rights reserved.
 //
 
-#import "ABModel.h"
+#import "Model.h"
 
-@interface UserModel : ABModel
+@interface UserModel : Model
 
 /**
  *  用户唯一ID
  */
-@property (nonatomic, copy) NSString *ID;
+@property (nonatomic, copy) NSString *userID;
 
 /**
  *  用户账户

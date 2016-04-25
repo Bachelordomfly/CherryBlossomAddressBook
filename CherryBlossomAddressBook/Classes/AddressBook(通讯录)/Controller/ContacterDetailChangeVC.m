@@ -15,9 +15,21 @@
 //编辑输入框
 @property (nonatomic, strong) UITextView *editView;
 
+@property (nonatomic, strong) ContacterModel *contacterModel;
 @end
 
 @implementation ContacterDetailChangeVC
+
+#pragma mark - init
+
+- (instancetype)initWithContacterModel:(ContacterModel *)contacter
+{
+    if (self = [super init])
+    {
+        _contacterModel = contacter;
+    }
+    return self;
+}
 
 #pragma mark - 生命周期
 
@@ -87,9 +99,9 @@ ContacterDetailChangeNameBlock:(ContacterDetailChangeNameBlock)contacterDetailCh
 {
     _changeType = ContacterDetailChangeName;
     _nameBlock = contacterDetailChangeNameBlock;
-    _originalInfo = oldInfo;
+    _originalInfo = ([oldInfo isEqualToString:@"(null)"]? @"" : oldInfo);
     self.title = [NSString stringWithFormat:@"%@编辑", title];
-    self.editView.text = oldInfo;
+    self.editView.text = _originalInfo;
 }
 //昵称
 - (void)prepareCellTitle:(NSString *)title
@@ -98,9 +110,9 @@ ContacterDetailChangeNickNameBlock:(ContacterDetailChangeNickNameBlock)contacter
 {
     _changeType = ContacterDetailChangeNickName;
     _nickNameBlock = contacterDetailChangeNickNameBlock;
-    _originalInfo = oldInfo;
+    _originalInfo = [oldInfo isEqualToString:@"(null)"] ? @"" : oldInfo;
     self.title = [NSString stringWithFormat:@"%@编辑", title];
-    self.editView.text = oldInfo;
+    self.editView.text = _originalInfo;
 }
 
 //电话号
@@ -110,59 +122,75 @@ ContacterDetailChangePhoneBlock:(ContacterDetailChangePhoneBlock)contacterDetail
 {
     _changeType = ContacterDetailChangePhone;
     _phoneBlock = contacterDetailChangePhoneBlock;
-    _originalInfo = oldInfo;
+    _originalInfo = [oldInfo isEqualToString:@"(null)"] ? @"" : oldInfo;
     self.title = [NSString stringWithFormat:@"%@编辑", title];
-    self.editView.text = oldInfo;
+    self.editView.text = _originalInfo;
 }
 //地址
 - (void)prepareCellTitle:(NSString *)title CellContentInfo:(NSString *)oldInfo ContacterDetailChangeAddressBlock:(ContacterDetailChangeAddressBlock)contacterDetailChangeAddressBlock
 {
     _changeType = ContacterDetailChangeAddress;
     _addressBlock = contacterDetailChangeAddressBlock;
-    _originalInfo = oldInfo;
+    _originalInfo = [oldInfo isEqualToString:@"(null)"] ? @"" : oldInfo;
     self.title = [NSString stringWithFormat:@"%@编辑", title];
-    self.editView.text = oldInfo;
+    self.editView.text = _originalInfo;
 }
 
 #pragma mark - 监听事件
 
 - (void)saveItemDidClick
 {
-//    [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
     //判断是否修改
-    if(![_originalInfo isEqualToString:self.editView.text])
+    if(![_originalInfo isEqualToString:self.editView.text] &&
+       [[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
     {
-        //辨认修改哪些信息，然后向服务器发起相应请求（服务器接受修改并成功返回新信息，然后发布通知，告诉各个页面从而更新数据）
-        weakSelf(self);
+        //记录修改的联系人模型
         switch (_changeType) {
             case ContacterDetailChangeName:
             {
-//                [[UserManager shareInstance] requestInfoManagerWithName:weakSelf.editView.text nickName:nil sex:nil weXinNumber:nil storeName:nil];
+                _contacterModel.name = self.editView.text;
             }
                 break;
             case ContacterDetailChangeNickName:
             {
-//                [[UserManager shareInstance] requestInfoManagerWithName:nil nickName:weakSelf.editView.text sex:nil weXinNumber:nil storeName:nil];
+                _contacterModel.nickName = self.editView.text;
             }
                 break;
             case ContacterDetailChangePhone:
             {
-//                [[UserManager shareInstance] requestInfoManagerWithName:nil nickName:nil sex:nil weXinNumber:weakSelf.editView.text storeName:nil];
+                _contacterModel.phone = self.editView.text;
             }
                 break;
             case ContacterDetailChangeAddress:
             {
-//                [[UserManager shareInstance] requestInfoManagerWithName:nil nickName:nil sex:nil weXinNumber:nil storeName:self.editView.text];
+                _contacterModel.address = self.editView.text;
             }
                 break;
                 
             default:
                 break;
         }
-
+        
+        //更新 - 修改联系人数据库
+        if ([[DataBaseManager shareInstanceDataBase] successDeleteContacterModle:_contacterModel])
+        {
+            [SVProgressHUD showSuccessWithStatus:@"修改成功"];
+            weakSelf(self);
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)1.5*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                
+                [weakSelf didClickBack:nil];
+            });
+        }
+    }
+    else
+    {
+        [SVProgressHUD showWithStatus:@"原信息和新信息不能一样"];
     }
     
-    [self didClickBack:nil];
+    
+    
+    
+    
 }
 
 @end

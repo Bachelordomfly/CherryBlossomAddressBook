@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, ABSex) {
 /**
  *  所有model基类
  */
-@interface ABModel : NSObject
+@interface Model : NSObject
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 @end

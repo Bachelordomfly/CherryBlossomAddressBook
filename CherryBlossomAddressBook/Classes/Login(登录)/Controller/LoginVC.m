@@ -49,6 +49,8 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBarHidden = YES;
+    self.userName.textField.text = [UserManager shareInstance].userSecurity.account;
+    self.passWd.textField.text = [UserManager shareInstance].userSecurity.password;
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -175,6 +177,8 @@
 {
     [super addNotificationObservers];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveDidLoginNotification:) name:kNotificationDidLogin object:nil];
+    
     //键盘事件
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardAppear:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDisappear:) name:UIKeyboardWillHideNotification object:nil];
@@ -187,6 +191,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)didReceiveDidLoginNotification:(NSNotification *)noti
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - 监听点击事件
 
 /**
@@ -195,18 +204,46 @@
  */
 - (void)didClickLogin:(JJButton *)sender
 {
-//    if (self.userName.textField.text.length == 0)
-//    {
-//        [SVProgressHUD showErrorWithStatus:@"请输入账号"];
-//        return ;
-//    }
-//    if (self.passWd.textField.text.length == 0)
-//    {
-//        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
-//        return ;
-//    }
+    if (self.userName.textField.text.length == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入账号"];
+        return ;
+    }
+    if (self.passWd.textField.text.length == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+        return ;
+    }
     
-    //查询数据库
+    //数据库
+    if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:UserDataBase])
+    {
+        UserModel *userModel = [UserModel new];
+        userModel.account = self.userName.textField.text;
+        userModel.password = self.passWd.textField.text;
+        if ([[DataBaseManager shareInstanceDataBase] isExistsOfUserModel:userModel])
+        {
+            if ([[DataBaseManager shareInstanceDataBase] isCorrectOfUserModel:userModel])
+            {
+                [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+                //写入本地
+                [UserManager shareInstance].userSecurity.account = userModel.account;
+                [UserManager shareInstance].userSecurity.password = userModel.password;
+                
+                //登录成功 - 发布通知
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidLogin object:nil];
+            }
+            else
+            {
+                [SVProgressHUD showErrorWithStatus:@"密码错误！"];
+            }
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"该账号不存在！"];
+            return ;
+        }
+    }
 
 }
 /**

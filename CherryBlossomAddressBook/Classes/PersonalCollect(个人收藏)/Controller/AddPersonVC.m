@@ -175,6 +175,7 @@ static NSInteger const lineSpace = 11;
         _numbleTextV = [[SPTextFieldView alloc]init];
         _numbleTextV.imageType = SPTextFieldImageNone;
         _numbleTextV.textField.placeholder = @"电话号码";
+        _numbleTextV.textField.keyboardType = UIKeyboardTypePhonePad;
     }
     return _numbleTextV;
 }
@@ -444,11 +445,22 @@ static NSInteger const lineSpace = 11;
         
         if ([[DataBaseManager shareInstanceDataBase] isExistsOfContacterModel:contacter])
         {
+            [SVProgressHUD showErrorWithStatus:@"该联系人已存在！"];
             return ;
         }
         else
         {
-            [[DataBaseManager shareInstanceDataBase] successInsertContacterModel:contacter];
+            if ([[DataBaseManager shareInstanceDataBase] successInsertContacterModel:contacter])
+            {
+                [SVProgressHUD showSuccessWithStatus:@"保存新联系人成功！"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+                
+                //新建联系人 - 发布通知
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContacterChange object:nil];
+            }
         }
         
     }

@@ -42,7 +42,7 @@
 /**
  *  保存登录信息
  */
-@interface UserSecurity : ABModel
+@interface UserSecurity : Model
 
 @property (nonatomic, copy) NSString *account;
 @property (nonatomic, copy) NSString *password;

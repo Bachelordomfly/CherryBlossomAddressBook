@@ -48,6 +48,14 @@
     [self addAllSubViews];
     [self parseContacts];
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.arrContact = nil;
+    [self parseContacts];
+}
+
+#pragma mark - private method
 
 -(void)addAllSubViews
 {
@@ -138,6 +146,27 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - 通知相关
+
+- (void)addNotificationObservers
+{
+    [super addNotificationObservers];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotificationContacterChange:) name:kNotificationContacterChange object:nil];
+}
+- (void)removeNotificationObservers
+{
+    [super removeNotificationObservers];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)didReceiveNotificationContacterChange:(NSNotification *)noti
+{
+    self.arrContact = nil;
+    //重新读取数据库数据
+    [self parseContacts];
+}
+
 
 #pragma mark - getter
 
@@ -146,31 +175,12 @@
     if (!_arrContact)
     {
         _arrContact = [NSMutableArray array];
-        NSDictionary *dict1 = @{@"name":@"王小明",
-                               @"phone":@"18234080512",
-                               @"avatarPath":@"login_logo",
-                               @"sex":@(ABSexMan),
-                               @"中国上海":@"address"};
-        NSDictionary *dict2 = @{@"name":@"张小红",
-                               @"phone":@"18200000000",
-                               @"avatarPath":@"login_logo",
-                               @"sex":@(ABSexWomen),
-                               @"address":@"中国北京"};
-        NSDictionary *dict3 = @{@"name":@"李小芳",
-                                @"phone":@"18211111111",
-                                @"avatarPath":@"login_logo",
-                                @"sex":@(ABSexWomen),
-                                @"address":@"中国山西"};
-
-        ContacterModel *contacter1 = [ContacterModel mj_objectWithKeyValues:dict1];
-        ContacterModel *contacter2 = [ContacterModel mj_objectWithKeyValues:dict2];
-        ContacterModel *contacter3 = [ContacterModel mj_objectWithKeyValues:dict3];
-        for(int i=0; i<3; i++)
+        
+        if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
         {
-            [_arrContact addObject:contacter1];
-            [_arrContact addObject:contacter2];
-            [_arrContact addObject:contacter3];
+            _arrContact = [[DataBaseManager shareInstanceDataBase] getAllContacterModelOfDataBase];
         }
+
     }
     return _arrContact;
 }
@@ -260,9 +270,9 @@
     {
         cell = [[AddressBookCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseID];
     }
-//    NSArray *sectionArr=[self.listContent objectAtIndex:indexPath.section];
-//    ContacterModel *contacter = (ContacterModel *)[sectionArr objectAtIndex:indexPath.row];
-//    [cell configureCellWithContacterModel:contacter];
+    NSArray *sectionArr=[self.listContent objectAtIndex:indexPath.section];
+    ContacterModel *contacter = (ContacterModel *)[sectionArr objectAtIndex:indexPath.row];
+    [cell configureCellWithContacterModel:contacter];
     cell.drawHeadLine = (indexPath.row == 0);
     return cell;
 }
@@ -276,8 +286,21 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        [self.listContent removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
+        {
+            ContacterModel *contacter = self.listContent[indexPath.section][indexPath.row];
+            if ([[DataBaseManager shareInstanceDataBase] successDeleteContacterModle:contacter])
+            {
+                [SVProgressHUD showSuccessWithStatus:@"删除该联系人成功！"];
+                [self didReceiveNotificationContacterChange:nil];
+            }
+            else
+            {
+                [SVProgressHUD showErrorWithStatus:@"删除联系人失败！"];
+                return ;
+            }
+        }
+        
         
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert)
@@ -346,11 +369,24 @@
 #define stateImgWidth 22.f
 #define userImgWidht 40.f
 @interface AddressBookCell ()
+/**
+ *  头像
+ */
+@property (nonatomic, strong) UIImageView *avatarImageView;
 
-@property (nonatomic, strong) UIImageView *imgUser;
-//@property (nonatomic, strong) UIImageView *imgState;
-@property (nonatomic, strong) UILabel *lbTitle;
-@property (nonatomic, strong) UILabel *tagLable;
+/**
+ *  姓名
+ */
+@property (nonatomic, strong) UILabel *nameLab;
+
+/**
+ *  标签
+ */
+@property (nonatomic, strong) UILabel *tagLab;
+
+/**
+ *  联系人模型
+ */
 @property (nonatomic, strong) ContacterModel *model;
 @end
 
@@ -365,69 +401,53 @@
         UIView *fixView =[self.contentView addShadowTanView];
         
         //头像
-        _imgUser=[[UIImageView alloc]init];
-        _imgUser.contentMode = UIViewContentModeScaleAspectFill;
-        _imgUser.image = [UIImage imageNamed:@"default_head_woman"];
-        [_imgUser setBackgroundColor:kColorBgSub];
-        _imgUser.layer.cornerRadius = 4.f;
-        _imgUser.layer.masksToBounds = YES;
-        [fixView addSubview:_imgUser];
+        _avatarImageView=[[UIImageView alloc]init];
+        _avatarImageView.frame = CGRectMake(10,([AddressBookCell cellHeight]-userImgWidht)/2.f, userImgWidht,userImgWidht);
+        _avatarImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _avatarImageView.image = [UIImage imageNamed:@"default_head_woman"];
+        [_avatarImageView setBackgroundColor:kColorBgSub];
+        _avatarImageView.layer.cornerRadius = 4.f;
+        _avatarImageView.layer.masksToBounds = YES;
+        [fixView addSubview:_avatarImageView];
         
-        //
-//        _imgState=[[UIImageView alloc]init];
-//        _imgState.image = [UIImage imageNamed:@"contact_icon_active"];
-//        [fixView addSubview:_imgState];
-        
+
         
         //名字
-        _lbTitle=[[UILabel alloc]init];
-//        _lbTitle.font=[UIFont fontWithName:@"STHeitiTC-Light" size:16];
-        _lbTitle.font = [UIFont systemFontOfSize:24];
-        _lbTitle.text = @"jiajia";
-        [fixView addSubview:_lbTitle];
-        [_lbTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(_imgUser.mas_right).offset(10);
+        _nameLab=[[UILabel alloc]init];
+        _nameLab.font = [UIFont systemFontOfSize:24];
+        [fixView addSubview:_nameLab];
+        [_nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_avatarImageView.mas_right).offset(10);
             make.centerY.equalTo(fixView);
         }];
         
         //标签
-        _tagLable = [[UILabel alloc]init];
-        _tagLable.text = @"大笨蛋,🐷";
-        [_tagLable setTextColor:kColorMain];
-        _tagLable.font = [UIFont systemFontOfSize:14];
-        [fixView addSubview:_tagLable];
-        [_tagLable mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.lbTitle.mas_right).offset(10);
-            make.bottom.equalTo(self.lbTitle);
+        _tagLab = [[UILabel alloc]init];
+        _tagLab.text = @"大笨蛋,🐷";
+        [_tagLab setTextColor:kColorMain];
+        _tagLab.font = [UIFont systemFontOfSize:14];
+        [fixView addSubview:_tagLab];
+        [_tagLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.nameLab.mas_right).offset(10);
+            make.bottom.equalTo(self.nameLab);
         }];
         
         self.separatorLineInset = 10.f;
-        
-//        [fixView coloredSubviews];
     }
     return self;
 }
-//- (void)configureCellWithContacterModel:(ContacterModel *)model
-//{
-//    _model = model;
-//    _imgUser.image = [UIImage imageNamed:_model.avatarPath];
+- (void)configureCellWithContacterModel:(ContacterModel *)model
+{
+    _model = model;
+    _avatarImageView.image = [UIImage imageNamed:_model.avatarPath];
 //    _imgState.image = [UIImage imageNamed:_model.sex == ABSexMan ? @"man_manager_icon":@"woman_manager_icon"];
-//    _lbTitle.text = _model.name;
-//}
+    _nameLab.text = _model.name;
+}
 +(CGFloat)cellHeight
 {
     return 65.f;
 }
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    _imgUser.frame = CGRectMake(10,([AddressBookCell cellHeight]-userImgWidht)/2.f, userImgWidht,userImgWidht);
-//    _imgState.frame = CGRectMake(CGRectGetMaxX(_imgUser.frame)+9.f, ([AddressBookCell cellHeight]-stateImgWidth)/2.f-2, stateImgWidth,stateImgWidth);
-    
-//    CGFloat titleWidth = self.width - CGRectGetMaxX(_imgState.frame) - 9.f - 26.f;
-//    _lbTitle.frame = CGRectMake(CGRectGetMaxX(_imgState.frame)+2.f, ([AddressBookCell cellHeight]-stateImgWidth-4)/2.f,titleWidth ,stateImgWidth+4);
-}
+
 
 
 
