@@ -71,4 +71,11 @@ typedef void(^ContacterDetailChangeAddressBlock)(NSString *newStoreName);
  */
 - (void)prepareCellTitle:(NSString *)title CellContentInfo:(NSString *)oldInfo ContacterDetailChangeAddressBlock:(ContacterDetailChangeAddressBlock)contacterDetailChangeAddressBlock;
 
+/**
+ *  初始化联系人
+ *
+ *  @param contacter 
+ */
+- (instancetype)initWithContacterModel:(ContacterModel *)contacter;
+
 @end

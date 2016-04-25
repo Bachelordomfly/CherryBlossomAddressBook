@@ -285,43 +285,43 @@
         return;
     }
     
+    UserModel *newUser = [UserModel new];
+    newUser.account = self.account;
+    newUser.password = self.password;
+    
     //打开数据库
-    if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
+    if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:UserDataBase])
     {
         //查询数据库
-        if ([[DataBaseManager shareInstanceDataBase] isExistOfAccount:self.account])
+        if ([[DataBaseManager shareInstanceDataBase] isExistsOfUserModel:newUser])
         {
-            [SVProgressHUD showErrorWithStatus:@"该账号已存在，请重新输入"];
+            [SVProgressHUD showErrorWithStatus:@"该账号已存在！"];
             return ;
         }
         else
         {
             //写入数据库
-            UserModel *newUser = [UserModel new];
-            newUser.account = self.account;
-            newUser.password = self.password;
+            
             if ([[DataBaseManager shareInstanceDataBase] isSuccessRegisterOfUserModel:newUser])
             {
-                [SVProgressHUD showInfoWithStatus:@"注册新用户成功"];
-                [self didClickBack:nil];
+                [SVProgressHUD showSuccessWithStatus:@"注册新用户成功！"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self didClickBack:nil];
+                });
                 return ;
             }
             else
             {
-                [SVProgressHUD showErrorWithStatus:@"注册新用户失败"];
+                [SVProgressHUD showErrorWithStatus:@"注册新用户失败！"];
                 return ;
             }
         }
-            
     }
     else
     {
         [SVProgressHUD showErrorWithStatus:@"无法打开用户数据库"];
         return ;
     }
-    
-    
-    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

@@ -78,12 +78,19 @@ typedef NS_ENUM(NSUInteger, DataBaseType) {
  */
 - (BOOL)successDeleteContacterModle:(ContacterModel *)contacterModel;
 
+/**
+ *  读取 - 从数据库获取所有联系人模型
+ *
+ *  @return
+ */
+- (NSMutableArray *)getAllContacterModelOfDataBase;
+
 #pragma mark - 用户数据库操作
 
 /********************** 用户表操作 ********************************/
 
 /**
- *  联系人表 - 查询是否存在该用户
+ *  查询 - 是否存在该用户
  *
  *  @param userModel 用户模型
  *
@@ -92,7 +99,16 @@ typedef NS_ENUM(NSUInteger, DataBaseType) {
 - (BOOL)isExistsOfUserModel:(UserModel *)userModel;
 
 /**
- *  能否成功在数据库注册该用户
+ *  查询 - 用户账号和密码是否正确匹配
+ *
+ *  @param userModel 用户模型
+ *
+ *  @return 
+ */
+- (BOOL)isCorrectOfUserModel:(UserModel *)userModel;
+
+/**
+ *  写入 - 能否成功在数据库注册该用户
  *
  *  @param userModel
  *
@@ -100,8 +116,5 @@ typedef NS_ENUM(NSUInteger, DataBaseType) {
  */
 - (BOOL)isSuccessRegisterOfUserModel:(UserModel *)userModel;
 
-/**
- *  关闭数据库
- */
-- (void)closeDataBase;
+
 @end

@@ -10,11 +10,11 @@
 #import "UserModel.h"
 #import "ContacterModel.h"
 
-//联系人表名
-static NSString * const ContacterTable = @"Contacter_Table";
+//联系人表名(根据当前登录信息唯一对应)
+#define ContacterTable  [@"Contacter_Table_" stringByAppendingString:[UserManager shareInstance].userSecurity.account]
 
 //用户表名
-static NSString * const UserTable = @"User_Table";
+#define UserTable  @"User_Table"
 
 @interface DataBaseManager ()
 
@@ -83,7 +83,7 @@ static NSString * const UserTable = @"User_Table";
     {
         NSLog(@"%@",[NSString stringWithFormat:@"%@数据库文件不存在，开始创建！", tablePath]);
         if ([fileManager createDirectoryAtPath:[documentPath stringByAppendingPathComponent:@"database"]
-                   withIntermediateDirectories:NO
+                   withIntermediateDirectories:YES
                                     attributes:nil
                                          error:nil])
         {
@@ -112,22 +112,25 @@ static NSString * const UserTable = @"User_Table";
         switch (dataBaseType) {
             case ContacterDataBase:
             {
-                sql_CreateTable =  @"CREATE TABLE IF NOT EXISTS Contacter_Table ( \
-                id INTEGER PRIMARY KEY AUTOINCREMENT,   \
-                name TEXT,                              \
-                nickName TEXT,                          \
-                phone TEXT,                             \
-                address TEXT,                           \
-                avatarPath TEXT,                        \
-                sex INTEGER,                            \
-                sectionNumber INTEGER                   \
-                )";
+                //根据当前登录信息，建立对应联系人表，账号是唯一的
+                sql_CreateTable = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS                                 '%@' ( \
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,   \
+                    name TEXT,                              \
+                    nickName TEXT,                          \
+                    phone TEXT,                             \
+                    address TEXT,                           \
+                    avatarPath TEXT,                        \
+                    sex INTEGER,                            \
+                    sectionNumber INTEGER                   \
+                    )", ContacterTable];
             }
                 break;
             case UserDataBase:
             {
-                sql_CreateTable =  @"CREAT TABLE IF NOT EXISTS User_Table ( \
+                sql_CreateTable =  @"CREATE TABLE IF NOT EXISTS User_Table ( \
                 id INTEGER PRIMARY KEY AUTOINCREMENT,   \
+                account TEXT,                           \
+                password TEXT                           \
                 )";
             }
                 break;
@@ -140,7 +143,7 @@ static NSString * const UserTable = @"User_Table";
         }
         
         //7、检测表是否创建成功
-        if([self.db executeUpdate:sql_CreateTable])
+        if([_db executeUpdate:sql_CreateTable])
         {
             NSLog(@"%@",[NSString stringWithFormat:@"%@数据库文件 - 表创建成功！", tablePath]);
             return YES;
@@ -161,20 +164,6 @@ static NSString * const UserTable = @"User_Table";
 }
 
 
-
-
-
-
-- (void)closeDataBase
-{
-    if (self.db)
-    {
-        [self.db close];
-        self.db = nil;
-    }
-    return ;
-}
-
 #pragma mark - 联系人数据库操作
 
 - (BOOL)isExistsOfContacterModel:(ContacterModel *)contacterModel
@@ -189,10 +178,12 @@ static NSString * const UserTable = @"User_Table";
             if ([[set stringForColumn:@"name"] isEqualToString:contacterModel.name])
             {
                 NSLog(@"该联系人已经存在!");
+                [_db close];
                 return YES;
             }
         }
         NSLog(@"该联系人不存在！");
+        [_db close];
         return NO;
     }
     else
@@ -221,12 +212,14 @@ static NSString * const UserTable = @"User_Table";
         if ([_db executeUpdate:sql_Insert])
         {
             NSLog(@"插入联系人数据成功！");
+            [_db close];
             return YES;
         }
         else
         {
             errorMessage = [_db lastErrorMessage];
             NSLog(@"插入联系人数据失败！错误信息：%@", errorMessage);
+            [_db close];
             return NO;
         }
     }
@@ -243,13 +236,13 @@ static NSString * const UserTable = @"User_Table";
     if ([_db open])
     {
         NSString *sql_Update = [NSString stringWithFormat:@"UPDATE '%@' SET \
-                                name          = '%@'      \
-                                nickName      = '%@'      \
-                                phone         = '%@'      \
-                                address       = '%@'      \
-                                avatarPaht    = '%@'      \
-                                sex           = '%@'      \
-                                sectionNumber = '%@' ",
+                                name          = '%@',      \
+                                nickName      = '%@',     \
+                                phone         = '%@',      \
+                                address       = '%@',     \
+                                avatarPath    = '%@',      \
+                                sex           = '%@',     \
+                                sectionNumber = '%@' WHERE id = '%@'",
                                 ContacterTable,
                                 contacterModel.name,
                                 contacterModel.nickName,
@@ -257,16 +250,19 @@ static NSString * const UserTable = @"User_Table";
                                 contacterModel.address,
                                 contacterModel.avatarPath,
                                 [NSNumber numberWithInteger:contacterModel.sex],
-                                [NSNumber numberWithInteger:contacterModel.sectionNumber]];
+                                [NSNumber numberWithInteger:contacterModel.sectionNumber],
+                                [NSNumber numberWithInteger:contacterModel.contacterID]];
         if ([_db executeUpdate:sql_Update])
         {
             NSLog(@"修改联系人数据成功！");
+            [_db close];
             return YES;
         }
         else
         {
             errorMessage = [_db lastErrorMessage];
             NSLog(@"修改联系人数据失败！错误信息：%@", errorMessage);
+            [_db close];
             return NO;
         }
     }
@@ -279,34 +275,165 @@ static NSString * const UserTable = @"User_Table";
 }
 - (BOOL)successDeleteContacterModle:(ContacterModel *)contacterModel
 {
-    return YES;
+    NSString *errorMessage = @"";
+    if ([_db open])
+    {
+        
+        NSString *sql_Delete = [NSString stringWithFormat:@"DELETE FROM '%@' WHERE \
+                                    id            = '%@'      \
+                                AND nickName      = '%@'      \
+                                AND phone         = '%@'      \
+                                AND address       = '%@'      \
+                                AND avatarPath    = '%@'      \
+                                AND sex           = '%@'      \
+                                AND sectionNumber = '%@';",
+                                ContacterTable,
+                                [NSNumber numberWithInteger:contacterModel.contacterID],
+                                contacterModel.nickName,
+                                contacterModel.phone,
+                                contacterModel.address,
+                                contacterModel.avatarPath,
+                                [NSNumber numberWithInteger:contacterModel.sex],
+                                [NSNumber numberWithInteger:contacterModel.sectionNumber]];
+        if ([_db executeUpdate:sql_Delete])
+        {
+            NSLog(@"删除联系人数据成功！");
+            [_db close];
+            return YES;
+        }
+        else
+        {
+            errorMessage = [_db lastErrorMessage];
+            NSLog(@"删除联系人数据失败！错误信息：%@", errorMessage);
+            [_db close];
+            return NO;
+        }
+    }
+    else
+    {
+        errorMessage = [_db lastErrorMessage];
+        NSLog(@"无法打开联系人数据库！错误信息：%@", errorMessage);
+        return NO;
+    }
 }
-
+- (NSMutableArray *)getAllContacterModelOfDataBase
+{
+    NSString *errorMessage = @"";
+    NSMutableArray *contacterArray = [NSMutableArray array];
+    if ([_db open])
+    {
+        NSString *sql_ReadAll = [NSString stringWithFormat:@"SELECT * FROM %@", ContacterTable];
+        FMResultSet *set = [_db executeQuery:sql_ReadAll];
+        while ([set next]) {
+            ContacterModel *contactModel = [ContacterModel new];
+            contactModel.contacterID = [set intForColumn:@"id"];
+            contactModel.name = [set stringForColumn:@"name"];
+            contactModel.nickName = [set stringForColumn:@"nickName"];
+            contactModel.phone = [set stringForColumn:@"phone"];
+            contactModel.address = [set stringForColumn:@"address"];
+            contactModel.avatarPath = [set stringForColumn:@"avatarPath"];
+            contactModel.sex = [set intForColumn:@"sex"];
+            contactModel.sectionNumber = [set intForColumn:@"sectionNumber"];
+            [contacterArray addObject:contactModel];
+        }
+        return contacterArray;
+    }
+    else
+    {
+        errorMessage = [_db lastErrorMessage];
+        NSLog(@"无法打开联系人数据库！错误信息：%@", errorMessage);
+        return contacterArray;
+    }
+}
 
 #pragma mark - 用户数据库操作
 
 - (BOOL)isExistsOfUserModel:(UserModel *)userModel
 {
-    return YES;
-}
-- (BOOL)isExistOfAccount:(NSString *)account
-{
-    NSString *findSQL = @"select * from table_user ";
-    FMResultSet *set = [_db executeQuery:findSQL];
-    while ([set next])
+    NSString *errorMessage = @"";
+    if ([_db open])
     {
-         if ([[set stringForColumn:account] isEqualToString:account])
-         {
-             return YES;
-         }
+        NSString *sql_Find = [NSString stringWithFormat:@"SELECT * FROM %@", UserTable];
+        FMResultSet *set = [_db executeQuery:sql_Find];
+        while ([set next])
+        {
+            if ([[set stringForColumn:@"account"] isEqualToString:userModel.account])
+            {
+                NSLog(@"该用户已经存在!");
+                [_db close];
+                return YES;
+            }
+        }
+        NSLog(@"该用户不存在！");
+        [_db close];
+        return NO;
     }
-    return NO;
+    else
+    {
+        errorMessage = [_db lastErrorMessage];
+        NSLog(@"无法打开联系人数据库！错误信息：%@", errorMessage);
+        return NO;
+    }
+}
+- (BOOL)isCorrectOfUserModel:(UserModel *)userModel
+{
+    NSString *errorMessage = @"";
+    if ([_db open])
+    {
+        NSString *sql_Find = [NSString stringWithFormat:@"SELECT * FROM %@", UserTable];
+        FMResultSet *set = [_db executeQuery:sql_Find];
+        while ([set next])
+        {
+            if ([[set stringForColumn:@"account"] isEqualToString:userModel.account] &&
+                [[set stringForColumn:@"password"] isEqualToString:userModel.password])
+            {
+                NSLog(@"用户账号密码匹配正确！");
+                [_db close];
+                return YES;
+            }
+        }
+        NSLog(@"用户账号密码匹配错误！");
+        [_db close];
+        return NO;
+    }
+    else
+    {
+        errorMessage = [_db lastErrorMessage];
+        NSLog(@"无法打开用户数据库！错误信息：%@", errorMessage);
+        return NO;
+    }
 }
 - (BOOL)isSuccessRegisterOfUserModel:(UserModel *)userModel
 {
-    NSString *insertSQL=@"insert into table_user(account, password) values(?,?)";
-    BOOL isSuccess = [self.db executeUpdate:insertSQL, userModel.account, userModel.password];
-    return isSuccess;
+    NSString *errorMessage = @"";
+    if ([_db open])
+    {
+        NSString *sql_Insert = [NSString stringWithFormat:@"INSERT INTO '%@' \
+                                (account, password) \
+                                VALUES ('%@', '%@');",
+                                UserTable,
+                                userModel.account,
+                                userModel.password];
+        if ([_db executeUpdate:sql_Insert])
+        {
+            NSLog(@"新建用户数据成功！");
+            [_db close];
+            return YES;
+        }
+        else
+        {
+            errorMessage = [_db lastErrorMessage];
+            NSLog(@"新建用户数据失败！错误信息：%@", errorMessage);
+            [_db close];
+            return NO;
+        }
+    }
+    else
+    {
+        errorMessage = [_db lastErrorMessage];
+        NSLog(@"无法打开用户数据库！错误信息：%@", errorMessage);
+        return NO;
+    }
 }
 
 

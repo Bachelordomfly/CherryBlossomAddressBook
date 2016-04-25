@@ -98,7 +98,7 @@
 		A5EA6F3E1CB7757700D2E299 /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D521CB7757600D2E299 /* AppManager.m */; };
 		A5EA6F3F1CB7757700D2E299 /* DataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D541CB7757600D2E299 /* DataBaseManager.m */; };
 		A5EA6F401CB7757700D2E299 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D561CB7757600D2E299 /* UserManager.m */; };
-		A5EA6F411CB7757700D2E299 /* ABModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D591CB7757600D2E299 /* ABModel.m */; };
+		A5EA6F411CB7757700D2E299 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D591CB7757600D2E299 /* Model.m */; };
 		A5EA6F421CB7757700D2E299 /* ContacterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D5B1CB7757600D2E299 /* ContacterModel.m */; };
 		A5EA6F431CB7757700D2E299 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D5D1CB7757600D2E299 /* UserModel.m */; };
 		A5EA6F441CB7757700D2E299 /* new_feature_1-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5EA6D5F1CB7757600D2E299 /* new_feature_1-568h@2x.png */; };
@@ -526,8 +526,8 @@
 		A5EA6D541CB7757600D2E299 /* DataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseManager.m; sourceTree = "<group>"; };
 		A5EA6D551CB7757600D2E299 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
 		A5EA6D561CB7757600D2E299 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
-		A5EA6D581CB7757600D2E299 /* ABModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABModel.h; sourceTree = "<group>"; };
-		A5EA6D591CB7757600D2E299 /* ABModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABModel.m; sourceTree = "<group>"; };
+		A5EA6D581CB7757600D2E299 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		A5EA6D591CB7757600D2E299 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		A5EA6D5A1CB7757600D2E299 /* ContacterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContacterModel.h; sourceTree = "<group>"; };
 		A5EA6D5B1CB7757600D2E299 /* ContacterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContacterModel.m; sourceTree = "<group>"; };
 		A5EA6D5C1CB7757600D2E299 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
@@ -1503,8 +1503,8 @@
 		A5EA6D571CB7757600D2E299 /* Models(模型) */ = {
 			isa = PBXGroup;
 			children = (
-				A5EA6D581CB7757600D2E299 /* ABModel.h */,
-				A5EA6D591CB7757600D2E299 /* ABModel.m */,
+				A5EA6D581CB7757600D2E299 /* Model.h */,
+				A5EA6D591CB7757600D2E299 /* Model.m */,
 				A5EA6D5C1CB7757600D2E299 /* UserModel.h */,
 				A5EA6D5D1CB7757600D2E299 /* UserModel.m */,
 				A5EA6D5A1CB7757600D2E299 /* ContacterModel.h */,
@@ -2359,7 +2359,7 @@
 				A5EA6F5C1CB7757700D2E299 /* FMDatabase.m in Sources */,
 				A5EA6FA41CB7757700D2E299 /* GPUImageHoughTransformLineDetector.m in Sources */,
 				A5EA6FFD1CB7757700D2E299 /* GPUImageUnsharpMaskFilter.m in Sources */,
-				A5EA6F411CB7757700D2E299 /* ABModel.m in Sources */,
+				A5EA6F411CB7757700D2E299 /* Model.m in Sources */,
 				A5EA6F1A1CB7757700D2E299 /* AppDelegate.m in Sources */,
 				52011BD51CB7900F00E365F8 /* MJExtensionConst.m in Sources */,
 				A5F751B31CC74B0C00AE478C /* UIColor+Util.m in Sources */,

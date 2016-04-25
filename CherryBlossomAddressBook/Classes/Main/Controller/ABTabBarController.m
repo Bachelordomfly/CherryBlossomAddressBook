@@ -98,16 +98,15 @@
  */
 - (void)enterApp
 {
-//    if ([UserManager shareInstance].isAutoLogin)
-//    {
-//        [self initChildViewControllers];
-//        return ;
-//    }
-//    else
-//    {
-//        [self initLoginVC];
-//    }
-    [self initChildViewControllers];
+    if ([UserManager shareInstance].isAutoLogin)
+    {
+        [self initChildViewControllers];
+        return ;
+    }
+    else
+    {
+        [self initLoginVC];
+    }
 }
 /**
  *  弹出登录界面

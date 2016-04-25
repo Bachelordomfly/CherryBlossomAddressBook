@@ -6,9 +6,9 @@
 //  Copyright © 2016年 mac-025. All rights reserved.
 //
 
-#import "ABModel.h"
+#import "Model.h"
 
-@implementation ABModel
+@implementation Model
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict
 {
