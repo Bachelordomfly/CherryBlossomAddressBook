@@ -2,10 +2,6 @@
   "images" : [
     {
       "idiom" : "universal",
-<<<<<<< HEAD:CherryBlossomAddressBook/Assets.xcassets/bg/background.imageset/Contents.json
-      "filename" : "background.jpg",
-=======
->>>>>>> pr/5:CherryBlossomAddressBook/Assets.xcassets/bg/login_bg.imageset/Contents.json
       "scale" : "1x"
     },
     {

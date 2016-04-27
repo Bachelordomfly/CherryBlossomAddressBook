@@ -62,9 +62,9 @@
 		52C580E51CD0861600AAF9A0 /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C580E01CD0861600AAF9A0 /* SKTag.m */; };
 		52C580E61CD0861600AAF9A0 /* SKTagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C580E21CD0861600AAF9A0 /* SKTagButton.m */; };
 		52C580E71CD0861600AAF9A0 /* SKTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C580E41CD0861600AAF9A0 /* SKTagView.m */; };
+		A5D6E7821CD0FD6E00534C7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5D6E7811CD0FD6E00534C7F /* Assets.xcassets */; };
 		A5E1D45E1CAB8F79001DCBB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E1D45D1CAB8F79001DCBB5 /* main.m */; };
 		A5E1D46A1CAB8F79001DCBB5 /* CherryBlossomAddressBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5E1D4681CAB8F79001DCBB5 /* CherryBlossomAddressBook.xcdatamodeld */; };
-		A5E1D46C1CAB8F79001DCBB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E1D46B1CAB8F79001DCBB5 /* Assets.xcassets */; };
 		A5E1D46F1CAB8F79001DCBB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5E1D46D1CAB8F79001DCBB5 /* LaunchScreen.storyboard */; };
 		A5E1D47A1CAB8F79001DCBB5 /* CherryBlossomAddressBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E1D4791CAB8F79001DCBB5 /* CherryBlossomAddressBookTests.m */; };
 		A5E1D4851CAB8F79001DCBB5 /* CherryBlossomAddressBookUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E1D4841CAB8F79001DCBB5 /* CherryBlossomAddressBookUITests.m */; };
@@ -452,10 +452,10 @@
 		52C580E21CD0861600AAF9A0 /* SKTagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagButton.m; sourceTree = "<group>"; };
 		52C580E31CD0861600AAF9A0 /* SKTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagView.h; sourceTree = "<group>"; };
 		52C580E41CD0861600AAF9A0 /* SKTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagView.m; sourceTree = "<group>"; };
+		A5D6E7811CD0FD6E00534C7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5E1D4591CAB8F79001DCBB5 /* CherryBlossomAddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CherryBlossomAddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E1D45D1CAB8F79001DCBB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E1D4691CAB8F79001DCBB5 /* CherryBlossomAddressBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CherryBlossomAddressBook.xcdatamodel; sourceTree = "<group>"; };
-		A5E1D46B1CAB8F79001DCBB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5E1D46E1CAB8F79001DCBB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5E1D4701CAB8F79001DCBB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5E1D4751CAB8F79001DCBB5 /* CherryBlossomAddressBookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CherryBlossomAddressBookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1202,8 +1202,8 @@
 		A5E1D45C1CAB8F79001DCBB5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A5D6E7811CD0FD6E00534C7F /* Assets.xcassets */,
 				52011BB01CB78C0200E365F8 /* PrefixHeader.pch */,
-				A5E1D46B1CAB8F79001DCBB5 /* Assets.xcassets */,
 				A5E1D46D1CAB8F79001DCBB5 /* LaunchScreen.storyboard */,
 				A5E1D4701CAB8F79001DCBB5 /* Info.plist */,
 				A5E1D4681CAB8F79001DCBB5 /* CherryBlossomAddressBook.xcdatamodeld */,
@@ -2241,7 +2241,6 @@
 				A5EA6F621CB7757700D2E299 /* lookup_amatorka.png in Resources */,
 				A5EA6F561CB7757700D2E299 /* checkMark.png in Resources */,
 				A5EA6F4F1CB7757700D2E299 /* new_feature_share_true@2x.png in Resources */,
-				A5E1D46C1CAB8F79001DCBB5 /* Assets.xcassets in Resources */,
 				A5EA6F651CB7757700D2E299 /* lookup_soft_elegance_2.png in Resources */,
 				A5EA6F591CB7757700D2E299 /* crossMark@2x.png in Resources */,
 				A5EA6F641CB7757700D2E299 /* lookup_soft_elegance_1.png in Resources */,
@@ -2251,6 +2250,7 @@
 				A5EA6F481CB7757700D2E299 /* new_feature_3-568h@2x.png in Resources */,
 				A5EA6F611CB7757700D2E299 /* lookup.png in Resources */,
 				52011BBD1CB78FA600E365F8 /* leftside_shadow_bg@2x.png in Resources */,
+				A5D6E7821CD0FD6E00534C7F /* Assets.xcassets in Resources */,
 				A5EA6F461CB7757700D2E299 /* new_feature_2-568h@2x.png in Resources */,
 				A5EA6F4E1CB7757700D2E299 /* new_feature_share_false@2x.png in Resources */,
 				A5EA6F4B1CB7757700D2E299 /* new_feature_4@2x.png in Resources */,
