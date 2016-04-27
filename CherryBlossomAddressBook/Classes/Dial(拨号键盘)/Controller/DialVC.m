@@ -11,16 +11,37 @@
 #define ROW 4
 #define COL 3
 
-@interface DialVC ()
+@interface DialVC () <UITextFieldDelegate>
 
-@property (nonatomic, strong) UITextField *headerTF;
+/**
+ *  电话数字框
+ */
+@property (nonatomic, strong) UILabel *displayLab;
 
-@property (nonatomic, strong) NSMutableArray *btnArray;
+/**
+ *  删除按钮
+ */
+@property (nonatomic, strong) UIButton *deleteBtn;
+
+/**
+ *  拨号按钮
+ */
+@property (nonatomic, strong) UIButton *dialBtn;
+
+/**
+ *  当前输入
+ */
+@property (nonatomic, copy) NSString *currentPhone;
+
+/**
+ *  所有数字按钮 包括 *键 #键
+ */
+@property (nonatomic, strong) NSMutableArray *numberBtnArray;
 @end
 
 @implementation DialVC
 
-#pragma mark - 生命周期
+#pragma mark - life cycle
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -32,80 +53,38 @@
     
     self.title = @"拨号";
     
-    //添加头部隐藏视图（特殊）
-//    [self.view addSubview:self.headerTF];
+    [self addAllSubViews];
+}
+
+#pragma mark - private method
+
+- (void)addAllSubViews
+{
+    CGFloat margin = 5;
     
-    //添加数字按钮
+    //添加号码框
+    [self.view addSubview:self.displayLab];
+    [self.displayLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view).offset(margin);
+        make.left.mas_equalTo(self.view).offset(margin*10);
+        make.right.mas_equalTo(self.view).offset(-margin*10);
+        make.height.mas_equalTo(60);
+    }];
+    
+    //添加删除按钮
+    [self.view addSubview:self.deleteBtn];
+    [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.displayLab.mas_right);
+        make.centerY.mas_equalTo(self.displayLab);
+        make.width.height.mas_equalTo(margin*10);
+    }];
+
+    //添加数字按钮(九宫格大法)
     [self addDigitalButtons];
     
     //添加拨号按钮
-    [self addDialButton];
-    
-    
-}
-
-
-#pragma mark - lazyload
-- (UITextField *)headerTF
-{
-    if(!_headerTF)
-    {
-        _headerTF = [[UITextField alloc] initWithFrame:CGRectMake(0, 30, [UIScreen mainScreen].bounds.size.width, 50)];
-        _headerTF.textAlignment = NSTextAlignmentCenter;
-        _headerTF.backgroundColor = kColorAppMain;
-        _headerTF.placeholder = @"输入号码";
-    }
-    return _headerTF;
-}
-
-#pragma mark - 自定义方法
-- (void)addDigitalButtons
-{
-    UIView *bkview = [[UIView alloc]init];
-    [self.view addSubview:bkview];
-    [bkview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(300);
-        make.height.mas_equalTo(400);
-        make.center.equalTo(self.view);
-    }];
-    
-    int totalloc=3;
-    CGFloat appvieww=100;
-    CGFloat appviewh=100;
-    CGFloat margin=0;
-    int count=12;
-    
-    
-    for (int i=0; i<count; i++) {
-        int row=i/totalloc;//行号
-        //1/3=0,2/3=0,3/3=1;
-        int loc=i%totalloc;//列号
-        
-        CGFloat appviewx=margin+(margin+appvieww)*loc;
-        CGFloat appviewy=margin+(margin+appviewh)*row;
-        
-        
-        //创建uiview控件
-        UIButton *numberBtn=[[UIButton alloc]initWithFrame:CGRectMake(appviewx, appviewy, appvieww, appviewh)];
-
-        //[appview setBackgroundColor:[UIColor purpleColor]];
-        [bkview addSubview:numberBtn];
-        [numberBtn setTitle:@"3" forState:UIControlStateNormal];
-
-        [bkview addSubview:numberBtn];
-        [numberBtn setTitle:[NSString stringWithFormat:@"%d", i+1] forState:UIControlStateNormal];
-        [numberBtn setBackgroundColor: [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]];
-        
-    }
-    
-}
-- (void)addDialButton
-{
-
-    UIButton *dialBtn = [[UIButton alloc]init];
-    [dialBtn setBackgroundImage:[UIImage imageNamed:@"dial_bg"] forState:UIControlStateNormal];
-    [self.view addSubview:dialBtn];
-    [dialBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:self.dialBtn];
+    [self.dialBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.bottom.equalTo(self.view).offset(-44);
         make.height.width.mas_equalTo(100);
@@ -113,8 +92,157 @@
     
 }
 
+- (void)addDigitalButtons
+{
+    //数字按钮背景图
+    UIView *bgView = [[UIView alloc]init];
+    [self.view addSubview:bgView];
+    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(88*3);
+        make.height.mas_equalTo(88*4);
+        make.top.mas_equalTo(self.displayLab.mas_bottom).offset(20);
+        make.centerX.mas_equalTo(self.view);
+    }];
+    
+    CGFloat width = 88;
+    CGFloat height = 88;
+    CGFloat margin = 0;
+    
+    //九宫格创建数字按钮
+    for (int i=0; i<ROW*COL; i++)
+    {
+        int row = i/COL;//行号
+        int loc = i%COL;//列号
+        
+        CGFloat x = margin+(margin+width)*loc;
+        CGFloat y = margin+(margin+height)*row;
+        
+        
+        UIButton *numberBtn=[[UIButton alloc]initWithFrame:CGRectMake(x, y, width, height)];
+        if (i <= 8)
+        {
+            [numberBtn setTitle:[NSString stringWithFormat:@"%d", i+1] forState:UIControlStateNormal];
+        }
+        else if (i == 9)
+        {
+            [numberBtn setTitle:@"*" forState:UIControlStateNormal];
+        }
+        else if (i == 10)
+        {
+            [numberBtn setTitle:@"0" forState:UIControlStateNormal];
+        }
+        else
+        {
+            [numberBtn setTitle:@"#" forState:UIControlStateNormal];
+        }
+        numberBtn.tag = i;
+        [numberBtn addTarget:self action:@selector(didClickNumber:) forControlEvents:UIControlEventTouchUpInside];
+        [numberBtn setBackgroundImage:[UIImage imageWithColor:kColorARC4Random cornerRadius:0] forState:UIControlStateNormal];
+        [numberBtn.titleLabel setFont:[UIFont fontWithName:kDefaultRegularFontFamilyName size:40]];
+        [bgView addSubview:numberBtn];
+        [self.numberBtnArray addObject:numberBtn];
+    }
+}
 
 
+#pragma mark - lazy load
+- (NSMutableArray *)numberBtnArray
+{
+    if (!_numberBtnArray)
+    {
+        _numberBtnArray = [NSMutableArray arrayWithCapacity:ROW*COL];
+    }
+    return _numberBtnArray;
+}
+
+- (UILabel *)displayLab
+{
+    if(!_displayLab)
+    {
+        _displayLab = [UILabel new];
+        _displayLab.textColor = [UIColor blackColor];
+        _displayLab.textAlignment = NSTextAlignmentCenter;
+        _displayLab.font = [UIFont fontWithName:kDefaultRegularFontFamilyName size:35];
+    }
+    return _displayLab;
+}
+- (UIButton *)deleteBtn
+{
+    if (!_deleteBtn)
+    {
+        _deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _deleteBtn.hidden = YES;
+        [_deleteBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [_deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+        [_deleteBtn addTarget:self action:@selector(delete:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _deleteBtn;
+}
+- (UIButton *)dialBtn
+{
+    if (!_dialBtn)
+    {
+        _dialBtn = [[UIButton alloc]init];
+        [_dialBtn setBackgroundImage:[UIImage imageNamed:@"dial_bg"] forState:UIControlStateNormal];
+        [_dialBtn addTarget:self action:@selector(dial:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _dialBtn;
+}
+
+#pragma mark - 点击事件
+
+- (void)didClickNumber:(UIButton *)sender
+{
+    NSString *currentPhoneStr = self.displayLab.text ?: @"";
+    if (currentPhoneStr.length == 11)
+    {
+        return ;
+    }
+    self.deleteBtn.hidden = NO;
+    self.displayLab.text = [currentPhoneStr stringByAppendingString:sender.currentTitle];
+    
+    //纯数字
+    if (sender.tag <= 8 || sender.tag == 10)
+    {
+        
+    }
+    // * 键
+    else if (sender.tag == 9)
+    {
+        
+    }
+    // # 键
+    else if (sender.tag == 11)
+    {
+        
+    }
+    
+}
+- (void)delete:(UIButton *)sender
+{
+    NSString *currentPhoneStr = self.displayLab.text ?: @"";
+    if (currentPhoneStr.length > 0)
+    {
+        NSString *resultPhoneStr = [currentPhoneStr substringToIndex:currentPhoneStr.length-1];
+        self.displayLab.text = resultPhoneStr;
+        if ([resultPhoneStr isEqualToString:@""])
+        {
+            self.deleteBtn.hidden = YES;
+        }
+    }
+    else
+    {
+        return ;
+    }
+}
+
+- (void)dial:(UIButton *)sender
+{
+    //调用打电话
+    NSString *str = [NSString stringWithFormat:@"tel://%@", self.displayLab.text];
+    NSURL *url = [NSURL URLWithString:str];
+    [[UIApplication sharedApplication] openURL:url];
+}
 
 
 

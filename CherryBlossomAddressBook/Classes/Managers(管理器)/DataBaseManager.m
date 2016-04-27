@@ -121,7 +121,8 @@
                     address TEXT,                           \
                     avatarPath TEXT,                        \
                     sex INTEGER,                            \
-                    sectionNumber INTEGER                   \
+                    sectionNumber INTEGER,                  \
+                    tagStr TEXT                           \
                     )", ContacterTable];
             }
                 break;
@@ -199,8 +200,8 @@
     if ([_db open])
     {
         NSString *sql_Insert = [NSString stringWithFormat:@"INSERT INTO '%@' \
-                                (name, nickName, phone, address, avatarPath, sex, sectionNumber) \
-                                VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@');",
+                                (name, nickName, phone, address, avatarPath, sex, sectionNumber, tagStr) \
+                                VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@');",
                                 ContacterTable,
                                 contacterModel.name,
                                 contacterModel.nickName,
@@ -208,7 +209,8 @@
                                 contacterModel.address,
                                 contacterModel.avatarPath,
                                 [NSNumber numberWithInteger:contacterModel.sex],
-                                [NSNumber numberWithInteger:contacterModel.sectionNumber]];
+                                [NSNumber numberWithInteger:contacterModel.sectionNumber],
+                                contacterModel.tagStr];
         if ([_db executeUpdate:sql_Insert])
         {
             NSLog(@"插入联系人数据成功！");

@@ -17,7 +17,7 @@ typedef NS_OPTIONS(NSUInteger, ContacterSectionType) {
      */
     ContacterSectionTypeTop,
     /**
-     *  备注名、ContacterDetailChangeNickName
+     *  备注名、性别
      */
     ContacterSectionTypeMid,
     /**

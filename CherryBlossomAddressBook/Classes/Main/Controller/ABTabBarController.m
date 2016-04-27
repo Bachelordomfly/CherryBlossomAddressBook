@@ -100,8 +100,8 @@
 {
     if ([UserManager shareInstance].isAutoLogin)
     {
-        [self initChildViewControllers];
-        return ;
+//        [self initChildViewControllers];
+//        return ;
     }
     else
     {

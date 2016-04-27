@@ -56,7 +56,7 @@
 
 /* Category */
 #import "UIView+Util.h"
-#import "UIImage+COlor.h"
+#import "UIImage+FlatUI.h"
 #import "UIView+Frame.h"
 #import "UIView+Util.h"
 #import "UIView+Additions.h"
@@ -83,6 +83,9 @@
 
 //点击列表后，还原列表状态为deselect状态
 #define deselectRowWithTableView(tableView) double delayInSeconds = 1.0;dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));dispatch_after(popTime, dispatch_get_main_queue(), ^(void){[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];});
+
+//随机颜色
+#define kColorARC4Random [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]
 
 // self弱引用
 #define weakSelf(args)   __weak typeof(args) weakSelf = args

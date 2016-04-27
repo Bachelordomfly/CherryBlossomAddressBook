@@ -13,5 +13,6 @@
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) ABTabBarController *tabBarController;
 
++ (instancetype)sharedInstance;
 @end
 
