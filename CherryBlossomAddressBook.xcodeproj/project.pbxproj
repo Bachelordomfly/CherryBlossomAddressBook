@@ -59,9 +59,9 @@
 		52011C571CB7C73700E365F8 /* ImageScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52011C561CB7C73700E365F8 /* ImageScaleViewController.m */; };
 		5271EAD71CC8756A002CFB92 /* DataBasePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 5271EAD61CC8756A002CFB92 /* DataBasePath.m */; };
 		529CD8741CC72F4E00D7A946 /* RecentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 529CD8731CC72F4E00D7A946 /* RecentCell.m */; };
-		A5A054041CC0CC7F001C9A88 /* SKTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A054031CC0CC7F001C9A88 /* SKTagView.m */; };
-		A5A054071CC0CCD2001C9A88 /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A054061CC0CCD2001C9A88 /* SKTag.m */; };
-		A5A0540A1CC0CD30001C9A88 /* SKTagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A5A054091CC0CD30001C9A88 /* SKTagButton.m */; };
+		52C580E51CD0861600AAF9A0 /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C580E01CD0861600AAF9A0 /* SKTag.m */; };
+		52C580E61CD0861600AAF9A0 /* SKTagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C580E21CD0861600AAF9A0 /* SKTagButton.m */; };
+		52C580E71CD0861600AAF9A0 /* SKTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C580E41CD0861600AAF9A0 /* SKTagView.m */; };
 		A5E1D45E1CAB8F79001DCBB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E1D45D1CAB8F79001DCBB5 /* main.m */; };
 		A5E1D46A1CAB8F79001DCBB5 /* CherryBlossomAddressBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5E1D4681CAB8F79001DCBB5 /* CherryBlossomAddressBook.xcdatamodeld */; };
 		A5E1D46C1CAB8F79001DCBB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5E1D46B1CAB8F79001DCBB5 /* Assets.xcassets */; };
@@ -446,12 +446,12 @@
 		5271EAD61CC8756A002CFB92 /* DataBasePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBasePath.m; sourceTree = "<group>"; };
 		529CD8721CC72F4E00D7A946 /* RecentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCell.h; sourceTree = "<group>"; };
 		529CD8731CC72F4E00D7A946 /* RecentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCell.m; sourceTree = "<group>"; };
-		A5A054021CC0CC7F001C9A88 /* SKTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagView.h; sourceTree = "<group>"; };
-		A5A054031CC0CC7F001C9A88 /* SKTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagView.m; sourceTree = "<group>"; };
-		A5A054051CC0CCD2001C9A88 /* SKTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTag.h; sourceTree = "<group>"; };
-		A5A054061CC0CCD2001C9A88 /* SKTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTag.m; sourceTree = "<group>"; };
-		A5A054081CC0CD30001C9A88 /* SKTagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagButton.h; sourceTree = "<group>"; };
-		A5A054091CC0CD30001C9A88 /* SKTagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagButton.m; sourceTree = "<group>"; };
+		52C580DF1CD0861600AAF9A0 /* SKTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTag.h; sourceTree = "<group>"; };
+		52C580E01CD0861600AAF9A0 /* SKTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTag.m; sourceTree = "<group>"; };
+		52C580E11CD0861600AAF9A0 /* SKTagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagButton.h; sourceTree = "<group>"; };
+		52C580E21CD0861600AAF9A0 /* SKTagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagButton.m; sourceTree = "<group>"; };
+		52C580E31CD0861600AAF9A0 /* SKTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagView.h; sourceTree = "<group>"; };
+		52C580E41CD0861600AAF9A0 /* SKTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTagView.m; sourceTree = "<group>"; };
 		A5E1D4591CAB8F79001DCBB5 /* CherryBlossomAddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CherryBlossomAddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E1D45D1CAB8F79001DCBB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A5E1D4691CAB8F79001DCBB5 /* CherryBlossomAddressBook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CherryBlossomAddressBook.xcdatamodel; sourceTree = "<group>"; };
@@ -1121,12 +1121,6 @@
 		52011C371CB7B9CD00E365F8 /* UITextField */ = {
 			isa = PBXGroup;
 			children = (
-				A5A054081CC0CD30001C9A88 /* SKTagButton.h */,
-				A5A054091CC0CD30001C9A88 /* SKTagButton.m */,
-				A5A054051CC0CCD2001C9A88 /* SKTag.h */,
-				A5A054061CC0CCD2001C9A88 /* SKTag.m */,
-				A5A054021CC0CC7F001C9A88 /* SKTagView.h */,
-				A5A054031CC0CC7F001C9A88 /* SKTagView.m */,
 				52011C381CB7B9CD00E365F8 /* SPTextFieldView.h */,
 				52011C391CB7B9CD00E365F8 /* SPTextFieldView.m */,
 			);
@@ -1158,6 +1152,19 @@
 				529CD8731CC72F4E00D7A946 /* RecentCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		52C580DE1CD0861600AAF9A0 /* SKTagView */ = {
+			isa = PBXGroup;
+			children = (
+				52C580DF1CD0861600AAF9A0 /* SKTag.h */,
+				52C580E01CD0861600AAF9A0 /* SKTag.m */,
+				52C580E11CD0861600AAF9A0 /* SKTagButton.h */,
+				52C580E21CD0861600AAF9A0 /* SKTagButton.m */,
+				52C580E31CD0861600AAF9A0 /* SKTagView.h */,
+				52C580E41CD0861600AAF9A0 /* SKTagView.m */,
+			);
+			path = SKTagView;
 			sourceTree = "<group>";
 		};
 		A5E1D4501CAB8F79001DCBB5 = {
@@ -1258,10 +1265,10 @@
 				A5EA6CEC1CB7757600D2E299 /* AddressBookVC.m */,
 				52011BDF1CB7946300E365F8 /* ContacterDetailVC.h */,
 				52011BE01CB7946300E365F8 /* ContacterDetailVC.m */,
-				52011C171CB7A14B00E365F8 /* SearchContacterVC.h */,
-				52011C181CB7A14B00E365F8 /* SearchContacterVC.m */,
 				52011C521CB7C24E00E365F8 /* ContacterDetailChangeVC.h */,
 				52011C531CB7C24E00E365F8 /* ContacterDetailChangeVC.m */,
+				52011C171CB7A14B00E365F8 /* SearchContacterVC.h */,
+				52011C181CB7A14B00E365F8 /* SearchContacterVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1582,6 +1589,7 @@
 		A5EA6D781CB7757600D2E299 /* Vendors(第三方) */ = {
 			isa = PBXGroup;
 			children = (
+				52C580DE1CD0861600AAF9A0 /* SKTagView */,
 				A5F751A91CC72D8500AE478C /* 滑动分页控制器 */,
 				52011BE51CB7973B00E365F8 /* SDWebImage */,
 				52011BBF1CB7900F00E365F8 /* MJExtension */,
@@ -2276,7 +2284,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5A054071CC0CCD2001C9A88 /* SKTag.m in Sources */,
 				A5EA6FB11CB7757700D2E299 /* GPUImageLineGenerator.m in Sources */,
 				A5EA6F681CB7757700D2E299 /* GPUImage3x3TextureSamplingFilter.m in Sources */,
 				A5EA700B1CB7757700D2E299 /* HTPressableButtonPrefs.m in Sources */,
@@ -2312,6 +2319,7 @@
 				A5EA70011CB7757700D2E299 /* GPUImageWeakPixelInclusionFilter.m in Sources */,
 				52011BBA1CB78FA600E365F8 /* GestureNavigationController.m in Sources */,
 				5271EAD71CC8756A002CFB92 /* DataBasePath.m in Sources */,
+				52C580E51CD0861600AAF9A0 /* SKTag.m in Sources */,
 				A5EA6F1E1CB7757700D2E299 /* RIButtonItem.m in Sources */,
 				A5EA6FAB1CB7757700D2E299 /* GPUImageKuwaharaRadius3Filter.m in Sources */,
 				A5EA6F2E1CB7757700D2E299 /* BaseVC.m in Sources */,
@@ -2378,6 +2386,7 @@
 				A5EA6F7A1CB7757700D2E299 /* GPUImageColorBurnBlendFilter.m in Sources */,
 				A5EA6FF61CB7757700D2E299 /* GPUImageToonFilter.m in Sources */,
 				A5EA6FE11CB7757700D2E299 /* GPUImageSingleComponentGaussianBlurFilter.m in Sources */,
+				52C580E61CD0861600AAF9A0 /* SKTagButton.m in Sources */,
 				A5EA6F9D1CB7757700D2E299 /* GPUImageHarrisCornerDetectionFilter.m in Sources */,
 				52011C0C1CB7973B00E365F8 /* SDWebImageDownloader.m in Sources */,
 				A5EA6F9E1CB7757700D2E299 /* GPUImageHazeFilter.m in Sources */,
@@ -2451,7 +2460,6 @@
 				A5EA6FD41CB7757700D2E299 /* GPUImageRawDataInput.m in Sources */,
 				A5EA6F671CB7757700D2E299 /* GPUImage3x3ConvolutionFilter.m in Sources */,
 				A5EA6FA31CB7757700D2E299 /* GPUImageHistogramGenerator.m in Sources */,
-				A5A0540A1CC0CD30001C9A88 /* SKTagButton.m in Sources */,
 				A5EA6FBB1CB7757700D2E299 /* GPUImageMissEtikateFilter.m in Sources */,
 				A5EA6F401CB7757700D2E299 /* UserManager.m in Sources */,
 				A5EA6F6C1CB7757700D2E299 /* GPUImageAmatorkaFilter.m in Sources */,
@@ -2505,7 +2513,6 @@
 				A5EA6FE91CB7757700D2E299 /* GPUImageSphereRefractionFilter.m in Sources */,
 				A5EA700D1CB7757700D2E299 /* UIImage+HTButton.m in Sources */,
 				A5EA6FFB1CB7757700D2E299 /* GPUImageTwoPassTextureSamplingFilter.m in Sources */,
-				A5A054041CC0CC7F001C9A88 /* SKTagView.m in Sources */,
 				A5EA6F261CB7757700D2E299 /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				52011BE11CB7946300E365F8 /* ContacterDetailVC.m in Sources */,
 				A5EA6F8C1CB7757700D2E299 /* GPUImageExclusionBlendFilter.m in Sources */,
@@ -2529,6 +2536,7 @@
 				52011C471CB7BAD400E365F8 /* NotificationIndicator.m in Sources */,
 				A5EA6FA21CB7757700D2E299 /* GPUImageHistogramFilter.m in Sources */,
 				A5EA70141CB7757700D2E299 /* NSArray+MASAdditions.m in Sources */,
+				52C580E71CD0861600AAF9A0 /* SKTagView.m in Sources */,
 				A5EA6F811CB7757700D2E299 /* GPUImageCrosshairGenerator.m in Sources */,
 				A5EA6F8A1CB7757700D2E299 /* GPUImageEmbossFilter.m in Sources */,
 				A5EA6F251CB7757700D2E299 /* UIImage+Tint.m in Sources */,

@@ -28,7 +28,7 @@
 {
     if (self = [super init])
     {
-        
+        [self initChildViewControllers];
     }
     return self;
 }
@@ -100,8 +100,8 @@
 {
     if ([UserManager shareInstance].isAutoLogin)
     {
-        [self initChildViewControllers];
-        return ;
+//        [self initChildViewControllers];
+//        return ;
     }
     else
     {
@@ -113,13 +113,9 @@
  */
 - (void)initLoginVC
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        LoginVC *loginVC = [[LoginVC alloc] init];
-        JJNavigationController *loginNavVC = [[JJNavigationController alloc] initWithRootViewController:loginVC];
-        [self presentViewController:loginNavVC animated:NO completion:nil];
-    });
-
+    LoginVC *loginVC = [[LoginVC alloc] init];
+    JJNavigationController *loginNavVC = [[JJNavigationController alloc] initWithRootViewController:loginVC];
+    [self presentViewController:loginNavVC animated:YES completion:nil];
 }
 /**
  *  初始化子控制器群

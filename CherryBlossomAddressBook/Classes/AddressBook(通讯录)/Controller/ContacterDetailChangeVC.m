@@ -180,6 +180,9 @@ ContacterDetailChangePhoneBlock:(ContacterDetailChangePhoneBlock)contacterDetail
                 
                 [weakSelf didClickBack:nil];
             });
+            
+            //修改联系人 - 发布通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContacterChange object:nil];
         }
     }
     else

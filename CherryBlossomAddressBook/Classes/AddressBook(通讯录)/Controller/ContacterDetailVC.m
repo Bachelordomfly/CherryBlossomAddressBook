@@ -52,8 +52,6 @@ UINavigationControllerDelegate
     [super viewDidLoad];
     
     self.title = @"联系人详情";
-    
-    
 }
 
 #pragma mark - lazyload
@@ -281,7 +279,7 @@ UINavigationControllerDelegate
         }
     }
     /************** 底部 **************/
-    else if (indexPath.section == ContacterSectionTypeTop)
+    else if (indexPath.section == ContacterSectionTypeBottom)
     {
         //电话
         if(indexPath.row == 0)
@@ -395,16 +393,24 @@ UINavigationControllerDelegate
     [self.navigationController pushViewController:contacterChangeVC animated:YES];
 }
 
-#pragma mark - 保存修改
+#pragma mark - 通知相关
 
-- (void)didClickSaveChange
+- (void)addNotificationObservers
 {
-    if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
-    {
-        
-    }
+    [super addNotificationObservers];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotificationContacterChange:) name:kNotificationContacterChange object:nil];
 }
-
+- (void)removeNotificationObservers
+{
+    [super removeNotificationObservers];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)didReceiveNotificationContacterChange:(NSNotification *)noti
+{
+    
+}
 
 @end
 

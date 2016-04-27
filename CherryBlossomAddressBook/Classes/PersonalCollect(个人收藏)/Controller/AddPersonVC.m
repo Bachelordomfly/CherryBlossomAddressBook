@@ -12,58 +12,81 @@
 static NSInteger const lineSpace = 11;
 
 @interface AddPersonVC ()<SKTagViewDelegate>
+
+#pragma mark - 控件
+
 /**
- *  上传图片
+ *  头像
  */
 @property(nonatomic, strong)UIImageView *avatorImageV;
+
 /**
- *  添加姓名
- *  添加号码
- *  添加地址
- *  添加标签
+ *  姓名
  */
 @property(nonatomic, strong) SPTextFieldView *nameTextV;
-@property(nonatomic, strong) SPTextFieldView *numbleTextV;
-@property(nonatomic, strong) SPTextFieldView *addressTextV;
-@property(nonatomic, strong) UILabel *tagLable;
+
 /**
- *  上面已选标签视图
+ *  电话
+ */
+@property(nonatomic, strong) SPTextFieldView *numbleTextV;
+
+/**
+ *  地址
+ */
+@property(nonatomic, strong) SPTextFieldView *addressTextV;
+
+/**
+ *  标签提示
+ */
+@property(nonatomic, strong) UILabel *tagLable;
+
+/**
+ *  已选标签视图
  */
 @property(nonatomic, strong) SKTagView *tagTextFiled;
 @property(nonatomic, strong) UIScrollView *selectedScrollView;
-/**
- *  下面可选标签列表
- */
-@property (nonatomic, strong) NSArray *selectedTagArr;
-/**
- *  已选所有tag列表
- */
-@property(nonatomic, strong) NSMutableArray *allTagArr;
-/**
- *  输入tag列表
- */
-@property (nonatomic, copy) NSArray* inputTag;
+
 
 /**
- *  下面可选标签视图
+ *  可选标签视图
  */
 @property (nonatomic, strong) UIScrollView *allTagsScrollerV;
 @property (nonatomic, strong) SKTagView    *allTagsView;
+
+#pragma mark - 数据
+
+/**
+ *  所有标签数组
+ */
+@property (nonatomic, strong) NSArray *allTagsArray;
+
+/**
+ *  已选标签数组
+ */
+@property(nonatomic, strong) NSMutableArray *selectedTagsArray;
+
+/**
+ *  手动输入标签数组
+ */
+@property (nonatomic, strong) NSArray *inputTag;
 
 @end
 
 @implementation AddPersonVC
 
-- (void)viewDidLoad {
+#pragma mark - life cycle
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     self.title = @"新建联系人";
     [self addAllSubViews];
     
     weakSelf(self);
-    [self.selectedTagArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [self.allTagsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         JJTag *tag = [JJTag tagWithText:obj];
-        [tag setSelected:[weakSelf.allTagArr containsObject:obj]];
+        [tag setSelected:[weakSelf.selectedTagsArray containsObject:obj]];
         [weakSelf.allTagsView addTag:tag];
     }];
 }
@@ -117,22 +140,16 @@ static NSInteger const lineSpace = 11;
         make.top.equalTo(self.tagLable.mas_bottom).offset(13.f);
         make.left.equalTo(self.view).offset(4);
         make.right.equalTo(self.view).offset(-4);
-        make.height.mas_equalTo(100);
+        make.height.mas_equalTo(44);
     }];
     
     CGFloat selectedMargin = 10;
     self.tagTextFiled.preferredMaxLayoutWidth = SCREEN_WIDTH - 20*2 - selectedMargin*2;
     [self.tagTextFiled mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(@(11));
-//        make.left.equalTo(@(selectedMargin));
-//        make.right.equalTo(@(self.tagTextFiled.preferredMaxLayoutWidth));
-//        make.bottom.equalTo(@(11));
-//        make.top.mas_equalTo(11);
-//        make.left.mas_equalTo(11);
         make.top.equalTo(self.tagLable.mas_bottom).offset(10);
         make.left.equalTo(self.avatorImageV);
         make.right.equalTo(self.nameTextV);
-        make.height.mas_equalTo(100);
+        make.height.mas_equalTo(44);
     }];
     
     [self.allTagsScrollerV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -152,26 +169,29 @@ static NSInteger const lineSpace = 11;
 
 #pragma mark - getter
 
--(UIImageView *)avatorImageV{
-
-    if (!_avatorImageV) {
+- (UIImageView *)avatorImageV
+{
+    if (!_avatorImageV)
+    {
         _avatorImageV = [[UIImageView alloc]init];
         _avatorImageV.image = [UIImage imageNamed:@"default_head_man"];
     }
     return _avatorImageV;
 }
--(SPTextFieldView *)nameTextV{
-
-    if (!_nameTextV) {
+- (SPTextFieldView *)nameTextV
+{
+    if (!_nameTextV)
+    {
         _nameTextV = [[SPTextFieldView alloc]init];
         _nameTextV.imageType = SPTextFieldImageNone;
         _nameTextV.textField.placeholder = @"姓名";
     }
     return _nameTextV;
 }
--(SPTextFieldView *)numbleTextV{
-
-    if (!_numbleTextV) {
+- (SPTextFieldView *)numbleTextV
+{
+    if (!_numbleTextV)
+    {
         _numbleTextV = [[SPTextFieldView alloc]init];
         _numbleTextV.imageType = SPTextFieldImageNone;
         _numbleTextV.textField.placeholder = @"电话号码";
@@ -179,39 +199,41 @@ static NSInteger const lineSpace = 11;
     }
     return _numbleTextV;
 }
--(SPTextFieldView *)addressTextV{
-
-    if (!_addressTextV) {
+- (SPTextFieldView *)addressTextV
+{
+    if (!_addressTextV)
+    {
         _addressTextV = [[SPTextFieldView alloc]init];
         _addressTextV.imageType = SPTextFieldImageNone;
         _addressTextV.textField.placeholder = @"地址";
     }
     return _addressTextV;
 }
--(UILabel *)tagLable{
-
-    if (!_tagLable) {
+- (UILabel *)tagLable
+{
+    if (!_tagLable)
+    {
         _tagLable = [[UILabel alloc]init];
-        _tagLable.text = @"标签";
+        _tagLable.text = @"标签（最多可选择三个）";
         _tagLable.textColor = [UIColor orangeColor];
         _tagLable.font = [UIFont systemFontOfSize:16];
     }
     return _tagLable;
 }
--(SKTagView *)tagTextFiled{
-
-    if (!_tagTextFiled) {
+- (SKTagView *)tagTextFiled
+{
+    if (!_tagTextFiled)
+    {
         _tagTextFiled = [[SKTagView alloc]init];
         _tagTextFiled.backgroundColor = [UIColor clearColor];
         _tagTextFiled.padding   = UIEdgeInsetsMake(5, 10, -5, -5);
         _tagTextFiled.insets    = 6;
         _tagTextFiled.lineSpace = lineSpace;
-        [_tagTextFiled setEditable:@"手动输入标签"];
         _tagTextFiled.delegate = self;
         
         weakSelf(self);
         _tagTextFiled.didClickTagAtIndex = ^(NSUInteger index){
-            NSString *tag = [weakSelf.selectedTagArr objectAtIndex:index];
+            NSString *tag = [weakSelf.allTagsArray objectAtIndex:index];
             [weakSelf didToggleTag:tag scroll:NO];
         };
         CGFloat selectedMargin = 10;
@@ -240,14 +262,13 @@ static NSInteger const lineSpace = 11;
     if (!_allTagsView) {
         _allTagsView = [[SKTagView alloc]init];
         _allTagsView.backgroundColor = [UIColor clearColor];
-        _allTagsView.padding    = UIEdgeInsetsMake(0, 0, 0, 0);
+        _allTagsView.padding   = UIEdgeInsetsMake(10, 10, 10, 10);
         _allTagsView.insets    = 5;
         _allTagsView.lineSpace = 8;
 
         __weak typeof(self) weakSelf = self;
-        //Handle tag's click event
         _allTagsView.didClickTagAtIndex = ^(NSUInteger index){
-            NSString *tag = [weakSelf.selectedTagArr objectAtIndex:index];
+            NSString *tag = [weakSelf.allTagsArray objectAtIndex:index];
             [weakSelf didToggleTag:tag scroll:YES];
         };
         _allTagsView.preferredMaxLayoutWidth = SCREEN_WIDTH - 20*2;
@@ -276,26 +297,29 @@ static NSInteger const lineSpace = 11;
     return _selectedScrollView;
 }
 
--(NSArray *)selectedTagArr{
+-(NSArray *)allTagsArray
+{
 
-    if (!_selectedTagArr) {
-        _selectedTagArr = [NSArray arrayWithObjects:@"逗比",@"书呆子",@"土豪",@"跟屁虫",@"大胸妹",@"大眼镜",@"小短腿",@"白富美",@"大帅哥",@"代码狗",@"百科全书",@"娘娘腔",@"女汉子",@"游戏王",@"男佣" ,nil];
+    if (!_allTagsArray)
+    {
+        _allTagsArray = [NSArray arrayWithObjects:@"逗比",@"书呆子",@"土豪",@"跟屁虫",@"大胸妹",@"大眼镜",@"小短腿",@"白富美",@"大帅哥",@"代码狗",@"百科全书",@"娘娘腔",@"女汉子",@"游戏王",@"男佣" ,nil];
     }
-    return _selectedTagArr;
+    return _allTagsArray;
 }
 
--(NSMutableArray *)allTagArr{
+-(NSMutableArray *)selectedTagsArray{
 
-    if (!_allTagArr) {
+    if (!_selectedTagsArray) {
         
-        _allTagArr =[NSMutableArray array] ;
+        _selectedTagsArray = [NSMutableArray array] ;
     }
-    return _allTagArr;
+    return _selectedTagsArray;
 }
 
--(NSArray *)inputTag{
-
-    if (!_inputTag) {
+-(NSArray *)inputTag
+{
+    if (!_inputTag)
+    {
         _inputTag = [NSArray array];
     }
     return _inputTag;
@@ -303,7 +327,8 @@ static NSInteger const lineSpace = 11;
 /*
  * 重新计算选中tag框的大小和滚动区域
  */
-- (void)layoutSelectedScrollView:(BOOL)scroll {
+- (void)layoutSelectedScrollView:(BOOL)scroll
+{
     CGFloat padding = 2*lineSpace;
     CGFloat contentHeight = self.tagTextFiled.intrinsicContentSize.height;
     if (contentHeight < 20) {
@@ -332,42 +357,42 @@ static NSInteger const lineSpace = 11;
 /*
  * 用户点击了Tag，执行选中开关操作
  */
-- (void) didToggleTag:(NSString*)str scroll:(BOOL)scroll {
+- (void)didToggleTag:(NSString*)str scroll:(BOOL)scroll
+{
     __block BOOL isSelected = YES;
     weakSelf(self);
-    [self.allTagArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-     {
-         if ([(NSString*)obj isEqualToString:str]) {
+    
+    [self.selectedTagsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        
+         if ([(NSString*)obj isEqualToString:str])
+         {
              isSelected = NO;
-
              [weakSelf.tagTextFiled removeTagAtIndex:idx];
-             [weakSelf.allTagArr removeObjectAtIndex:idx];
+             [weakSelf.selectedTagsArray removeObjectAtIndex:idx];
              *stop = YES;
          }
      }];
     
-    if (isSelected == YES) {
-        
-        [self.allTagArr addObject:str];
+    if (isSelected == YES)
+    {
+        [self.selectedTagsArray addObject:str];
         
         JJTag *tag = [JJTag tagWithText:str];
         tag.textColor = UIColor.whiteColor;
         tag.bgColor = kColorMain;
         
         [self.tagTextFiled addTag:tag];
-        
     }
     
     [self.allTagsView removeAllTags];
     
-
-    [self.selectedTagArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [self.allTagsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         JJTag *tag = [JJTag tagWithText:obj];
-        [tag setSelected:[weakSelf.allTagArr containsObject:obj]];
+        [tag setSelected:[weakSelf.selectedTagsArray containsObject:obj]];
         [weakSelf.allTagsView addTag:tag];
     }];
     
-    [self.allTagArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [self.selectedTagsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if ([(NSString*)obj isEqualToString:str]) {
             [weakSelf.tagTextFiled removeTagAtIndex:idx];
             
@@ -419,14 +444,14 @@ static NSInteger const lineSpace = 11;
 - (void)newTag:(NSString *)tagText
 {
     if (tagText.length > 0) {
-        //此处尚未加入到selectedTagArr时,maxTagCount-1
-//        if (self.selectedTagArr.count > maxTagCount-1){
+        //此处尚未加入到allTagsArray时,maxTagCount-1
+//        if (self.allTagsArray.count > maxTagCount-1){
 //            [NCHitMessage showInfoWithMessage:[NSString stringWithFormat:@"最多只能选择%ld个领域", (long)maxTagCount]];
 //            return;
 //        }
         
         [self insertSelectedTag:self.tagTextFiled tagText:tagText atIndex:-1];
-        [self.allTagArr addObject:tagText];
+        [self.selectedTagsArray addObject:tagText];
     }
     
     [self layoutSelectedScrollView:NO];
@@ -443,6 +468,15 @@ static NSInteger const lineSpace = 11;
         contacter.phone = self.numbleTextV.textField.text;
         contacter.address = self.addressTextV.textField.text;
         
+        NSString *tagStr = @"";
+        for (NSString *tag in self.selectedTagsArray)
+        {
+            if (tag.length > 0)
+            {
+                tagStr = [tagStr stringByAppendingString:tag];
+            }
+        }
+        contacter.tagStr = tagStr;
         if ([[DataBaseManager shareInstanceDataBase] isExistsOfContacterModel:contacter])
         {
             [SVProgressHUD showErrorWithStatus:@"该联系人已存在！"];
@@ -462,7 +496,6 @@ static NSInteger const lineSpace = 11;
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContacterChange object:nil];
             }
         }
-        
     }
 }
 

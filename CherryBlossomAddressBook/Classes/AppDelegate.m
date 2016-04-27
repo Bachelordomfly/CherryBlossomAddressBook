@@ -24,11 +24,8 @@
      */
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
-    
-//    LoginVC *loginVC = [[LoginVC alloc]init];
     self.tabBarController = [[ABTabBarController alloc] init];
     self.window.rootViewController = self.tabBarController;
-//    self.window.rootViewController = loginVC;
 
     
     /**
@@ -79,6 +76,13 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
+}
+
+#pragma mark - 
+
++ (instancetype)sharedInstance
+{
+    return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
 
 @end

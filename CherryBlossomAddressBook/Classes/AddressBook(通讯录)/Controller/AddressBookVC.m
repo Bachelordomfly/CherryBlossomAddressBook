@@ -423,7 +423,6 @@
         
         //标签
         _tagLab = [[UILabel alloc]init];
-        _tagLab.text = @"大笨蛋,🐷";
         [_tagLab setTextColor:kColorMain];
         _tagLab.font = [UIFont systemFontOfSize:14];
         [fixView addSubview:_tagLab];
@@ -439,9 +438,15 @@
 - (void)configureCellWithContacterModel:(ContacterModel *)model
 {
     _model = model;
-    _avatarImageView.image = [UIImage imageNamed:_model.avatarPath];
-//    _imgState.image = [UIImage imageNamed:_model.sex == ABSexMan ? @"man_manager_icon":@"woman_manager_icon"];
+    
+    //头像
+    _avatarImageView.image = [UIImage imageNamed:_model.avatarPath?:@"default_head_man"];
+    
+    //姓名
     _nameLab.text = _model.name;
+    
+    //标签
+    _tagLab.text = _model.tagStr.length>0 ? _model.tagStr : @"暂无标签" ;
 }
 +(CGFloat)cellHeight
 {
