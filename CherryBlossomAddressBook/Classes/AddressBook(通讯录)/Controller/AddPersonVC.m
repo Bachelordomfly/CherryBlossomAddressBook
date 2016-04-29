@@ -11,7 +11,12 @@
 
 static NSInteger const lineSpace = 11;
 
-@interface AddPersonVC ()<SKTagViewDelegate>
+@interface AddPersonVC ()
+<
+SKTagViewDelegate,
+UIPickerViewDelegate,
+UIPickerViewDataSource
+>
 
 #pragma mark - 控件
 
@@ -34,6 +39,21 @@ static NSInteger const lineSpace = 11;
  *  地址
  */
 @property(nonatomic, strong) SPTextFieldView *addressTextV;
+
+/**
+ *  性别
+ */
+@property (nonatomic, strong) SPTextFieldView *sexTF;
+
+/**
+ *  性别选择器
+ */
+@property (nonatomic, strong) UIPickerView *sexPickerView;
+
+/**
+ *  性别选择器数据源
+ */
+@property (nonatomic, strong) NSArray *sexArray;
 
 /**
  *  标签提示
@@ -70,6 +90,11 @@ static NSInteger const lineSpace = 11;
  */
 @property (nonatomic, strong) NSArray *inputTag;
 
+/**
+ *  当前构建的联系人模型
+ */
+@property (nonatomic, strong) ContacterModel *contacterModel;
+
 @end
 
 @implementation AddPersonVC
@@ -103,6 +128,7 @@ static NSInteger const lineSpace = 11;
     [self.view addSubview:self.nameTextV];
     [self.view addSubview:self.numbleTextV];
     [self.view addSubview:self.addressTextV];
+    [self.view addSubview:self.sexTF];
     [self.view addSubview:self.tagLable];
     [self.view addSubview:self.selectedScrollView];
     [self.view addSubview:self.allTagsScrollerV];
@@ -131,8 +157,13 @@ static NSInteger const lineSpace = 11;
         make.left.right.equalTo(self.numbleTextV);
     }];
     
+    [self.sexTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.addressTextV.mas_bottom).offset(10);
+        make.left.right.equalTo(self.addressTextV);
+    }];
+    
     [self.tagLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.addressTextV.mas_bottom).offset(10);
+        make.top.equalTo(self.sexTF.mas_bottom).offset(10);
         make.left.equalTo(self.view).offset(10);
     }];
     
@@ -208,6 +239,40 @@ static NSInteger const lineSpace = 11;
         _addressTextV.textField.placeholder = @"地址";
     }
     return _addressTextV;
+}
+- (SPTextFieldView *)sexTF
+{
+    if (!_sexTF)
+    {
+        _sexTF = [[SPTextFieldView alloc] initWithSPTextFieldImageType:SPTextFieldImageNone];
+        _sexTF.textField.placeholder = @"性别";
+        _sexTF.textField.inputView = self.sexPickerView;
+    }
+    return _sexTF;
+}
+- (UIPickerView *)sexPickerView
+{
+    if (!_sexPickerView)
+    {
+        _sexPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 175)];
+        _sexPickerView.delegate = self;
+        UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(didSaveSex:)];
+         UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(didCancelSex:)];
+        toolBar.items = @[cancelBtn, flexSpace,doneBtn];
+        [_sexPickerView addSubview:toolBar];
+        
+    }
+    return _sexPickerView;
+}
+- (NSArray *)sexArray
+{
+    if (!_sexArray)
+    {
+        _sexArray = @[@"未知", @"男", @"女"];
+    }
+    return _sexArray;
 }
 - (UILabel *)tagLable
 {
@@ -324,6 +389,73 @@ static NSInteger const lineSpace = 11;
     }
     return _inputTag;
 }
+- (ContacterModel *)contacterModel
+{
+    if (!_contacterModel)
+    {
+        _contacterModel = [ContacterModel new];
+    }
+    return _contacterModel;
+}
+
+#pragma mark - UIPickerViewDataSource 协议
+//返回列数
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+//返回行数
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return self.sexArray.count;
+}
+
+#pragma mark - UIPickerViewDelegate
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
+{
+    return SCREEN_WIDTH / 2;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 40;
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return self.sexArray[row];
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    switch (row) {
+        case 0:
+            self.contacterModel.sex = ABSexUnknow;
+            break;
+        case 1:
+            self.contacterModel.sex = ABSexMan;
+            break;
+        case 2:
+            self.contacterModel.sex = ABSexWomen;
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - 选择性别点击事件
+- (void)didSaveSex:(UIBarButtonItem *)item
+{
+    [self.sexTF resignFirstResponder];
+    [self.view becomeFirstResponder];
+}
+- (void)didCancelSex:(UIBarButtonItem *)item
+{
+    self.contacterModel.sex = ABSexUnknow;
+    [self.sexTF resignFirstResponder];
+    [self.view becomeFirstResponder];
+}
+
+
 /*
  * 重新计算选中tag框的大小和滚动区域
  */
@@ -463,10 +595,10 @@ static NSInteger const lineSpace = 11;
 {
     if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
     {
-        ContacterModel *contacter = [[ContacterModel alloc] init];
-        contacter.name = self.nameTextV.textField.text;
-        contacter.phone = self.numbleTextV.textField.text;
-        contacter.address = self.addressTextV.textField.text;
+        //1、实例化联系人模型
+        self.contacterModel.name = self.nameTextV.textField.text;
+        self.contacterModel.phone = self.numbleTextV.textField.text;
+        self.contacterModel.address = self.addressTextV.textField.text;
         
         NSString *tagStr = @"";
         for (NSString *tag in self.selectedTagsArray)
@@ -476,15 +608,18 @@ static NSInteger const lineSpace = 11;
                 tagStr = [tagStr stringByAppendingString:tag];
             }
         }
-        contacter.tagStr = tagStr;
-        if ([[DataBaseManager shareInstanceDataBase] isExistsOfContacterModel:contacter])
+        self.contacterModel.tagStr = tagStr;
+        
+        //2、打开联系人数据库
+        if ([[DataBaseManager shareInstanceDataBase] isExistsOfContacterModel:self.contacterModel])
         {
             [SVProgressHUD showErrorWithStatus:@"该联系人已存在！"];
             return ;
         }
         else
         {
-            if ([[DataBaseManager shareInstanceDataBase] successInsertContacterModel:contacter])
+            //3、插入数据
+            if ([[DataBaseManager shareInstanceDataBase] successInsertContacterModel:self.contacterModel])
             {
                 [SVProgressHUD showSuccessWithStatus:@"保存新联系人成功！"];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -492,7 +627,7 @@ static NSInteger const lineSpace = 11;
                     [self.navigationController popViewControllerAnimated:YES];
                 });
                 
-                //新建联系人 - 发布通知
+                //4、新建联系人 - 发布通知
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContacterChange object:nil];
             }
         }

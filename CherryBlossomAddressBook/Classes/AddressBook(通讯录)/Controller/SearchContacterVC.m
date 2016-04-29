@@ -8,10 +8,12 @@
 
 #import "SearchContacterVC.h"
 #import "SearchBar.h"
+#import "ContacterDetailVC.h"
 
 @interface SearchContacterVC () <SearchBarDelegate>
 
 @property (nonatomic, strong) SearchBar *searchBar;
+@property (nonatomic, strong) NSMutableArray *contacterArray;
 @end
 
 @implementation SearchContacterVC
@@ -36,6 +38,7 @@
     self.navigationItem.titleView = self.searchBar;
 }
 
+#pragma mark - getter
 - (SearchBar *)searchBar
 {
     if (!_searchBar)
@@ -44,6 +47,44 @@
         _searchBar.delegate = self;
     }
     return _searchBar;
+}
+- (NSMutableArray *)contacterArray
+{
+    if (!_contacterArray)
+    {
+        _contacterArray = [NSMutableArray array];
+    }
+    return _contacterArray;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44.f;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *reuseID = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseID];
+    }
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+    
+    return cell;
 }
 
 #pragma mark - SearchBarDelegate
@@ -67,7 +108,19 @@
  */
 - (void)searchBar:(SearchBar *)searchBar didClickSearchText:(NSString *)searchText
 {
-    
+    if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
+    {
+        ContacterModel *contacterModel = [[DataBaseManager shareInstanceDataBase] getContacterModelOfContacterName:searchText];
+        if (contacterModel)
+        {
+            ContacterDetailVC *vc = [[ContacterDetailVC alloc] initWithContacterModel:contacterModel];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else
+        {
+            [SVProgressHUD showErrorWithStatus:@"暂无此人"];
+        }
+    }
 }
 
 /**

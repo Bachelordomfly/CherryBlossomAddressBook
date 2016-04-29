@@ -16,4 +16,18 @@
  *  @return 
  */
 + (instancetype)sharedInstance;
+
+/**
+ *  调用系统打电话
+ *
+ *  @param phone 号码
+ */
+- (BOOL)callPhoneWithPhoneNumber:(NSString *)phone;
+
+/**
+ *  调用系统发短信
+ *
+ *  @return
+ */
+- (BOOL)sendMessage;
 @end

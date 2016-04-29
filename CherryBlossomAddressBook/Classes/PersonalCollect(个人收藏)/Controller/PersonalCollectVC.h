@@ -11,6 +11,6 @@
 
 @end
 
-@interface PersonalCollectCell : BaseSimpleCell
+@interface PersonalCollectCell : BaseTableViewCell
 
 @end

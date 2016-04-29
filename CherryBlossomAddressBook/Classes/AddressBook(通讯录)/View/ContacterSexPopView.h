@@ -10,5 +10,5 @@
 
 @interface ContacterSexPopView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame withABSex:(ABSex)sex;
+- (instancetype)initWithFrame:(CGRect)frame withContacterModel:(ContacterModel *)model;
 @end

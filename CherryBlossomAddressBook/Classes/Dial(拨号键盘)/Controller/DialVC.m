@@ -238,10 +238,14 @@
 
 - (void)dial:(UIButton *)sender
 {
-    //调用打电话
-    NSString *str = [NSString stringWithFormat:@"tel://%@", self.displayLab.text];
-    NSURL *url = [NSURL URLWithString:str];
-    [[UIApplication sharedApplication] openURL:url];
+    if ([[AppManager sharedInstance] callPhoneWithPhoneNumber:self.displayLab.text])
+    {
+        
+    }
+    else
+    {
+        [SVProgressHUD showErrorWithStatus:@"无效号码！"];
+    }
 }
 
 

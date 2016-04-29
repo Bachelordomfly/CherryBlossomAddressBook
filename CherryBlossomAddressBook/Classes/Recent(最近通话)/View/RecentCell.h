@@ -9,7 +9,7 @@
 #import "BaseSimpleCell.h"
 @class ContacterModel;
 
-@interface RecentCell : BaseSimpleCell
+@interface RecentCell : BaseTableViewCell
 
 //- (void)configureCellWithContacterModel:(ContacterModel *)contacterModel;
 @end

@@ -99,7 +99,7 @@ ContacterDetailChangeNameBlock:(ContacterDetailChangeNameBlock)contacterDetailCh
 {
     _changeType = ContacterDetailChangeName;
     _nameBlock = contacterDetailChangeNameBlock;
-    _originalInfo = ([oldInfo isEqualToString:@"(null)"]? @"" : oldInfo);
+    _originalInfo = ([oldInfo isEqualToString:@"暂无"]? @"" : oldInfo);
     self.title = [NSString stringWithFormat:@"%@编辑", title];
     self.editView.text = _originalInfo;
 }
@@ -110,7 +110,7 @@ ContacterDetailChangeNickNameBlock:(ContacterDetailChangeNickNameBlock)contacter
 {
     _changeType = ContacterDetailChangeNickName;
     _nickNameBlock = contacterDetailChangeNickNameBlock;
-    _originalInfo = [oldInfo isEqualToString:@"(null)"] ? @"" : oldInfo;
+    _originalInfo = [oldInfo isEqualToString:@"暂无"] ? @"" : oldInfo;
     self.title = [NSString stringWithFormat:@"%@编辑", title];
     self.editView.text = _originalInfo;
 }
@@ -122,7 +122,7 @@ ContacterDetailChangePhoneBlock:(ContacterDetailChangePhoneBlock)contacterDetail
 {
     _changeType = ContacterDetailChangePhone;
     _phoneBlock = contacterDetailChangePhoneBlock;
-    _originalInfo = [oldInfo isEqualToString:@"(null)"] ? @"" : oldInfo;
+    _originalInfo = [oldInfo isEqualToString:@"暂无"] ? @"" : oldInfo;
     self.title = [NSString stringWithFormat:@"%@编辑", title];
     self.editView.text = _originalInfo;
 }
@@ -131,7 +131,7 @@ ContacterDetailChangePhoneBlock:(ContacterDetailChangePhoneBlock)contacterDetail
 {
     _changeType = ContacterDetailChangeAddress;
     _addressBlock = contacterDetailChangeAddressBlock;
-    _originalInfo = [oldInfo isEqualToString:@"(null)"] ? @"" : oldInfo;
+    _originalInfo = [oldInfo isEqualToString:@"暂无"] ? @"" : oldInfo;
     self.title = [NSString stringWithFormat:@"%@编辑", title];
     self.editView.text = _originalInfo;
 }
@@ -172,7 +172,7 @@ ContacterDetailChangePhoneBlock:(ContacterDetailChangePhoneBlock)contacterDetail
         }
         
         //更新 - 修改联系人数据库
-        if ([[DataBaseManager shareInstanceDataBase] successDeleteContacterModle:_contacterModel])
+        if ([[DataBaseManager shareInstanceDataBase] successUpdateContacterModle:_contacterModel])
         {
             [SVProgressHUD showSuccessWithStatus:@"修改成功"];
             weakSelf(self);
@@ -187,7 +187,7 @@ ContacterDetailChangePhoneBlock:(ContacterDetailChangePhoneBlock)contacterDetail
     }
     else
     {
-        [SVProgressHUD showWithStatus:@"原信息和新信息不能一样"];
+        [SVProgressHUD showErrorWithStatus:@"原信息和新信息不能一样"];
     }
     
     
