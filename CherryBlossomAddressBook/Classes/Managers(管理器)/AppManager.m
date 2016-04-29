@@ -8,6 +8,10 @@
 
 #import "AppManager.h"
 
+@interface AppManager ()
+
+@end
+
 @implementation AppManager
 
 + (instancetype)sharedInstance
@@ -19,4 +23,25 @@
     });
     return appManager;
 }
+
+- (BOOL)callPhoneWithPhoneNumber:(NSString *)phone
+{
+    if ([phone isMobileNumber] || [phone isTelPhoneNumber])
+    {
+        NSString *str = [NSString stringWithFormat:@"tel://%@", phone];
+        NSURL *url = [NSURL URLWithString:str];
+        [[UIApplication sharedApplication] openURL:url];
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
+
+
+
 @end
+
+

@@ -59,6 +59,8 @@
 		52011C571CB7C73700E365F8 /* ImageScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52011C561CB7C73700E365F8 /* ImageScaleViewController.m */; };
 		5271EAD71CC8756A002CFB92 /* DataBasePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 5271EAD61CC8756A002CFB92 /* DataBasePath.m */; };
 		529CD8741CC72F4E00D7A946 /* RecentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 529CD8731CC72F4E00D7A946 /* RecentCell.m */; };
+		52A42AB91CD35E4500D00812 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A42AB81CD35E4500D00812 /* MessageUI.framework */; };
+		52A42ABC1CD3724000D00812 /* AddPersonVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52A42ABB1CD3724000D00812 /* AddPersonVC.m */; };
 		52C580E51CD0861600AAF9A0 /* SKTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C580E01CD0861600AAF9A0 /* SKTag.m */; };
 		52C580E61CD0861600AAF9A0 /* SKTagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C580E21CD0861600AAF9A0 /* SKTagButton.m */; };
 		52C580E71CD0861600AAF9A0 /* SKTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C580E41CD0861600AAF9A0 /* SKTagView.m */; };
@@ -114,7 +116,6 @@
 		A5EA6F4E1CB7757700D2E299 /* new_feature_share_false@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5EA6D691CB7757600D2E299 /* new_feature_share_false@2x.png */; };
 		A5EA6F4F1CB7757700D2E299 /* new_feature_share_true@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A5EA6D6A1CB7757600D2E299 /* new_feature_share_true@2x.png */; };
 		A5EA6F501CB7757700D2E299 /* SHGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D6D1CB7757600D2E299 /* SHGuideView.m */; };
-		A5EA6F511CB7757700D2E299 /* AddPersonVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D711CB7757600D2E299 /* AddPersonVC.m */; };
 		A5EA6F521CB7757700D2E299 /* PersonalCollectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D731CB7757600D2E299 /* PersonalCollectVC.m */; };
 		A5EA6F531CB7757700D2E299 /* RecentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D771CB7757600D2E299 /* RecentVC.m */; };
 		A5EA6F541CB7757700D2E299 /* AMBouncingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EA6D7B1CB7757600D2E299 /* AMBouncingView.m */; };
@@ -446,6 +447,9 @@
 		5271EAD61CC8756A002CFB92 /* DataBasePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBasePath.m; sourceTree = "<group>"; };
 		529CD8721CC72F4E00D7A946 /* RecentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCell.h; sourceTree = "<group>"; };
 		529CD8731CC72F4E00D7A946 /* RecentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCell.m; sourceTree = "<group>"; };
+		52A42AB81CD35E4500D00812 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		52A42ABA1CD3724000D00812 /* AddPersonVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPersonVC.h; sourceTree = "<group>"; };
+		52A42ABB1CD3724000D00812 /* AddPersonVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPersonVC.m; sourceTree = "<group>"; };
 		52C580DF1CD0861600AAF9A0 /* SKTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTag.h; sourceTree = "<group>"; };
 		52C580E01CD0861600AAF9A0 /* SKTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKTag.m; sourceTree = "<group>"; };
 		52C580E11CD0861600AAF9A0 /* SKTagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKTagButton.h; sourceTree = "<group>"; };
@@ -546,8 +550,6 @@
 		A5EA6D6A1CB7757600D2E299 /* new_feature_share_true@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_feature_share_true@2x.png"; sourceTree = "<group>"; };
 		A5EA6D6C1CB7757600D2E299 /* SHGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHGuideView.h; sourceTree = "<group>"; };
 		A5EA6D6D1CB7757600D2E299 /* SHGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHGuideView.m; sourceTree = "<group>"; };
-		A5EA6D701CB7757600D2E299 /* AddPersonVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPersonVC.h; sourceTree = "<group>"; };
-		A5EA6D711CB7757600D2E299 /* AddPersonVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPersonVC.m; sourceTree = "<group>"; };
 		A5EA6D721CB7757600D2E299 /* PersonalCollectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCollectVC.h; sourceTree = "<group>"; };
 		A5EA6D731CB7757600D2E299 /* PersonalCollectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCollectVC.m; sourceTree = "<group>"; };
 		A5EA6D761CB7757600D2E299 /* RecentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentVC.h; sourceTree = "<group>"; };
@@ -965,6 +967,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A42AB91CD35E4500D00812 /* MessageUI.framework in Frameworks */,
 				A5EA6CCF1CB3BEE300D2E299 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1170,6 +1173,7 @@
 		A5E1D4501CAB8F79001DCBB5 = {
 			isa = PBXGroup;
 			children = (
+				52A42AB81CD35E4500D00812 /* MessageUI.framework */,
 				A5EA6CCE1CB3BEE300D2E299 /* libsqlite3.tbd */,
 				A5E1D45B1CAB8F79001DCBB5 /* CherryBlossomAddressBook */,
 				A5E1D4781CAB8F79001DCBB5 /* CherryBlossomAddressBookTests */,
@@ -1269,6 +1273,8 @@
 				52011C531CB7C24E00E365F8 /* ContacterDetailChangeVC.m */,
 				52011C171CB7A14B00E365F8 /* SearchContacterVC.h */,
 				52011C181CB7A14B00E365F8 /* SearchContacterVC.m */,
+				52A42ABA1CD3724000D00812 /* AddPersonVC.h */,
+				52A42ABB1CD3724000D00812 /* AddPersonVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1562,8 +1568,6 @@
 			children = (
 				A5EA6D721CB7757600D2E299 /* PersonalCollectVC.h */,
 				A5EA6D731CB7757600D2E299 /* PersonalCollectVC.m */,
-				A5EA6D701CB7757600D2E299 /* AddPersonVC.h */,
-				A5EA6D711CB7757600D2E299 /* AddPersonVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2381,6 +2385,7 @@
 				A5EA70191CB7757700D2E299 /* SVIndefiniteAnimatedView.m in Sources */,
 				A5EA6F171CB7757700D2E299 /* AddressBookVC.m in Sources */,
 				A5EA6FA51CB7757700D2E299 /* GPUImageHSBFilter.m in Sources */,
+				52A42ABC1CD3724000D00812 /* AddPersonVC.m in Sources */,
 				A5EA6FB81CB7757700D2E299 /* GPUImageLuminosityBlendFilter.m in Sources */,
 				52011C0F1CB7973B00E365F8 /* SDWebImagePrefetcher.m in Sources */,
 				A5EA6F7A1CB7757700D2E299 /* GPUImageColorBurnBlendFilter.m in Sources */,
@@ -2562,7 +2567,6 @@
 				A5EA6FBC1CB7757700D2E299 /* GPUImageMonochromeFilter.m in Sources */,
 				52011C511CB7C0B900E365F8 /* ContacterSexPopView.m in Sources */,
 				A5EA6F211CB7757700D2E299 /* UIImage+Alpha.m in Sources */,
-				A5EA6F511CB7757700D2E299 /* AddPersonVC.m in Sources */,
 				A5EA6F6B1CB7757700D2E299 /* GPUImageAlphaBlendFilter.m in Sources */,
 				A5EA6FF21CB7757700D2E299 /* GPUImageThresholdedNonMaximumSuppressionFilter.m in Sources */,
 				A5EA6F741CB7757700D2E299 /* GPUImageCannyEdgeDetectionFilter.m in Sources */,

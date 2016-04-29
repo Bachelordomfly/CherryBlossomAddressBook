@@ -45,23 +45,7 @@
     _contacterModel = userModel;
     
     //头像
-    if(_contacterModel.avatarPath.length > 0)
-    {
-        [self.detailIV sd_setImageWithURL:[NSURL URLWithString:_contacterModel.avatarPath]];
-    }
-    else
-    {
-        if (_contacterModel.sex != ABSexMan)
-        {
-            
-            [self.detailIV setImage:[UIImage imageNamed:@"default_head_woman"]];
-        }
-        else
-        {
-            
-            [self.detailIV setImage:[UIImage imageNamed:@"default_head_man"]];
-        }
-    }
+    self.detailIV.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:AvatarPathWithContacterID(_contacterModel.contacterID)]];
 }
 
 

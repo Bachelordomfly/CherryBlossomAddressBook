@@ -8,7 +8,6 @@
 
 #import "PersonalCollectVC.h"
 #import "LoginVC.h"
-#import "AddPersonVC.h"
 
 @interface PersonalCollectVC ()
 
@@ -46,7 +45,7 @@
     [super setupNaviBarItems];
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注销" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightBarButtonItemAction:)];
+    
 }
 
 
@@ -93,13 +92,6 @@
     [self presentViewController:alterView animated:YES completion:nil];
     
     
-}
-
--(void)rightBarButtonItemAction:(UIBarButtonItem *)rightBarButtonItem
-{
-    
-    AddPersonVC *addPersonVC = [[AddPersonVC alloc]init];
-    [self.navigationController pushViewController:addPersonVC animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

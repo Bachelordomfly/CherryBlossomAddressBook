@@ -85,6 +85,24 @@ typedef NS_ENUM(NSUInteger, DataBaseType) {
  */
 - (NSMutableArray *)getAllContacterModelOfDataBase;
 
+/**
+ *  读取 - 从数据库获取单个联系人模型
+ *
+ *  @param contacterID 联系人id
+ *
+ *  @return 
+ */
+- (ContacterModel *)getContacterModelOfContacterID:(NSInteger)contacterID;
+
+/**
+ *  读取 - 从数据库获取单个联系人模型
+ *
+ *  @param contacterName 联系人
+ *
+ *  @return 
+ */
+- (ContacterModel *)getContacterModelOfContacterName:(NSString *)contacterName;
+
 #pragma mark - 用户数据库操作
 
 /********************** 用户表操作 ********************************/

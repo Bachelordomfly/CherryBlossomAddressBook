@@ -19,18 +19,19 @@
 @property (nonatomic, strong) UIImageView *selectIV; //对勾
 @property (nonatomic, strong) UIButton *selectBtn;   //记录当前勾选的按钮
 @property (nonatomic, assign) ABSex originSex;       //原始性别
-
+@property (nonatomic, strong) ContacterModel *model;
 @end
 
 @implementation ContacterSexPopView
 
 #pragma mark - init
 
-- (instancetype)initWithFrame:(CGRect)frame withABSex:(ABSex)sex
+- (instancetype)initWithFrame:(CGRect)frame withContacterModel:(ContacterModel *)model
 {
     if(self = [super initWithFrame:frame])
     {
-        _originSex = sex;
+        _model = model;
+        _originSex = model.sex;
         
         [self addAllSubViews];
         
@@ -212,8 +213,11 @@
     self.selectIV.center = center;
     self.selectIV.hidden = NO;
     
-    //12.25 改需求 选择一次性别 立即隐藏并全局生效
-    [self handleDidClickmaskView:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self handleDidClickmaskView:nil];
+    });
+    
 }
 //点击空白区域隐藏maskView
 - (void)handleDidClickmaskView:(UITapGestureRecognizer *)tapGest
@@ -223,7 +227,16 @@
     //判断是否修改性别
     if(_originSex != self.selectBtn.tag)
     {
-//        [[UserManager shareInstance] requestInfoManagerWithName:nil nickName:nil sex:[NSString stringWithFormat:@"%ld", self.selectBtn.tag] weXinNumber:nil storeName:nil];
+        
+        _model.sex = self.selectBtn.tag;
+        if ([[DataBaseManager shareInstanceDataBase] successOpenDataBaseType:ContacterDataBase])
+        {
+            if ([[DataBaseManager shareInstanceDataBase] successUpdateContacterModle:_model])
+            {
+                //发布通知 - 修改联系人
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContacterChange object:nil];
+            }
+        }
     }
     
     self.hidden = YES;

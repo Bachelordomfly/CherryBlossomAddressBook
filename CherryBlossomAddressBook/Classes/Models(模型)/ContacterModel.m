@@ -58,19 +58,14 @@
     }
     return _avatarPath;
 }
-//- (ABSex)sex
-//{
-//    if (!_sex || _sex == 0)
-//    {
-//        
-//    }
-//    return _sex;
-//}
-//- (NSInteger)sectionNumber
-//{
-//
-//}
-
+- (NSString *)tagStr
+{
+    if (!_tagStr || [_tagStr isEqualToString:@"(null)"])
+    {
+        _tagStr = @"暂无标签";
+    }
+    return _tagStr;
+}
 
 
 

@@ -23,7 +23,11 @@ typedef NS_OPTIONS(NSUInteger, ContacterSectionType) {
     /**
      *  电话、地址
      */
-    ContacterSectionTypeBottom
+    ContacterSectionTypeBottom,
+    /**
+     *  打电话、发短信
+     */
+    ContacterSectionTypeFunction
 };
 
 
@@ -43,3 +47,7 @@ typedef NS_OPTIONS(NSUInteger, ContacterSectionType) {
 + (CGFloat)cellHeight;
 - (void)updateWithContact:(ContacterModel *)contact;
 @end
+
+
+
+

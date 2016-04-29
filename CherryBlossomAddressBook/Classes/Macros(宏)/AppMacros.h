@@ -13,6 +13,7 @@
 /* FrameWorks */
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <MessageUI/MessageUI.h>
 
 /* Const */
 #import "DataBasePath.h"
@@ -86,6 +87,12 @@
 
 //随机颜色
 #define kColorARC4Random [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]
+
+//Document文件夹路径
+#define DocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
+
+//根据联系人id 获取本地头像图片路径
+#define AvatarPathWithContacterID(contacterID) [DocumentPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld", contacterID]]
 
 // self弱引用
 #define weakSelf(args)   __weak typeof(args) weakSelf = args

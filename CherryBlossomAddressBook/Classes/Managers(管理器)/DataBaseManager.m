@@ -122,7 +122,7 @@
                     avatarPath TEXT,                        \
                     sex INTEGER,                            \
                     sectionNumber INTEGER,                  \
-                    tagStr TEXT                           \
+                    tagStr TEXT                             \
                     )", ContacterTable];
             }
                 break;
@@ -347,6 +347,79 @@
         return contacterArray;
     }
 }
+- (ContacterModel *)getContacterModelOfContacterID:(NSInteger)contacterID
+{
+    NSString *errorMessage = @"";
+    ContacterModel *contactModel = [ContacterModel new];
+    if ([_db open])
+    {
+        NSString *sql_ReadAll = [NSString stringWithFormat:@"SELECT * FROM %@", ContacterTable];
+        FMResultSet *set = [_db executeQuery:sql_ReadAll];
+        while ([set next]) {
+            if ([set intForColumn:@"id"] == contacterID)
+            {
+                contactModel.contacterID = [set intForColumn:@"id"];
+                contactModel.name = [set stringForColumn:@"name"];
+                contactModel.nickName = [set stringForColumn:@"nickName"];
+                contactModel.phone = [set stringForColumn:@"phone"];
+                contactModel.address = [set stringForColumn:@"address"];
+                contactModel.avatarPath = [set stringForColumn:@"avatarPath"];
+                contactModel.sex = [set intForColumn:@"sex"];
+                contactModel.sectionNumber = [set intForColumn:@"sectionNumber"];
+
+                NSLog(@"已获取到该联系人数据!");
+                [_db close];
+                return contactModel;
+            }
+        }
+        NSLog(@"获取不到该联系人数据!");
+        [_db close];
+        return nil;
+    }
+    else
+    {
+        errorMessage = [_db lastErrorMessage];
+        NSLog(@"无法打开联系人数据库！错误信息：%@", errorMessage);
+        return nil;
+    }
+}
+- (ContacterModel *)getContacterModelOfContacterName:(NSString *)contacterName
+{
+    NSString *errorMessage = @"";
+    ContacterModel *contactModel = [ContacterModel new];
+    if ([_db open])
+    {
+        NSString *sql_ReadAll = [NSString stringWithFormat:@"SELECT * FROM %@", ContacterTable];
+        FMResultSet *set = [_db executeQuery:sql_ReadAll];
+        while ([set next]) {
+            if ([set stringForColumn:@"name"] == contacterName)
+            {
+                contactModel.contacterID = [set intForColumn:@"id"];
+                contactModel.name = [set stringForColumn:@"name"];
+                contactModel.nickName = [set stringForColumn:@"nickName"];
+                contactModel.phone = [set stringForColumn:@"phone"];
+                contactModel.address = [set stringForColumn:@"address"];
+                contactModel.avatarPath = [set stringForColumn:@"avatarPath"];
+                contactModel.sex = [set intForColumn:@"sex"];
+                contactModel.sectionNumber = [set intForColumn:@"sectionNumber"];
+                
+                NSLog(@"已获取到该联系人数据!");
+                [_db close];
+                return contactModel;
+            }
+        }
+        NSLog(@"获取不到该联系人数据!");
+        [_db close];
+        return nil;
+    }
+    else
+    {
+        errorMessage = [_db lastErrorMessage];
+        NSLog(@"无法打开联系人数据库！错误信息：%@", errorMessage);
+        return nil;
+    }
+}
+
 
 #pragma mark - 用户数据库操作
 

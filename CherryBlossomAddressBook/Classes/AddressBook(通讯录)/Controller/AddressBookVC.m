@@ -9,6 +9,7 @@
 #import "AddressBookVC.h"
 #import "ContacterDetailVC.h"
 #import "SearchContacterVC.h"
+#import "AddPersonVC.h"
 
 @interface AddressBookVC () <UISearchBarDelegate>
 
@@ -63,6 +64,19 @@
     
     self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.searchBar.frame), self.tableView.width, self.tableView.height - NAVIBAR_AND_STATUSBAR_HEIGHT);
 }
+- (void)setupNaviBarItems
+{
+    [super setupNaviBarItems];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightBarButtonItemAction:)];
+}
+-(void)rightBarButtonItemAction:(UIBarButtonItem *)rightBarButtonItem
+{
+    
+    AddPersonVC *addPersonVC = [[AddPersonVC alloc]init];
+    [self.navigationController pushViewController:addPersonVC animated:YES];
+}
+
 
 /**
  *  解析联系人列表
@@ -440,13 +454,21 @@
     _model = model;
     
     //头像
-    _avatarImageView.image = [UIImage imageNamed:_model.avatarPath?:@"default_head_man"];
+//    if ([_model.avatarPath isEqualToString:@"暂无"])
+//    {
+//        _avatarImageView.image = [UIImage imageNamed:@"default_head_man"];
+//    }
+//    else
+//    {
+//        _avatarImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:AvatarPathWithContacterID(_model.contacterID)]];
+//    }
+    _avatarImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfFile:AvatarPathWithContacterID(_model.contacterID)]];
     
     //姓名
     _nameLab.text = _model.name;
     
     //标签
-    _tagLab.text = _model.tagStr.length>0 ? _model.tagStr : @"暂无标签" ;
+    _tagLab.text = _model.tagStr ;
 }
 +(CGFloat)cellHeight
 {
