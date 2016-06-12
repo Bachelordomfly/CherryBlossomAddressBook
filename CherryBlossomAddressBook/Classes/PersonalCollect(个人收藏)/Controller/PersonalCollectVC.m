@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSMutableArray *data;
 @property (nonatomic, strong) LoginVC *loginViewController;
 @property (nonatomic, assign) BOOL isEditable;
+@property (nonatomic, strong) NSArray *nameArr;
 
 @end
 
@@ -70,7 +71,13 @@
     return _data;
 }
 
+-(NSArray *)nameArr{
 
+    if (!_nameArr) {
+        _nameArr = [NSArray arrayWithObjects:@"Davi",@"Json",@"Rose",@"Jay",@"Alio",@"Davi",@"Json",@"Rose",@"Jay",@"Alio", nil];
+    }
+    return  _nameArr;
+}
 #pragma mark - leftBarButtomItem
 -(void)leftBarButtonItemAction:(UIBarButtonItem *)leftBarButtonItem
 {
@@ -98,8 +105,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    return self.data.count;
-    return 80;
+        return self.nameArr.count;
+//    return 80;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,7 +117,7 @@
     {
         cell = [[PersonalCollectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        cell.nameLable.text= self.nameArr[indexPath.row];
     }
     return cell;
 }
@@ -140,10 +147,7 @@
 @end
 
 @interface PersonalCollectCell()
-@property (nonatomic, strong) UIImageView   *avatorImageView;
-@property (nonatomic, strong) UILabel       *nameLable;
-@property (nonatomic, strong) UILabel       *areaLable;
-@property (nonatomic, strong) UIButton      *checkButton;
+
 @end
 
 @implementation PersonalCollectCell
@@ -162,7 +166,7 @@
     if (!_nameLable) {
         _nameLable = [[UILabel alloc]init];
         _nameLable.font = [UIFont systemFontOfSize:24];
-        _nameLable.text = @"jiajia";
+//        _nameLable.text = @"jiajia";
     }
     return _nameLable;
 }

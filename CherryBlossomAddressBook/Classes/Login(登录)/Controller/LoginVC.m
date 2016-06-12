@@ -116,7 +116,7 @@
 {
     if (!_backGroundImageView)
     {
-        _backGroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
+        _backGroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login"]];
         _backGroundImageView.backgroundColor = [UIColor whiteColor];
         _backGroundImageView.contentMode = UIViewContentModeScaleAspectFit;
         _backGroundImageView.layer.masksToBounds = YES;

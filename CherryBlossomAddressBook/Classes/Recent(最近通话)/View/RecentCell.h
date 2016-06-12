@@ -10,6 +10,30 @@
 @class ContacterModel;
 
 @interface RecentCell : BaseTableViewCell
+/**
+ *  头像
+ */
+@property (nonatomic, strong) UIImageView *avatarImageView;
+
+/**
+ *  性别
+ */
+//@property (nonatomic, strong) UIImageView *sexImageView;
+
+/**
+ *  备注
+ */
+@property (nonatomic, strong) UILabel *nameLab;
+
+/**
+ *  电话
+ */
+@property (nonatomic, strong) UILabel *phoneLab;
+
+/**
+ *  时间
+ */
+@property (nonatomic, strong) UILabel *timeLab;
 
 //- (void)configureCellWithContacterModel:(ContacterModel *)contacterModel;
 @end

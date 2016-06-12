@@ -112,7 +112,7 @@ MFMessageComposeViewControllerDelegate
         [_messageBtn setTitle:@"Message" forState:UIControlStateNormal];
         [_messageBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
-        [_messageBtn setBackgroundImage:[UIImage imageWithColor:[UIColor blueColor] cornerRadius:0] forState:UIControlStateNormal];
+        [_messageBtn setBackgroundImage:[UIImage imageWithColor:kColorMain cornerRadius:0] forState:UIControlStateNormal];
         
         [_messageBtn addTarget:self action:@selector(didClickMessage) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -125,12 +125,14 @@ MFMessageComposeViewControllerDelegate
         _callBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _callBtn.layer.cornerRadius = ButtonWidth / 2;
         _callBtn.layer.masksToBounds = YES;
+        _callBtn.layer.borderWidth = 5;
+        _callBtn.layer.borderColor = [kColorMain CGColor];
         _callBtn.titleLabel.font = [UIFont fontWithName:kDefaultBoldFontFamilyName size:23];
         
         [_callBtn setTitle:@"Call" forState:UIControlStateNormal];
-        [_callBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_callBtn setTitleColor:kColorMain forState:UIControlStateNormal];
         
-        [_callBtn setBackgroundImage:[UIImage imageWithColor:[UIColor greenColor] cornerRadius:0] forState:UIControlStateNormal];
+        [_callBtn setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] cornerRadius:0] forState:UIControlStateNormal];
         [_callBtn addTarget:self action:@selector(didClickCall) forControlEvents:UIControlEventTouchUpInside];
     }
     return _callBtn;

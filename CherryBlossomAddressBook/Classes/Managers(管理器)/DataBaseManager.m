@@ -76,7 +76,7 @@
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *contacterTablePath = [documentPath stringByAppendingPathComponent:tablePath];
     
-    
+    NSLog(@"%@",contacterTablePath);
     //3、判断该数据库文件路径是否存在，不存在则创建
     BOOL isExist = [fileManager fileExistsAtPath:contacterTablePath isDirectory:NULL];
     if (!isExist)
@@ -97,7 +97,7 @@
     }
     else
     {
-        NSLog(@"%@",[NSString stringWithFormat:@"%@数据库文件存在，无需创建！", tablePath]);
+        NSLog(@"%@",[NSString stringWithFormat:@"%@数据库文件存在，无需创建！", [documentPath stringByAppendingPathComponent:tablePath]]);
     }
     
     //4、实例化数据库对象

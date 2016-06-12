@@ -10,6 +10,7 @@
 
 #define ROW 4
 #define COL 3
+#define ButtonWidth 90.f
 
 @interface DialVC () <UITextFieldDelegate>
 
@@ -76,7 +77,7 @@
     [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.displayLab.mas_right);
         make.centerY.mas_equalTo(self.displayLab);
-        make.width.height.mas_equalTo(margin*10);
+        make.width.height.mas_equalTo(30);
     }];
 
     //添加数字按钮(九宫格大法)
@@ -86,8 +87,8 @@
     [self.view addSubview:self.dialBtn];
     [self.dialBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.bottom.equalTo(self.view).offset(-44);
-        make.height.width.mas_equalTo(100);
+        make.bottom.equalTo(self.view).offset(-55);
+        make.height.width.mas_equalTo(ButtonWidth);
     }];
     
 }
@@ -98,15 +99,15 @@
     UIView *bgView = [[UIView alloc]init];
     [self.view addSubview:bgView];
     [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(88*3);
-        make.height.mas_equalTo(88*4);
-        make.top.mas_equalTo(self.displayLab.mas_bottom).offset(20);
+        make.width.mas_equalTo(88*3+10*4);
+        make.height.mas_equalTo(88*4+10*4);
+        make.top.mas_equalTo(self.displayLab.mas_bottom);
         make.centerX.mas_equalTo(self.view);
     }];
     
     CGFloat width = 88;
     CGFloat height = 88;
-    CGFloat margin = 0;
+    CGFloat margin = 10;
     
     //九宫格创建数字按钮
     for (int i=0; i<ROW*COL; i++)
@@ -136,8 +137,11 @@
             [numberBtn setTitle:@"#" forState:UIControlStateNormal];
         }
         numberBtn.tag = i;
+        numberBtn.layer.cornerRadius = 88 / 2;
+        numberBtn.layer.masksToBounds = YES;
         [numberBtn addTarget:self action:@selector(didClickNumber:) forControlEvents:UIControlEventTouchUpInside];
-        [numberBtn setBackgroundImage:[UIImage imageWithColor:kColorARC4Random cornerRadius:0] forState:UIControlStateNormal];
+        [numberBtn setBackgroundImage:[UIImage imageWithColor:kColorMain cornerRadius:0] forState:UIControlStateNormal];
+        [numberBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [numberBtn.titleLabel setFont:[UIFont fontWithName:kDefaultRegularFontFamilyName size:40]];
         [bgView addSubview:numberBtn];
         [self.numberBtnArray addObject:numberBtn];
@@ -172,8 +176,7 @@
     {
         _deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _deleteBtn.hidden = YES;
-        [_deleteBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [_deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+        [_deleteBtn setBackgroundImage:[UIImage imageNamed:@"deleteBtn"] forState:UIControlStateNormal];
         [_deleteBtn addTarget:self action:@selector(delete:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _deleteBtn;
@@ -182,8 +185,15 @@
 {
     if (!_dialBtn)
     {
-        _dialBtn = [[UIButton alloc]init];
-        [_dialBtn setBackgroundImage:[UIImage imageNamed:@"dial_bg"] forState:UIControlStateNormal];
+        _dialBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _dialBtn.layer.cornerRadius = ButtonWidth / 2;
+        _dialBtn.layer.masksToBounds = YES;
+        _dialBtn.layer.borderWidth = 5;
+        _dialBtn.layer.borderColor = [kColorMain CGColor];
+        _dialBtn.titleLabel.font = [UIFont fontWithName:kDefaultBoldFontFamilyName size:23];
+        [_dialBtn setTitle:@"Call" forState:UIControlStateNormal];
+        [_dialBtn setTitleColor:kColorMain forState:UIControlStateNormal];
+        [_dialBtn setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] cornerRadius:0] forState:UIControlStateNormal];
         [_dialBtn addTarget:self action:@selector(dial:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _dialBtn;

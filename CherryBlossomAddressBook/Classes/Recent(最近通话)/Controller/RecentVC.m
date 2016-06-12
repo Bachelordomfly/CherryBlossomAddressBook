@@ -13,6 +13,9 @@
 
 @property (nonatomic, strong) RecentTitleView *titleView;
 @property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) NSArray *nameArr;
+//@property (nonatomic, strong) NSArray *timeArr;
+
 @end
 
 @implementation RecentVC
@@ -59,6 +62,19 @@
     }
     return _dataArray;
 }
+-(NSArray *)nameArr{
+    
+    if (!_nameArr) {
+        _nameArr = [NSArray arrayWithObjects:@"Davi",@"Json",@"Rose",@"Jay",@"Alio",@"Davi",@"Json",@"Rose",@"Jay",@"Alio",@"Davi",@"Json",@"Rose",@"Jay",@"Alio",@"Davi", nil];
+    }
+    return  _nameArr;
+}
+//-(NSArray *)timeArr{
+//
+//    if (!_timeArr) {
+//        _timeArr = [NSArray arrayWithObjects:@"2016-4-19",@"2016-4-19",@"2016-4-19",@"2016-4-19",@"2016-4-19",@"2016-4-19",@"2016-4-19",@"2016-4-19",@"2016-4-19",@"2016-4-19",@"2016-4-19",@"2016-4-19",@"2016-4-19", nil]
+//    }
+//}
 
 
 #pragma mark- segument点击事件
@@ -95,7 +111,8 @@
     {
         cell = [[RecentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseID];
     }
-    
+    cell.nameLab.text = self.nameArr[indexPath.row];
+    cell.timeLab.text = [NSString stringWithFormat:@"2016-4-%ld",(long)indexPath.row];
     return cell;
 }
 
